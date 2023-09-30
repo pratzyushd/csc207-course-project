@@ -18,18 +18,15 @@ files that aren’t relevant. Your repo needs to contain:
     the domain.
     - [x] A screenshot of using a tool to try out the API (like
     https://www.postman.com/ or https://hoppscotch.io/)
-    - [ ] Example output of running your Java code (see below).
+    - [x] Example output of running your Java code (see below).
     - [x] A list of any technical problems blocking progress (if any)
         - please don't hesitate to ask such questions on Piazza too of course.
 
 ## Java Code
 
 - Must include:
-    - [ ] A minimal example of calling the API from Java.
-    - [ ] The output of the program should indicate the result of the request.
-    - [ ] Tools like those above will generate code snippets for you, as will
-    some API documentation pages. You can also refer to the code from the Grade
-    API lab activity for examples using OkHttp.
+    - [x] A minimal example of calling the API from Java.
+    - [x] The output of the program should indicate the result of the request.
 
 ## Evaluation
 
