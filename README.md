@@ -7,8 +7,9 @@
 - Kevin Hu
 
 ## Problem Domain
-
-- Nutrition app with meals
+- As university students, our busy lives often prevent us from eating nutritous meals. It takes time, effort, and thought to account for the variety of nutrients and vitamins students need as young adults.
+- Our application seeks to tackle this issue by providing a platform for users to seek out new recipes, save their favourites, and view nutritional information as well.
+- Users will also be able to seamlessly track their nutrition intake.  
 
 ## Application Description
 
