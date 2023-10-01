@@ -1,8 +1,10 @@
 # CSC207 Group Project
 
 ## Members
-
-<!-- TODO: fill in names here -->
+- Pratyush Dwivedi
+- Jaeyong Lee
+- David (Jia Jun) Wu
+- Kevin Hu
 
 ## Problem Domain
 
