@@ -18,7 +18,7 @@ public class SearchCuisineInteractor implements SearchCuisineInputBoundary {
         Recipe[] recipes = userDataAccessObject.searchRecipesByCuisine(cuisine);
 
         if (recipes.length == 0) {
-            searchCuisinePresenter.prepareFailView(cuisine + "recipies do not exist.");
+            searchCuisinePresenter.prepareFailView(cuisine + "recipes do not exist.");
         } else {
             searchCuisinePresenter.prepareSuccessView(recipes);
         }

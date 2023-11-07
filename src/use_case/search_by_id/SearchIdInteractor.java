@@ -18,7 +18,7 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
         Recipe[] recipes = userDataAccessObject.searchRecipesById(id);
 
         if (recipes.length == 0) {
-            searchIdPresenter.prepareFailView(id + "recipies do not exist.");
+            searchIdPresenter.prepareFailView(id + "recipes do not exist.");
         } else {
             searchIdPresenter.prepareSuccessView(recipes);
         }
