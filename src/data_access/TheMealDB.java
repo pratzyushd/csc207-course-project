@@ -14,7 +14,7 @@ import java.io.IOException;
 public class TheMealDB implements RecipeAPI {
 
     /* We don't need an API key here, because TheMealDB API allows us to use the key "1" for development purposes. */
-    private static final String API_URL = "www.themealdb.com/api/json/v1/1/";
+    private static final String API_URL = "https://www.themealdb.com/api/json/v1/1/";
     private RecipeFactory recipeFactory;
 
     public TheMealDB(RecipeFactory recipeFactory) {
@@ -28,28 +28,34 @@ public class TheMealDB implements RecipeAPI {
                 .addHeader("Content-type", "application/json")
                 .build();
 
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
+        try (Response response = client.newCall(request).execute()) {
             if (response.body() == null) {
                 return null;
             }
-            JSONObject responseBody = new JSONObject(response.body().string());
-
-            if (responseBody.getInt("status_code") != 200) {
+            if (response.code() != 200) {
                 return null;
             }
+
+            JSONObject responseBody = new JSONObject(response.body().string());
+
+            /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
+            if (responseBody.isNull("meals")) {
+                return null;
+            }
+
+            System.out.println(responseBody);
             JSONArray mealArray = responseBody.getJSONArray("meals");
-            // TODO: initialise recipe using recipe factory.
+            JSONObject meal = mealArray.getJSONObject(0);
+            return this.recipeFactory.create(
+                    meal.getInt("idMeal"),
+                    meal.getString("strMeal"),
+                    meal.getString("strCategory"),
+                    meal.getString("strInstructions"),
+                    meal.getString("strArea"));
+
         } catch (IOException | JSONException e) {
             return null;
-        } finally {
-            if (response != null) {
-                response.close();
-            }
         }
-
-        return null;
     }
 
     @Override
