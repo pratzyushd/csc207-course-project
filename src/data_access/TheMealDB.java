@@ -44,6 +44,7 @@ public class TheMealDB implements RecipeAPI {
             }
 
             System.out.println(responseBody);
+            /* The API returns an array with only one item, so we know that the first item is the one we want. */
             JSONArray mealArray = responseBody.getJSONArray("meals");
             JSONObject meal = mealArray.getJSONObject(0);
             return this.recipeFactory.create(
