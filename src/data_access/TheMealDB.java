@@ -90,7 +90,37 @@ public class TheMealDB implements RecipeAPI {
 
     @Override
     public Recipe[] searchRecipesByName(String name) {
-        return new Recipe[0];
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder()
+                .url(String.format(API_URL + "search.php?s=" + name))
+                .addHeader("Content-type", "application/json")
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!responseIsValid(response)) {
+                return null;
+            }
+
+            JSONObject responseBody = new JSONObject(response.body().string());
+
+            /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
+            if (!dataInAPIResponse(responseBody)) {
+                return null;
+            }
+
+            JSONArray mealArray = responseBody.getJSONArray("meals");
+
+            Recipe[] recipes = new Recipe[mealArray.length()];
+            for (int i = 0; i < mealArray.length(); i++) {
+                JSONObject current = mealArray.getJSONObject(i);
+                recipes[i] = constructRecipeFromMealJSON(current);
+            }
+
+            return recipes;
+
+        } catch (IOException | JSONException e) {
+            return null;
+        }
     }
 
     private Boolean responseIsValid(Response response) {

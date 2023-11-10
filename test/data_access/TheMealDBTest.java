@@ -59,4 +59,33 @@ public class TheMealDBTest {
         }
     }
 
+    @Test
+    public void testCreateWithInvalidName() {
+        String name = "asdf";
+        Recipe[] recipes;
+        recipes = instance.searchRecipesByName(name);
+        assertNull(recipes);
+
+    }
+
+    @Test
+    public void testCreateSingleWithValidName() {
+        String name = "Arrabiata";
+        Recipe[] recipes;
+        recipes = instance.searchRecipesByName(name);
+        assertNotNull(recipes);
+        assertTrue(recipes.length == 1);
+
+    }
+
+    @Test
+    public void testCreateMultipleWithValidName() {
+        String name = "beef";
+        Recipe[] recipes;
+        recipes = instance.searchRecipesByName(name);
+        assertNotNull(recipes);
+        assertTrue(recipes.length > 1);
+
+    }
+
 }
