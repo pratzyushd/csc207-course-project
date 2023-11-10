@@ -1,6 +1,5 @@
 package data_access;
 
-import data_access.TheMealDB;
 import entity.Recipe;
 import entity.RecipeFactory;
 import entity.CommonRecipeFactory;
@@ -32,7 +31,32 @@ public class TheMealDBTest {
         String id = "52772";
         Recipe recipe;
         recipe = instance.getRecipeById(id);
-        /* TODO: add assertion here */
+        /* NOTE: we aren't testing for the contents, because that depends on the API, and may change. */
+        assertNotNull(recipe);
+    }
+
+    @Test
+    public void testCreateWithInvalidArea() {
+        String area = "asdf";
+        Recipe[] recipes;
+        recipes = instance.searchRecipesByCuisine(area);
+        assertNull(recipes);
+    }
+
+    @Test
+    public void testCreateWithValidArea() {
+        String area = "Canadian";
+        Recipe[] recipes;
+        recipes = instance.searchRecipesByCuisine(area);
+        /* We have an array */
+        assertNotNull(recipes);
+        /* The array has elements */
+        assertTrue(recipes.length != 0);
+        /* There are no null objects in the array.
+        * NOTE: this should be fine, as long as we don't have some connection error / API error. */
+        for (Recipe r : recipes) {
+            assertNotNull(r);
+        }
     }
 
 }
