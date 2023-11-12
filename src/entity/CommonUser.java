@@ -1,11 +1,13 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class CommonUser implements User {
 
     private final String name;
     private final String password;
+    private HashMap<String, ArrayList<Recipe>> tags;
     private ArrayList<Recipe> favourites;
 
     /**
@@ -17,6 +19,7 @@ class CommonUser implements User {
         this.name = name;
         this.password = password;
         this.favourites = new ArrayList<>();
+        this.tags = new HashMap<>();
     }
 
     @Override
@@ -32,6 +35,11 @@ class CommonUser implements User {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public HashMap<String, ArrayList<Recipe>> getAllTagged() {
+        return tags;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface User {
 
@@ -9,6 +10,8 @@ public interface User {
     String getName();
 
     String getPassword();
+
+    HashMap<String, ArrayList<Recipe>> getAllTagged();
 
     ArrayList<Recipe> getFavourites();
 }
