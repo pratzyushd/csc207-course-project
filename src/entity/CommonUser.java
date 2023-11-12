@@ -22,6 +22,22 @@ class CommonUser implements User {
         this.tags = new HashMap<>();
     }
 
+    /**
+     * Assign the given recipe to the given tag. If tag does not already exist, create a new one.
+     * @param recipe the recipe to which the tag will be assigned.
+     * @param tag the tag to be given to the recipe.
+     */
+    @Override
+    public void assignTag(Recipe recipe, String tag) {
+        if (tags.containsKey(tag)) {
+            tags.get(tag).add(recipe);
+        } else {
+            ArrayList<Recipe> recipesWithTag = new ArrayList<>();
+            recipesWithTag.add(recipe);
+            tags.put(tag, recipesWithTag);
+        }
+    }
+
     @Override
     public void addFavourite(Recipe recipe) {
         favourites.add(recipe);
