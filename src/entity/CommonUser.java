@@ -5,18 +5,18 @@ import java.util.HashMap;
 
 class CommonUser implements User {
 
-    private final String name;
+    private final String username;
     private final String password;
     private HashMap<String, ArrayList<Recipe>> tags;
     private ArrayList<Recipe> favourites;
 
     /**
-     * Requires: password is valid.
-     * @param name
-     * @param password
+     * Create a User with the given username and password given the username is available.
+     * @param username an alphanumeric username assigned by the user.
+     * @param password the password the user will use with their username to log in.
      */
-    CommonUser(String name, String password) {
-        this.name = name;
+    CommonUser(String username, String password) {
+        this.username = username;
         this.password = password;
         this.favourites = new ArrayList<>();
         this.tags = new HashMap<>();
@@ -44,8 +44,8 @@ class CommonUser implements User {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     @Override

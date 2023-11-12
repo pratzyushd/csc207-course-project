@@ -9,7 +9,7 @@ public interface User {
 
     void addFavourite(Recipe recipe);
 
-    String getName();
+    String getUsername();
 
     String getPassword();
 
