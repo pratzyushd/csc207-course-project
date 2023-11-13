@@ -40,7 +40,7 @@ public class TheMealDBTest {
         String area = "asdf";
         Recipe[] recipes;
         recipes = instance.searchRecipesByCuisine(area);
-        assertNull(recipes);
+        assertEquals(0, recipes.length);
     }
 
     @Test
@@ -48,8 +48,6 @@ public class TheMealDBTest {
         String area = "Canadian";
         Recipe[] recipes;
         recipes = instance.searchRecipesByCuisine(area);
-        /* We have an array */
-        assertNotNull(recipes);
         /* The array has elements */
         assertTrue(recipes.length != 0);
         /* There are no null objects in the array.
@@ -64,26 +62,30 @@ public class TheMealDBTest {
         String name = "asdf";
         Recipe[] recipes;
         recipes = instance.searchRecipesByName(name);
-        assertNull(recipes);
+        assertEquals(0, recipes.length);
 
     }
 
+    /**
+     * Test the case of the API only having a single recipe with a given name.
+     */
     @Test
     public void testCreateSingleWithValidName() {
         String name = "Arrabiata";
         Recipe[] recipes;
         recipes = instance.searchRecipesByName(name);
-        assertNotNull(recipes);
-        assertTrue(recipes.length == 1);
+        assertEquals(1, recipes.length);
 
     }
 
+    /**
+     * Test the case of the API having multiple recipes with a given name.
+     */
     @Test
     public void testCreateMultipleWithValidName() {
         String name = "beef";
         Recipe[] recipes;
         recipes = instance.searchRecipesByName(name);
-        assertNotNull(recipes);
         assertTrue(recipes.length > 1);
 
     }
