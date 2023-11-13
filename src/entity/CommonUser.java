@@ -54,7 +54,7 @@ class CommonUser implements User {
     }
 
     @Override
-    public HashMap<String, ArrayList<Recipe>> getAllTagged() {
+    public HashMap<String, ArrayList<Recipe>> getTaggedRecipes() {
         return taggedRecipes;
     }
 

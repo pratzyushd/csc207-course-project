@@ -13,7 +13,7 @@ public interface User {
 
     String getPassword();
 
-    HashMap<String, ArrayList<Recipe>> getAllTagged();
+    HashMap<String, ArrayList<Recipe>> getTaggedRecipes();
 
     ArrayList<Recipe> getFavourites();
 }
