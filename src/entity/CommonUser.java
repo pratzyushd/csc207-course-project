@@ -7,7 +7,7 @@ class CommonUser implements User {
 
     private final String username;
     private final String password;
-    private HashMap<String, ArrayList<Recipe>> tags;
+    private HashMap<String, ArrayList<Recipe>> taggedRecipes;
     private ArrayList<Recipe> favourites;
 
     /**
@@ -19,7 +19,7 @@ class CommonUser implements User {
         this.username = username;
         this.password = password;
         this.favourites = new ArrayList<>();
-        this.tags = new HashMap<>();
+        this.taggedRecipes = new HashMap<>();
     }
 
     /**
@@ -29,12 +29,12 @@ class CommonUser implements User {
      */
     @Override
     public void assignTag(Recipe recipe, String tag) {
-        if (tags.containsKey(tag)) {
-            tags.get(tag).add(recipe);
+        if (taggedRecipes.containsKey(tag)) {
+            taggedRecipes.get(tag).add(recipe);
         } else {
             ArrayList<Recipe> recipesWithTag = new ArrayList<>();
             recipesWithTag.add(recipe);
-            tags.put(tag, recipesWithTag);
+            taggedRecipes.put(tag, recipesWithTag);
         }
     }
 
@@ -55,7 +55,7 @@ class CommonUser implements User {
 
     @Override
     public HashMap<String, ArrayList<Recipe>> getAllTagged() {
-        return tags;
+        return taggedRecipes;
     }
 
     @Override
