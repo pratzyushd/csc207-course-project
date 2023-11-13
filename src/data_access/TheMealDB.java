@@ -18,7 +18,7 @@ public class TheMealDB implements RecipeAPI {
 
     /* We don't need an API key here, because TheMealDB API allows us to use the key "1" for development purposes. */
     private static final String API_URL = "https://www.themealdb.com/api/json/v1/1/";
-    private RecipeFactory recipeFactory;
+    private final RecipeFactory recipeFactory;
 
     public TheMealDB(RecipeFactory recipeFactory) {
         this.recipeFactory = recipeFactory;
