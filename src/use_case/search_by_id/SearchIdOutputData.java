@@ -5,12 +5,10 @@ import entity.Recipe;
 public class SearchIdOutputData {
     private final String id;
     private final Recipe[] recipes;
-    private boolean useCaseFailed;
 
-    public SearchIdOutputData(String id, Recipe[] recipes, boolean useCaseFailed) {
+    public SearchIdOutputData(String id, Recipe[] recipes) {
         this.id = id;
         this.recipes = recipes;
-        this.useCaseFailed = useCaseFailed;
     }
 
     public String getId() {
