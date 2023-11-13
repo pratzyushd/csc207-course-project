@@ -137,7 +137,7 @@ public class TheMealDB implements RecipeAPI {
      * @param response the response object from the API
      * @return JSONArray of the meals, or null if some error.
      */
-    private JSONArray getMealArrayFromResponse(Response response) {
+    private JSONArray getMealArrayFromResponse(Response response) throws IOException {
         if (!responseFromApiIsSuccessful(response)) {
             return null;
         }
