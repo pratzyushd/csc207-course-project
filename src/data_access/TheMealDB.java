@@ -14,6 +14,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * The DAO that allows us to access TheMealDB API.
+ */
 public class TheMealDB implements RecipeAPI {
 
     /* We don't need an API key here, because TheMealDB API allows us to use the key "1" for development purposes. */
@@ -32,14 +35,14 @@ public class TheMealDB implements RecipeAPI {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!responseIsValid(response)) {
+            if (!responseFromApiIsSuccessful(response)) {
                 return null;
             }
 
             JSONObject responseBody = new JSONObject(response.body().string());
 
             /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
-            if  (!dataInAPIResponse(responseBody)) {
+            if  (!dataIsInAPIResponse(responseBody)) {
                 return null;
             }
 
@@ -62,18 +65,10 @@ public class TheMealDB implements RecipeAPI {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!responseIsValid(response)) {
-                return null;
+            JSONArray mealArray = getMealArrayFromResponse(response);
+            if (mealArray == null) {
+                return new Recipe[0];
             }
-
-            JSONObject responseBody = new JSONObject(response.body().string());
-
-            /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
-            if (!dataInAPIResponse(responseBody)) {
-                return null;
-            }
-
-            JSONArray mealArray = responseBody.getJSONArray("meals");
 
             String[] mealIdArray = new String[mealArray.length()];
             for (int i = 0; i < mealArray.length(); i++) {
@@ -84,7 +79,7 @@ public class TheMealDB implements RecipeAPI {
             return getRecipesFromListOfIds(mealIdArray);
 
         } catch (IOException | JSONException e) {
-            return null;
+            return new Recipe[0];
         }
     }
 
@@ -97,18 +92,10 @@ public class TheMealDB implements RecipeAPI {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!responseIsValid(response)) {
-                return null;
+            JSONArray mealArray = getMealArrayFromResponse(response);
+            if (mealArray == null) {
+                return new Recipe[0];
             }
-
-            JSONObject responseBody = new JSONObject(response.body().string());
-
-            /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
-            if (!dataInAPIResponse(responseBody)) {
-                return null;
-            }
-
-            JSONArray mealArray = responseBody.getJSONArray("meals");
 
             Recipe[] recipes = new Recipe[mealArray.length()];
             for (int i = 0; i < mealArray.length(); i++) {
@@ -119,18 +106,20 @@ public class TheMealDB implements RecipeAPI {
             return recipes;
 
         } catch (IOException | JSONException e) {
-            return null;
+            return new Recipe[0];
         }
     }
 
-    private Boolean responseIsValid(Response response) {
+    private Boolean responseFromApiIsSuccessful(Response response) {
         if (response.body() == null) {
             return false;
         }
+        /* As per code review comment, we might later differentiate the types of errors that we
+         * could have, in which case we would change the below line. */
         return response.code() == 200;
     }
 
-    private Boolean dataInAPIResponse(JSONObject responseBody) {
+    private Boolean dataIsInAPIResponse(JSONObject responseBody) {
         return !(responseBody.isNull("meals"));
     }
 
@@ -141,6 +130,26 @@ public class TheMealDB implements RecipeAPI {
                 meal.getString("strCategory"),
                 meal.getString("strInstructions"),
                 meal.getString("strArea"));
+    }
+
+    /**
+     * Gets the JSONArray of the meals from the response from the API.
+     * @param response the response object from the API
+     * @return JSONArray of the meals, or null if some error.
+     */
+    private JSONArray getMealArrayFromResponse(Response response) {
+        if (!responseFromApiIsSuccessful(response)) {
+            return null;
+        }
+
+        JSONObject responseBody = new JSONObject(response.body().string());
+
+        /* We get back an empty list i.e. the ID doesn't exist in TheMealDB. */
+        if (!dataIsInAPIResponse(responseBody)) {
+            return null;
+        }
+
+        return responseBody.getJSONArray("meals");
     }
 
     /**
