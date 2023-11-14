@@ -24,11 +24,12 @@ public class SearchCuisineInteractor implements SearchCuisineInputBoundary {
     public void execute(SearchCuisineInputData searchCuisineInputData) {
         String cuisine = searchCuisineInputData.getCuisine();
         Recipe[] recipes = userDataAccessObject.searchRecipesByCuisine(cuisine);
+        SearchCuisineOutputData outputData = new SearchCuisineOutputData(cuisine, recipes);
 
         if (recipes.length == 0) {
-            searchCuisinePresenter.prepareFailView(cuisine + "recipes do not exist.");
+            searchCuisinePresenter.prepareFailView(outputData);
         } else {
-            searchCuisinePresenter.prepareSuccessView(recipes);
+            searchCuisinePresenter.prepareSuccessView(outputData);
         }
     }
 }

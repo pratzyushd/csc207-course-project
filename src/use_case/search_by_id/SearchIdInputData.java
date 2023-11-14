@@ -5,7 +5,7 @@ public class SearchIdInputData {
 
     /**
      * Creates an input data object with the given id.
-     * @param id the id associated with certain recipes.
+     * @param id the id associated with a certain recipe.
      */
     public SearchIdInputData(String id) {
         this.id = id;

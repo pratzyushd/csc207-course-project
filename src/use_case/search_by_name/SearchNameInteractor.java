@@ -1,6 +1,7 @@
 package use_case.search_by_name;
 
 import entity.Recipe;
+import use_case.search_by_cuisine.SearchCuisineOutputData;
 
 /**
  * Implements the search by name use case. Accesses the DAO to retrieve the relevant recipes
@@ -25,11 +26,12 @@ public class SearchNameInteractor implements SearchNameInputBoundary {
     public void execute(SearchNameInputData searchNameInputData) {
         String name = searchNameInputData.getName();
         Recipe[] recipes = userDataAccessObject.searchRecipesByName(name);
+        SearchNameOutputData outputData = new SearchNameOutputData(name, recipes);
 
         if (recipes.length == 0) {
-            searchNamePresenter.prepareFailView(name + "recipes do not exist.");
+            searchNamePresenter.prepareFailView(outputData);
         } else {
-            searchNamePresenter.prepareSuccessView(recipes);
+            searchNamePresenter.prepareSuccessView(outputData);
         }
     }
 }

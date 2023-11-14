@@ -4,9 +4,9 @@ import entity.Recipe;
 
 public interface SearchIdUserDataAccessInterface {
     /**
-     * Asks the API for recipes given the id.
-     * @param id the id that the user wants the recipes from.
-     * @return an array of Recipes that belong to the id.
+     * Asks the API for a recipe given the id.
+     * @param id the id that the user wants the recipe from.
+     * @return a Recipe that belongs to the id.
      */
-    Recipe[] searchRecipesById(String id);
+    Recipe searchRecipesById(String id);
 }

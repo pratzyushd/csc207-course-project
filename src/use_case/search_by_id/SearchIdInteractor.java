@@ -1,9 +1,10 @@
 package use_case.search_by_id;
 
 import entity.Recipe;
+import use_case.search_by_cuisine.SearchCuisineOutputData;
 
 /**
- * Implements the search by id use case. Accesses the DAO to retrieve the relevant recipes
+ * Implements the search by id use case. Accesses the DAO to retrieve the relevant recipe
  * and formats the output data. 
  */
 public class SearchIdInteractor implements SearchIdInputBoundary {
@@ -12,7 +13,7 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
 
     /**
      * Creates an instance of the SearchIdInteractor with its corresponding DAO and presenter.
-     * @param userDataAccessObject the DAO that retrieves the recipes relevant to the given id.
+     * @param userDataAccessObject the DAO that retrieves the recipe relevant to the given id.
      * @param searchIdPresenter the presenter that modifies the view based on the data retrieved by the DAO.
      */
     public SearchIdInteractor(SearchIdUserDataAccessInterface userDataAccessObject,
@@ -24,12 +25,13 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
     @Override
     public void execute(SearchIdInputData searchIdInputData) {
         String id = searchIdInputData.getId();
-        Recipe[] recipes = userDataAccessObject.searchRecipesById(id);
+        Recipe recipe = userDataAccessObject.searchRecipesById(id);
+        SearchIdOutputData outputData = new SearchIdOutputData(id, recipe);
 
-        if (recipes.length == 0) {
-            searchIdPresenter.prepareFailView(id + "recipes do not exist.");
+        if (recipe == null) {
+            searchIdPresenter.prepareFailView(outputData);
         } else {
-            searchIdPresenter.prepareSuccessView(recipes);
+            searchIdPresenter.prepareSuccessView(outputData);
         }
     }
 }
