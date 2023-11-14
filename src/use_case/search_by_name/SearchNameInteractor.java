@@ -2,14 +2,23 @@ package use_case.search_by_name;
 
 import entity.Recipe;
 
+/**
+ * Implements the search by name use case. Accesses the DAO to retrieve the relevant recipes
+ * and formats the output data.
+ */
 public class SearchNameInteractor implements SearchNameInputBoundary {
-    final SearchNameUserDataAccessInterface userDataAccessObject;
-    final SearchNameOutputBoundary searchNamePresenter;
+    private final SearchNameUserDataAccessInterface userDataAccessObject;
+    private final SearchNameOutputBoundary searchNamePresenter;
 
-    public SearchNameInteractor(SearchNameUserDataAccessInterface userDataAccessInterface,
-                                SearchNameOutputBoundary searchNameOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
-        this.searchNamePresenter = searchNameOutputBoundary;
+    /**
+     * Creates an instance of the SearchNameInteractor with its corresponding DAO and presenter.
+     * @param userDataAccessObject the DAO that retrieves the recipes relevant to the given name.
+     * @param searchNamePresenter the presenter that modifies the view based on the data retrieved by the DAO.
+     */
+    public SearchNameInteractor(SearchNameUserDataAccessInterface userDataAccessObject,
+                                SearchNameOutputBoundary searchNamePresenter) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.searchNamePresenter = searchNamePresenter;
     }
 
     @Override

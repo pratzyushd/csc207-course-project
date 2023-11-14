@@ -2,16 +2,24 @@ package use_case.search_by_cuisine;
 
 import entity.Recipe;
 
+/**
+ * Implements the search by cuisine use case. Accesses the DAO to retrieve the relevant recipes
+ * and formats the output data.
+ */
 public class SearchCuisineInteractor implements SearchCuisineInputBoundary {
-    final SearchCuisineUserDataAccessInterface userDataAccessObject;
-    final SearchCuisineOutputBoundary searchCuisinePresenter;
+    private final SearchCuisineUserDataAccessInterface userDataAccessObject;
+    private final SearchCuisineOutputBoundary searchCuisinePresenter;
 
-    public SearchCuisineInteractor(SearchCuisineUserDataAccessInterface userDataAccessInterface,
-                           SearchCuisineOutputBoundary searchCuisineOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
-        this.searchCuisinePresenter = searchCuisineOutputBoundary;
+    /**
+     * Creates an instance of the SearchCuisineInteractor with its corresponding DAO and presenter.
+     * @param userDataAccessObject the DAO that retrieves the recipes relevant to the given cuisine.
+     * @param searchCuisinePresenter the presenter that modifies the view based on the data retrieved by the DAO.
+     */
+    public SearchCuisineInteractor(SearchCuisineUserDataAccessInterface userDataAccessObject,
+                           SearchCuisineOutputBoundary searchCuisinePresenter) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.searchCuisinePresenter = searchCuisinePresenter;
     }
-
     @Override
     public void execute(SearchCuisineInputData searchCuisineInputData) {
         String cuisine = searchCuisineInputData.getCuisine();

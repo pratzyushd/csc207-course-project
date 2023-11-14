@@ -6,12 +6,17 @@ public class SearchNameOutputData {
     private final String name;
     private final Recipe[] recipes;
 
-    public SearchNameOutputData(String cuisine, Recipe[] recipes) {
-        this.name = cuisine;
+    /**
+     * Creates an output data object with the given name and its associated recipes.
+     * @param name the name of certain recipes.
+     * @param recipes recipes associated with the given name.
+     */
+    public SearchNameOutputData(String name, Recipe[] recipes) {
+        this.name = name;
         this.recipes = recipes;
     }
 
-    public String getCuisine() {
+    public String getName() {
         return name;
     }
 
