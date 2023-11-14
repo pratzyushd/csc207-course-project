@@ -1,7 +1,6 @@
 package use_case.search_by_id;
 
 import entity.Recipe;
-import use_case.search_by_cuisine.SearchCuisineOutputData;
 
 /**
  * Implements the search by id use case. Accesses the DAO to retrieve the relevant recipe

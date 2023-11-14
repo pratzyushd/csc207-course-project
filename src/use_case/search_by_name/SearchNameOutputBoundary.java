@@ -1,7 +1,5 @@
 package use_case.search_by_name;
 
-import entity.Recipe;
-
 public interface SearchNameOutputBoundary {
     /**
      * Output the UI that shows the relevant recipes the user searched for if they existed.

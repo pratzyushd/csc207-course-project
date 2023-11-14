@@ -1,7 +1,6 @@
 package use_case.search_by_name;
 
 import entity.Recipe;
-import use_case.search_by_cuisine.SearchCuisineOutputData;
 
 /**
  * Implements the search by name use case. Accesses the DAO to retrieve the relevant recipes
