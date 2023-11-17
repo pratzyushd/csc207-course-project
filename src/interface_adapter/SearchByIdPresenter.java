@@ -17,6 +17,7 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
 
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
+        System.out.println(response.getRecipe().getName());
 //        // On success, switch to the results view.
 //        SearchByIdState searchByIdState = searchByIdViewModel.getState();
 //        searchByIdState.setUsername(response.getUsername());
