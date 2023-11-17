@@ -2,6 +2,7 @@
 
 ## Members
 - Pratyush Dwivedi
+    - *NOTE:* for some reason, commits from this member show either with their GitHub username (pratzyushd) or with their full name (Pratyush Dwivedi).
 - Jaeyong Lee
 - David (Jia Jun) Wu
 - Kevin Hu
