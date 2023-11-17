@@ -1,18 +1,24 @@
 package use_case.display_tagged_recipe;
 
+/**
+ * Implements the display user tagged recipes use case.
+ */
 public class DisplayTaggedInteractor {
 
-    private final DisplayTaggedInputBoundary inputBoundary;
-    private final DisplayTaggedOutputBoundary outputBoundary;
+    private final DisplayTaggedOutputBoundary presenter;
     private final DisplayTaggedUserDataAccessInterface dataAccess;
 
-    public DisplayTaggedInteractor(DisplayTaggedInputBoundary inputBoundary, DisplayTaggedOutputBoundary outputBoundary, DisplayTaggedUserDataAccessInterface dataAccess) {
-        this.inputBoundary = inputBoundary;
-        this.outputBoundary = outputBoundary;
+    /**
+     * Creates a new DisplayTaggedInteractor with the given presenter and data access.
+     * @param presenter the presenter that will update the view with the relevant recipes.
+     * @param dataAccess the data access object that will retrieve the relevant recipes based on given user and tag.
+     */
+    public DisplayTaggedInteractor(DisplayTaggedOutputBoundary presenter, DisplayTaggedUserDataAccessInterface dataAccess) {
+        this.presenter = presenter;
         this.dataAccess = dataAccess;
     }
 
     public void execute(DisplayTaggedInputData input) {
-        outputBoundary.present(dataAccess.displayTaggedRecipes(input.getUsername(), input.getTag()));
+        presenter.prepareSuccessView(dataAccess.getTaggedRecipes(input.getUser(), input.getTag()));
     }
 }

@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface DisplayFavouriteUserDataAccessInterface {
 
-    List<Recipe> displayFavouriteRecipes(User user);
+    /**
+     * Gets the favourite recipes of the given user.
+     * @param user the user whose favourite recipes to get.
+     * @return the favourite recipes of the given user.
+     */
+    List<Recipe> getFavouriteRecipes(User user);
 
 }
