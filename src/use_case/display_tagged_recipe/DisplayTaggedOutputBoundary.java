@@ -1,12 +1,9 @@
 package use_case.display_tagged_recipe;
 
-import entity.Recipe;
-import java.util.List;
-
 public interface DisplayTaggedOutputBoundary {
     /**
      * Prepares the success view for the user.
-     * @param recipes the recipes to display.
+     * @param outputData the recipes to display.
      */
-    void prepareSuccessView(List<Recipe> recipes);
+    void prepareSuccessView(DisplayTaggedOutputData outputData);
 }

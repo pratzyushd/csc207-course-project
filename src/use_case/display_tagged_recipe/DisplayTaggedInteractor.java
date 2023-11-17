@@ -1,5 +1,9 @@
 package use_case.display_tagged_recipe;
 
+import entity.Recipe;
+
+import java.util.List;
+
 /**
  * Implements the display user tagged recipes use case.
  */
@@ -19,6 +23,10 @@ public class DisplayTaggedInteractor {
     }
 
     public void execute(DisplayTaggedInputData input) {
-        presenter.prepareSuccessView(dataAccess.getTaggedRecipes(input.getUser(), input.getTag()));
+
+        List<Recipe> recipes = dataAccess.getTaggedRecipes(input.getUser(), input.getTag());
+        DisplayTaggedOutputData dataOutput = new DisplayTaggedOutputData(recipes);
+
+        presenter.prepareSuccessView(dataOutput);
     }
 }

@@ -27,7 +27,8 @@ public class DisplayFavouriteInteractor implements DisplayFavouriteInputBoundary
     @Override
     public void execute(DisplayFavouriteInputData input) {
         List<Recipe> recipes = dataAccess.getFavouriteRecipes(user);
-        presenter.prepareSuccessView(recipes);
+        DisplayFavouriteOutputData dataOutput = new DisplayFavouriteOutputData(recipes);
+        presenter.prepareSuccessView(dataOutput);
     }
 
 }
