@@ -27,7 +27,7 @@ public class TheMealDB implements RecipeAPI {
         this.recipeFactory = recipeFactory;
     }
     @Override
-    public Recipe getRecipeById(String id) {
+    public Recipe searchRecipesById(String id) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
                 .url(String.format(API_URL + "lookup.php?i=" + id))
@@ -170,7 +170,7 @@ public class TheMealDB implements RecipeAPI {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    recipeArray[insertionIndex] = getRecipeById(idList[insertionIndex]);
+                    recipeArray[insertionIndex] = searchRecipesById(idList[insertionIndex]);
                     latch.countDown();
                 }
             });
