@@ -1,11 +1,12 @@
 package interface_adapter;
 
+import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class SearchByIdPresenter {
+public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
     private ViewManagerModel viewManagerModel;
 
@@ -14,7 +15,7 @@ public class SearchByIdPresenter {
         this.searchByIdViewModel = searchByIdViewModel;
     }
 
-    // todo: add @Overide decorator later
+    @Override
     public void prepareSuccessView(SearchIdOutputData response) {
 //        // On success, switch to the results view.
 //        SearchByIdState searchByIdState = searchByIdViewModel.getState();
@@ -26,8 +27,8 @@ public class SearchByIdPresenter {
 //        viewManagerModel.firePropertyChanged();
     }
 
-    // todo: add @Overide decorator later
-    public void prepareFailView(String error) {
+    @Override
+    public void prepareFailView(SearchIdOutputData error) {
 //        SignupState signupState = signupViewModel.getState();
 //        signupState.setUsernameError(error);
 //        signupViewModel.firePropertyChanged();
