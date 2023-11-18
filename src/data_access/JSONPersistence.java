@@ -76,6 +76,7 @@ public class JSONPersistence implements Persistence {
         JSONObject obj = new JSONObject();
         JSONObject tagsJSON = JSONForUserTags(user);
         JSONArray favouritesJSON = JSONForUserFavourites(user);
+        obj.put("username", user.getUsername());
         obj.put("tags", tagsJSON);
         obj.put("favourites", favouritesJSON);
         return obj;
@@ -88,7 +89,6 @@ public class JSONPersistence implements Persistence {
      */
     public void save(User user) {
         JSONObject obj = constructJSONObjectFromUser(user);
-        System.out.println(obj.toString(4));
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(this.JSONFile));
