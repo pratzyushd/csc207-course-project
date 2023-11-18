@@ -18,7 +18,6 @@ public class JSONPersistenceTest {
     private String filePath = "temp.json";
     private User filledUser;
     private User emptyUser;
-    private Recipe[] recipes;
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -30,17 +29,17 @@ public class JSONPersistenceTest {
         /* Use factories to create some mocking data. */
         this.emptyUser = userFactory.create("empty", "user");
         this.filledUser = userFactory.create("asdf", "1234");
-        this.recipes = new Recipe[]{
-            recipeFactory.create(52802, "Fish pie", "Seafood", "instructions", "British"),
-            recipeFactory.create(52872, "Spanish Tortilla", "Vegetarian", "instructions", "Spanish"),
-            recipeFactory.create(52855, "Banana Pancakes", "Dessert", "instructions", "American"),
-            recipeFactory.create(52870, "Chickpea Fajitas", "Vegetarian", "instructions", "Mexican"),
+        Recipe[] recipes = new Recipe[]{
+                recipeFactory.create(52802, "Fish pie", "Seafood", "instructions", "British"),
+                recipeFactory.create(52872, "Spanish Tortilla", "Vegetarian", "instructions", "Spanish"),
+                recipeFactory.create(52855, "Banana Pancakes", "Dessert", "instructions", "American"),
+                recipeFactory.create(52870, "Chickpea Fajitas", "Vegetarian", "instructions", "Mexican"),
         };
         /* Add the recipes to the user. */
-        this.filledUser.addFavourite(this.recipes[0]);
-        this.filledUser.addFavourite(this.recipes[1]);
-        this.filledUser.assignTag(this.recipes[2], "tag");
-        this.filledUser.assignTag(this.recipes[3], "tag");
+        this.filledUser.addFavourite(recipes[0]);
+        this.filledUser.addFavourite(recipes[1]);
+        this.filledUser.assignTag(recipes[2], "tag");
+        this.filledUser.assignTag(recipes[3], "tag");
 
         /* Try and open the temporary file, fail if we can't. */
         try {
@@ -54,35 +53,25 @@ public class JSONPersistenceTest {
     }
 
     @Test
-    public void testEmptyUserOutput() {
+    public void testEmptyUserOutput() throws IOException {
         instance.save(emptyUser);
-        try {
-            String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
-            assertTrue(fileContents.contains("favourites"));
-            assertTrue(fileContents.contains("tags"));
-            assertTrue(fileContents.contains("{}"));
-            assertTrue(fileContents.contains("[]"));
-        } catch (IOException e) {
-            System.out.println("Error reading file after writing");
-            fail();
-        }
+        String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
+        assertTrue(fileContents.contains("favourites"));
+        assertTrue(fileContents.contains("tags"));
+        assertTrue(fileContents.contains("{}"));
+        assertTrue(fileContents.contains("[]"));
     }
     @Test
-    public void testSingleUserOutput() {
+    public void testSingleUserOutput() throws IOException {
         instance.save(filledUser);
-        try {
-            String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
-            /* Check that we have the right things in the contents of the files */
-            assertTrue(fileContents.contains("favourites"));
-            assertTrue(fileContents.contains("tags"));
-            assertTrue(fileContents.contains("tag"));
-            assertTrue(fileContents.contains("52802"));
-            assertTrue(fileContents.contains("52872"));
-            assertTrue(fileContents.contains("52855"));
-            assertTrue(fileContents.contains("52870"));
-        } catch (IOException e) {
-            System.out.println("Error reading file after writing");
-            fail();
-        }
+        String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
+        /* Check that we have the right things in the contents of the files */
+        assertTrue(fileContents.contains("favourites"));
+        assertTrue(fileContents.contains("tags"));
+        assertTrue(fileContents.contains("tag"));
+        assertTrue(fileContents.contains("52802"));
+        assertTrue(fileContents.contains("52872"));
+        assertTrue(fileContents.contains("52855"));
+        assertTrue(fileContents.contains("52870"));
     }
 }
