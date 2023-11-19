@@ -13,7 +13,6 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        // This is the main application window
         JFrame application = new JFrame("MyRecipeMate");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         CardLayout cardLayout = new CardLayout();
@@ -45,6 +44,7 @@ public class Main {
 //        viewManagerModel.firePropertyChanged();
 
         application.pack();
+        application.setLocationRelativeTo(null);
         application.setVisible(true);
     }
 }

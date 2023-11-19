@@ -35,7 +35,8 @@ public class SearchByIdView extends JPanel {
         add(idLabel);
         add(idTextField);
         add(searchButton);
-    }
 
+        setPreferredSize(new Dimension(600, 200));
+    }
     // Add methods to update the view based on the ViewModel if needed here
 }
