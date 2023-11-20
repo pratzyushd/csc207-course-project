@@ -11,16 +11,15 @@ import org.json.JSONTokener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class JSONPersistence implements Persistence {
     private UserFactory userFactory;
-    private RecipeFactory recipeFactory;
     private final File JSONFile;
     private final RecipeAPI recipeDAO;
 
-    public JSONPersistence(UserFactory userFactory, RecipeFactory recipeFactory, String filePath, RecipeAPI recipeDAO) {
+    public JSONPersistence(UserFactory userFactory, String filePath, RecipeAPI recipeDAO) {
         this.userFactory = userFactory;
-        this.recipeFactory = recipeFactory;
         this.JSONFile = new File(filePath);
         this.recipeDAO = recipeDAO;
     }
@@ -104,23 +103,49 @@ public class JSONPersistence implements Persistence {
 
     public User load() {
         User user;
+        String name;
+        JSONArray favourites;
+        JSONObject tagsMap;
+        /* Read and parse the information from the file. */
         try (BufferedReader reader = new BufferedReader(new FileReader(this.JSONFile))) {
             JSONTokener tokenizer = new JSONTokener(reader);
             JSONObject obj = new JSONObject(tokenizer);
-            String name = obj.getString("username");
-            JSONArray favourites = obj.getJSONArray("favourites");
-            JSONObject tagsMap = obj.getJSONObject("tags");
+            name = obj.getString("username");
+            favourites = obj.getJSONArray("favourites");
+            tagsMap = obj.getJSONObject("tags");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        /* Construct the user object. */
+        /* TODO: fix this hack, where we don't use the password. */
+        user = userFactory.create(name, "");
+        /* Update user with favourites */
+        Recipe[] favouritesList = generateRecipesFromJSONArray(favourites);
+        for (Recipe recipe : favouritesList) {
+            user.addFavourite(recipe);
+        }
+        /* Update user with tags */
+        for (String key: tagsMap.keySet()) {
+            Recipe[] recipeArray = generateRecipesFromJSONArray(tagsMap.getJSONArray(key));
+            for (Recipe recipe : recipeArray) {
+                user.assignTag(recipe, key);
+            }
+        }
+        return user;
     }
 
-    private Recipe[] generateRecipesFromFavourites(JSONArray favourites) {
-        Recipe[] recipes = new Recipe[favourites.length()];
-        for (int i = 0; i < favourites.length(); i++) {
-            recipes[i] = recipeDAO.searchRecipesById(favourites.getString(i));
+    private Recipe[] generateRecipesFromJSONArray(JSONArray array) {
+        Recipe[] recipes = new Recipe[array.length()];
+        /* TODO: we want to fix this, so that we use a special method in the recipe DAO
+         * which more efficiently gets a list of recipes.
+         * This is done in issue #8, and so this must be modified after we merge this
+         * (still functional) code to main.
+         */
+        for (int i = 0; i < array.length(); i++) {
+            recipes[i] = recipeDAO.searchRecipesById(array.getString(i));
         }
+
         return recipes;
     }
+
 }
