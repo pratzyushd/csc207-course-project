@@ -105,8 +105,8 @@ public class JSONPersistence implements Persistence {
     public User load() {
         User user;
         try (BufferedReader reader = new BufferedReader(new FileReader(this.JSONFile))) {
-            JSONTokener tokener = new JSONTokener(reader);
-            JSONObject obj = new JSONObject(tokener);
+            JSONTokener tokenizer = new JSONTokener(reader);
+            JSONObject obj = new JSONObject(tokenizer);
             String name = obj.getString("username");
             JSONArray favourites = obj.getJSONArray("favourites");
             JSONObject tagsMap = obj.getJSONObject("tags");
