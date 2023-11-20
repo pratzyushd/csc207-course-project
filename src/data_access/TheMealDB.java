@@ -170,7 +170,7 @@ public class TheMealDB implements RecipeAPI {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    recipeArray[insertionIndex] = getRecipeById(idList[insertionIndex]);
+                    recipeArray[insertionIndex] = searchRecipesById(idList[insertionIndex]);
                     latch.countDown();
                 }
             });
