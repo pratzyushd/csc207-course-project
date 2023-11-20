@@ -3,9 +3,6 @@ package interface_adapter;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
     private ViewManagerModel viewManagerModel;
