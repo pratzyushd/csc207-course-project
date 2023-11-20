@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.search_by_id;
 
 import use_case.search_by_id.SearchIdInputBoundary;
 import use_case.search_by_id.SearchIdInputData;

@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.display_recipes;
 
 public class RecipesPresenter {
 
