@@ -1,4 +1,6 @@
-package interface_adapter;
+package interface_adapter.display_recipes;
+
+import interface_adapter.ViewModel;
 
 public class RecipesViewModel extends ViewModel {
     private final boolean isFavourite;

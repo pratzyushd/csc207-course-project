@@ -1,5 +1,6 @@
-package interface_adapter;
+package interface_adapter.search_by_id;
 
+import interface_adapter.ViewManagerModel;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
