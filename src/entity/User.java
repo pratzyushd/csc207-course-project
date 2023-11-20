@@ -11,8 +11,6 @@ public interface User {
 
     String getUsername();
 
-    String getPassword();
-
     HashMap<String, ArrayList<Recipe>> getTaggedRecipes();
 
     ArrayList<Recipe> getFavourites();

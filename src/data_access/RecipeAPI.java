@@ -10,4 +10,10 @@ import use_case.search_by_name.SearchNameUserDataAccessInterface;
  * from the various use cases. */
 public interface RecipeAPI extends FavouriteRecipeUserDataAccessInterface, SearchCuisineUserDataAccessInterface,
         SearchIdUserDataAccessInterface, SearchNameUserDataAccessInterface {
+    /**
+     * Search for recipes given a list of IDs.
+     * @param ids the list of IDs to search for.
+     * @return array containing Recipe objects (or null of invalid ID)
+     */
+    public Recipe[] searchRecipesByListOfIds(String[] ids);
 }

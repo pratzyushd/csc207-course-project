@@ -3,9 +3,6 @@ package interface_adapter;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
     private ViewManagerModel viewManagerModel;
@@ -17,6 +14,7 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
 
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
+        System.out.println(response.getRecipe().getName());
 //        // On success, switch to the results view.
 //        SearchByIdState searchByIdState = searchByIdViewModel.getState();
 //        searchByIdState.setUsername(response.getUsername());
