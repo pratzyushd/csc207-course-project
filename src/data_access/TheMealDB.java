@@ -186,4 +186,9 @@ public class TheMealDB implements RecipeAPI {
         return recipeArray;
 
     }
+
+    @Override
+    public Recipe[] searchRecipesByListOfIds(String[] ids) {
+        return getRecipesFromListOfIds(ids);
+    }
 }
