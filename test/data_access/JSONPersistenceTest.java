@@ -66,6 +66,7 @@ public class JSONPersistenceTest {
         instance.save(filledUser);
         String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
         /* Check that we have the right things in the contents of the files */
+        assertTrue(fileContents.contains("asdf"));
         assertTrue(fileContents.contains("favourites"));
         assertTrue(fileContents.contains("tags"));
         assertTrue(fileContents.contains("tag"));
@@ -73,5 +74,10 @@ public class JSONPersistenceTest {
         assertTrue(fileContents.contains("52872"));
         assertTrue(fileContents.contains("52855"));
         assertTrue(fileContents.contains("52870"));
+    }
+
+    @Test
+    public void testReadingContents() throws IOException {
+        User user = instance.load();
     }
 }
