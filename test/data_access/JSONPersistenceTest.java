@@ -8,8 +8,12 @@ import org.junit.Before;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -49,7 +53,8 @@ public class JSONPersistenceTest {
             fail();
         }
         /* Make the instance. */
-        this.instance = new JSONPersistence(userFactory, recipeFactory, filePath);
+        RecipeAPI recipeDAO = new TheMealDB(recipeFactory);
+        this.instance = new JSONPersistence(userFactory, filePath, recipeDAO);
     }
 
     @Test
@@ -78,6 +83,39 @@ public class JSONPersistenceTest {
 
     @Test
     public void testReadingContents() throws IOException {
+        /* Write some testing data to the file */
+        PrintWriter file = new PrintWriter("temp.json");
+        file.println("{\n" +
+                "    \"favourites\": [\n" +
+                "        52802,\n" +
+                "        52872\n" +
+                "    ],\n" +
+                "    \"username\": \"asdf\",\n" +
+                "    \"tags\": {\"tag\": [\n" +
+                "        52855,\n" +
+                "        52870\n" +
+                "    ]}\n" +
+                "}");
+        Set<Integer> actualFavouriteIds = Set.of(52802, 52872);
+        Set<Integer> actualTaggedIds = Set.of(52855, 52870);
+
         User user = instance.load();
+        assertEquals(user.getUsername(), "asdf");
+        assertEquals(user.getFavourites().size(), 2);
+
+        Integer[] favouriteIds = new Integer[2];
+        for (int i = 0; i < user.getFavourites().size(); i++) {
+            favouriteIds[i] = user.getFavourites().get(i).getMealId();
+        }
+
+        Integer[] taggedIds = new Integer[2];
+        ArrayList<Recipe> taggedRecipes = user.getTaggedRecipes().get("tag");
+        for (int i = 0; i < taggedRecipes.size(); i++) {
+            taggedIds[i] = taggedRecipes.get(i).getMealId();
+        }
+
+        assertEquals(favouriteIds.length, 2);
+        assertTrue(actualFavouriteIds.containsAll(List.of(favouriteIds)));
+        assertTrue(actualTaggedIds.containsAll(List.of(taggedIds)));
     }
 }
