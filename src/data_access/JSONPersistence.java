@@ -5,22 +5,25 @@ import entity.RecipeFactory;
 import entity.User;
 import entity.UserFactory;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class JSONPersistence implements Persistence {
-    private UserFactory userFactory;
-    private final File JSONFile;
+    private final UserFactory userFactory;
+    private final String filePath;
     private final RecipeAPI recipeDAO;
 
     public JSONPersistence(UserFactory userFactory, String filePath, RecipeAPI recipeDAO) {
         this.userFactory = userFactory;
-        this.JSONFile = new File(filePath);
+        this.filePath = filePath;
         this.recipeDAO = recipeDAO;
     }
 
@@ -93,7 +96,7 @@ public class JSONPersistence implements Persistence {
         JSONObject obj = constructJSONObjectFromUser(user);
         BufferedWriter writer;
         try {
-            writer = new BufferedWriter(new FileWriter(this.JSONFile));
+            writer = new BufferedWriter(new FileWriter(this.filePath));
             writer.write(obj.toString(4));
             writer.close();
         } catch (IOException e) {
@@ -107,13 +110,14 @@ public class JSONPersistence implements Persistence {
         JSONArray favourites;
         JSONObject tagsMap;
         /* Read and parse the information from the file. */
-        try (BufferedReader reader = new BufferedReader(new FileReader(this.JSONFile))) {
-            JSONTokener tokenizer = new JSONTokener(reader);
+        try {
+            String fileContents = Files.readString(Path.of(this.filePath));
+            JSONTokener tokenizer = new JSONTokener(fileContents);
             JSONObject obj = new JSONObject(tokenizer);
             name = obj.getString("username");
             favourites = obj.getJSONArray("favourites");
             tagsMap = obj.getJSONObject("tags");
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             throw new RuntimeException(e);
         }
         /* Construct the user object. */
@@ -142,7 +146,7 @@ public class JSONPersistence implements Persistence {
          * (still functional) code to main.
          */
         for (int i = 0; i < array.length(); i++) {
-            recipes[i] = recipeDAO.searchRecipesById(array.getString(i));
+            recipes[i] = recipeDAO.searchRecipesById(String.valueOf(array.getInt(i)));
         }
 
         return recipes;
