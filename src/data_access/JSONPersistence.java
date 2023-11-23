@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.Recipe;
-import entity.RecipeFactory;
 import entity.User;
 import entity.UserFactory;
 import org.json.JSONArray;
@@ -14,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class JSONPersistence implements Persistence {
     private final UserFactory userFactory;
@@ -127,8 +125,7 @@ public class JSONPersistence implements Persistence {
             throw new RuntimeException(e);
         }
         /* Construct the user object. */
-        /* TODO: fix this hack, where we don't use the password. */
-        user = userFactory.create(name, "");
+        user = userFactory.create(name);
         /* Update user with favourites */
         Recipe[] favouritesList = generateRecipesFromJSONArray(favourites);
         for (Recipe recipe : favouritesList) {
