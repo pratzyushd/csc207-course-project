@@ -36,13 +36,13 @@ public class JSONPersistence implements Persistence {
      */
     private JSONObject JSONForUserTags(User user) {
         JSONObject obj = new JSONObject();
-        JSONArray array = new JSONArray();
         HashMap<String, ArrayList<Recipe>> tagsMap = user.getTaggedRecipes();
         String[] tags = tagsMap.keySet().toArray(new String[0]);
 
         for (String tag : tags) {
             /* Make a JSON Array of the recipe IDs. */
             ArrayList<Recipe> recipeArray = tagsMap.get(tag);
+            JSONArray array = new JSONArray();
             for (Recipe recipe : recipeArray) {
                 array.put(recipe.getMealId());
             }
