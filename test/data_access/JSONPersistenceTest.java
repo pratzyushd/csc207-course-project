@@ -2,11 +2,13 @@ package data_access;
 
 import entity.*;
 
+import org.json.JSONException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -31,8 +33,8 @@ public class JSONPersistenceTest {
         RecipeFactory recipeFactory = new CommonRecipeFactory();
         UserFactory userFactory = new CommonUserFactory();
         /* Use factories to create some mocking data. */
-        this.emptyUser = userFactory.create("empty", "user");
-        this.filledUser = userFactory.create("asdf", "1234");
+        this.emptyUser = userFactory.create("empty");
+        this.filledUser = userFactory.create("asdf");
         Recipe[] recipes = new Recipe[]{
                 recipeFactory.create(52802, "Fish pie", "Seafood", "instructions", "British"),
                 recipeFactory.create(52872, "Spanish Tortilla", "Vegetarian", "instructions", "Spanish"),
@@ -54,7 +56,9 @@ public class JSONPersistenceTest {
         }
         /* Make the instance. */
         RecipeAPI recipeDAO = new TheMealDB(recipeFactory);
-        this.instance = new JSONPersistence(userFactory, filePath, recipeDAO);
+        this.instance = new JSONPersistence(userFactory,
+                String.valueOf(folder.getRoot()).concat("/" + filePath),
+                recipeDAO);
     }
 
     @Test
@@ -85,7 +89,9 @@ public class JSONPersistenceTest {
     @Test
     public void testReadingContents() throws IOException {
         /* Write some testing data to the file */
-        PrintWriter file = new PrintWriter("temp.json");
+        File filePath = new File(String.valueOf(folder.getRoot()), "temp.json");
+        new PrintWriter(filePath).close();
+        PrintWriter file = new PrintWriter(filePath);
         file.println("{\n" +
                 "    \"favourites\": [\n" +
                 "        52802,\n" +
@@ -97,6 +103,7 @@ public class JSONPersistenceTest {
                 "        52870\n" +
                 "    ]}\n" +
                 "}");
+        file.close();
         Set<Integer> actualFavouriteIds = Set.of(52802, 52872);
         Set<Integer> actualTaggedIds = Set.of(52855, 52870);
 
@@ -118,5 +125,17 @@ public class JSONPersistenceTest {
         assertEquals(favouriteIds.length, 2);
         assertTrue(actualFavouriteIds.containsAll(List.of(favouriteIds)));
         assertTrue(actualTaggedIds.containsAll(List.of(taggedIds)));
+    }
+
+    @Test
+    public void TestEmptyFileLoad() throws IOException {
+        /* Write empty file */
+        File filePath = new File(String.valueOf(folder.getRoot()), "temp.json");
+        new PrintWriter(filePath).close();
+        try {
+            instance.load();
+        } catch (RuntimeException e) {
+            /* Successfully threw an exception, so do nothing */
+        }
     }
 }
