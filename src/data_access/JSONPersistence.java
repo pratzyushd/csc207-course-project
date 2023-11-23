@@ -53,7 +53,7 @@ public class JSONPersistence implements Persistence {
     }
 
     /**
-     * Create a JSONArray form the given User object's favourites.
+     * Create a JSONArray from the given User object's favourites.
      * @param user the User object which we work with.
      * @return JSONArray that contains a list of all the IDs for the recipes
      * that the user has "favourited".
@@ -104,6 +104,12 @@ public class JSONPersistence implements Persistence {
         }
     }
 
+    /**
+     * Create a new User object based on the information in the JSON file.
+     * This involves constructing new Recipe objects, and making queries to
+     * the Recipe API DAO.
+     * @return User object with username, favourites, and tags fields all populated.
+     */
     public User load() {
         User user;
         String name;

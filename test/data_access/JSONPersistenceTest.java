@@ -66,6 +66,7 @@ public class JSONPersistenceTest {
         assertTrue(fileContents.contains("{}"));
         assertTrue(fileContents.contains("[]"));
     }
+
     @Test
     public void testSingleUserOutput() throws IOException {
         instance.save(filledUser);
