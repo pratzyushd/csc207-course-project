@@ -23,8 +23,4 @@ public class SearchByIdState {
     public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
     }
-
-    public void getRecipeIdError(String repeatPasswordError) {
-        this.recipeIdError = recipeIdError;
-    }
 }

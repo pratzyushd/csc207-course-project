@@ -24,7 +24,7 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
     @Override
     public void execute(SearchIdInputData searchIdInputData) {
         System.out.println("executing");
-        String id = searchIdInputData.getId();
+        int id = Integer.parseInt(searchIdInputData.getId());
         Recipe recipe = userDataAccessObject.searchRecipesById(id);
         SearchIdOutputData outputData = new SearchIdOutputData(id, recipe);
 

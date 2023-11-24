@@ -23,8 +23,4 @@ public class SearchByNameState {
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
     }
-
-    public void getRecipeNameError(String repeatPasswordError) {
-        this.recipeNameError = recipeNameError;
-    }
 }
