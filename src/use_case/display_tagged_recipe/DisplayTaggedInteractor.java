@@ -23,7 +23,6 @@ public class DisplayTaggedInteractor {
     }
 
     public void execute(DisplayTaggedInputData input) {
-
         List<Recipe> recipes = dataAccess.getTaggedRecipes(dataAccess.getUser(), input.getTag());
         DisplayTaggedOutputData dataOutput = new DisplayTaggedOutputData(recipes);
 

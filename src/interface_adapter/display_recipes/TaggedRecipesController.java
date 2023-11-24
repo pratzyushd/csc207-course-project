@@ -1,14 +1,7 @@
 package interface_adapter.display_recipes;
 
-import entity.User;
 import use_case.display_tagged_recipe.DisplayTaggedInputBoundary;
 import use_case.display_tagged_recipe.DisplayTaggedInputData;
-import use_case.display_tagged_recipe.DisplayTaggedOutputData;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 public class TaggedRecipesController {
 

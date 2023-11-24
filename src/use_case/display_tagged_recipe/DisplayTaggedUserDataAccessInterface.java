@@ -12,7 +12,6 @@ public interface DisplayTaggedUserDataAccessInterface {
      * @return the tagged recipes of the given user.
      */
     List<Recipe> getTaggedRecipes(User user, String tag);
-    List<String> getTags(User user);
     User getUser();
 
 }

@@ -1,7 +1,6 @@
 package interface_adapter.display_recipes;
 
 import entity.Recipe;
-import entity.User;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -45,5 +44,6 @@ public class RecipesViewModel extends ViewModel {
         //TODO: implement set recipes method
 
     }
+
 
 }
