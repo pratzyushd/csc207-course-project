@@ -1,27 +1,19 @@
 package data_access;
 
 import entity.Recipe;
+import use_case.favourite_recipe.FavouriteRecipeUserDataAccessInterface;
+import use_case.search_by_cuisine.SearchCuisineUserDataAccessInterface;
+import use_case.search_by_id.SearchIdUserDataAccessInterface;
+import use_case.search_by_name.SearchNameUserDataAccessInterface;
 
-public interface RecipeAPI {
-    /** Get a particular recipe from the API based on an ID.
-     *
-     * @param id the ID that the API identifies the recipe by.
-     * @return the recipe corresponding to that id.
-     */
-    Recipe getRecipeById(String id);
-
-    /** Get a list of recipes from the API that are of the specified cuisine.
-     *
-     * @param cuisine the cuisine that we want to search for.
-     * @return array of Recipe instances for each recipe from the API. This may be an empty list.
-     */
-    Recipe[] searchRecipesByCuisine(String cuisine);
-
+/* This interface acts as an aggregation of the other interfaces that we have
+ * from the various use cases. */
+public interface RecipeAPI extends FavouriteRecipeUserDataAccessInterface, SearchCuisineUserDataAccessInterface,
+        SearchIdUserDataAccessInterface, SearchNameUserDataAccessInterface {
     /**
-     * Get a list of recipes from the API that match the specified name.
-     * @param name the name that we want to search for.
-     * @return array of Recipe instances for each recipe from the API. This may be an empty list, but will typically
-     * contain a single element.
+     * Search for recipes given a list of IDs.
+     * @param ids the list of IDs to search for.
+     * @return array containing Recipe objects (or null of invalid ID)
      */
-    Recipe[] searchRecipesByName(String name);
+    public Recipe[] searchRecipesByListOfIds(String[] ids);
 }
