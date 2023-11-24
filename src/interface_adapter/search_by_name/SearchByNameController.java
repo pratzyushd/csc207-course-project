@@ -10,7 +10,7 @@ public class SearchByNameController {
     }
 
     /**
-     * call the searchNameInteractor's execute method to start the use case.
+     * Call the searchNameInteractor's execute method to start the use case.
      * @param id The id of the recipe the user wants to find.
      */
     public void execute(String id) {
@@ -19,6 +19,3 @@ public class SearchByNameController {
         searchNameInteractor.execute(searchNameInputData);
     }
 }
-
-
-
