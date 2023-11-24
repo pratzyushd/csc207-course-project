@@ -5,6 +5,11 @@ import use_case.search_by_name.SearchNameInputData;
 
 public class SearchByNameController {
     final SearchNameInputBoundary searchNameInteractor;
+
+    /**
+     * Create an instance of the SearchByNameController with its corresponding interactor.
+     * @param searchNameInteractor The interactor which executes the search by name use case.
+     */
     public SearchByNameController(SearchNameInputBoundary searchNameInteractor) {
         this.searchNameInteractor = searchNameInteractor;
     }
