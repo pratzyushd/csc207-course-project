@@ -13,11 +13,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class JSONPersistence implements Persistence {
     private final UserFactory userFactory;
     private final String filePath;
     private final RecipeAPI recipeDAO;
+    private User currentUser;
 
     public JSONPersistence(UserFactory userFactory, String filePath, RecipeAPI recipeDAO) {
         this.userFactory = userFactory;
@@ -138,21 +140,27 @@ public class JSONPersistence implements Persistence {
                 user.assignTag(recipe, key);
             }
         }
+        this.currentUser = user;
         return user;
     }
 
     private Recipe[] generateRecipesFromJSONArray(JSONArray array) {
-        Recipe[] recipes = new Recipe[array.length()];
-        /* TODO: we want to fix this, so that we use a special method in the recipe DAO
-         * which more efficiently gets a list of recipes.
-         * This is done in issue #8, and so this must be modified after we merge this
-         * (still functional) code to main.
-         */
+        String[] idList = new String[array.length()];
         for (int i = 0; i < array.length(); i++) {
-            recipes[i] = recipeDAO.searchRecipesById(String.valueOf(array.getInt(i)));
+            idList[i] = String.valueOf(array.getInt(i));
         }
 
-        return recipes;
+        return recipeDAO.searchRecipesByListOfIds(idList);
     }
 
+    @Override
+    public List<Recipe> getFavouriteRecipes(User user) {
+        return this.currentUser.getFavourites();
+    }
+
+    @Override
+    public List<Recipe> getTaggedRecipes(User user, String tag) {
+        HashMap<String, ArrayList<Recipe>> taggedMap = this.currentUser.getTaggedRecipes();
+        return taggedMap.get(tag);
+    }
 }

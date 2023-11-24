@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 
 public class JSONPersistenceTest {
     private JSONPersistence instance;
-    private String filePath = "temp.json";
+    private final String filePath = "temp.json";
     private User filledUser;
     private User emptyUser;
 
@@ -64,7 +64,9 @@ public class JSONPersistenceTest {
     @Test
     public void testEmptyUserOutput() throws IOException {
         instance.save(emptyUser);
-        String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
+        String fileContents = new String(Files.readAllBytes(
+                Path.of(String.valueOf(folder.getRoot()).concat("/" + this.filePath))
+        ));
         assertTrue(fileContents.contains("favourites"));
         assertTrue(fileContents.contains("tags"));
         assertTrue(fileContents.contains("{}"));
@@ -74,7 +76,9 @@ public class JSONPersistenceTest {
     @Test
     public void testSingleUserOutput() throws IOException {
         instance.save(filledUser);
-        String fileContents = new String(Files.readAllBytes(Path.of(this.filePath)));
+        String fileContents = new String(Files.readAllBytes(
+                Path.of(String.valueOf(folder.getRoot()).concat("/" + this.filePath))
+        ));
         /* Check that we have the right things in the contents of the files */
         assertTrue(fileContents.contains("asdf"));
         assertTrue(fileContents.contains("favourites"));
