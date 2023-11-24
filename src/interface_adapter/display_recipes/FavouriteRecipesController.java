@@ -1,6 +1,5 @@
 package interface_adapter.display_recipes;
 
-import entity.User;
 import use_case.display_favourite_recipe.DisplayFavouriteInputBoundary;
 import use_case.display_favourite_recipe.DisplayFavouriteInputData;
 
@@ -18,12 +17,10 @@ public class FavouriteRecipesController {
     }
 
     /**
-     * Executes the display favorite recipes use case for the given user.
-     *
-     * @param user The user for whom favorite recipes should be displayed.
+     * Executes the display favorite recipes use case
      */
-    public void execute(User user) {
-        DisplayFavouriteInputData displayFavouriteInputData = new DisplayFavouriteInputData(user.getUsername());
+    public void execute() {
+        DisplayFavouriteInputData displayFavouriteInputData = new DisplayFavouriteInputData();
         displayFavouriteInteractor.execute(displayFavouriteInputData);
     }
 }

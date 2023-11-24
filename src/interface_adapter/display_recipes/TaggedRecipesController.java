@@ -3,6 +3,12 @@ package interface_adapter.display_recipes;
 import entity.User;
 import use_case.display_tagged_recipe.DisplayTaggedInputBoundary;
 import use_case.display_tagged_recipe.DisplayTaggedInputData;
+import use_case.display_tagged_recipe.DisplayTaggedOutputData;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class TaggedRecipesController {
 
@@ -20,13 +26,11 @@ public class TaggedRecipesController {
     /**
      * Executes the display tagged recipes use case for the given user and tag.
      *
-     * @param user The user for whom tagged recipes should be displayed.
      * @param tag The tag for which recipes should be displayed.
      */
-    public void execute(User user, String tag) {
-        DisplayTaggedInputData displayTaggedInputData = new DisplayTaggedInputData(user.getUsername(), tag);
+    public void execute(String tag) {
+        DisplayTaggedInputData displayTaggedInputData = new DisplayTaggedInputData(tag);
         displayTaggedInteractor.execute(displayTaggedInputData);
     }
-
 
 }
