@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class JSONPersistence implements Persistence {
     private final UserFactory userFactory;
@@ -154,13 +155,25 @@ public class JSONPersistence implements Persistence {
     }
 
     @Override
-    public List<Recipe> getFavouriteRecipes(User user) {
+    public List<Recipe> getFavouriteRecipes(String username) {
+        if (usernameDoesNotMatch(username)) {
+            return new ArrayList<Recipe>();
+        }
         return this.currentUser.getFavourites();
     }
 
     @Override
-    public List<Recipe> getTaggedRecipes(User user, String tag) {
-        HashMap<String, ArrayList<Recipe>> taggedMap = this.currentUser.getTaggedRecipes();
-        return taggedMap.get(tag);
+    public List<Recipe> getTaggedRecipes(String username, String tag) {
+        if (usernameDoesNotMatch(username)) {
+            return new ArrayList<Recipe>();
+        }
+        if (!this.currentUser.getTaggedRecipes().containsKey(tag)) {
+            return new ArrayList<Recipe>();
+        }
+        return this.currentUser.getTaggedRecipes().get(tag);
+    }
+
+    private boolean usernameDoesNotMatch(String username) {
+        return !Objects.equals(username, this.currentUser.getUsername());
     }
 }
