@@ -5,6 +5,11 @@ import use_case.search_by_id.SearchIdInputData;
 
 public class SearchByIdController {
     final SearchIdInputBoundary searchIdInteractor;
+
+    /**
+     * Create an instance of the SearchByIdController with its corresponding interactor.
+     * @param searchIdInteractor The interactor which executes the search by id use case.
+     */
     public SearchByIdController(SearchIdInputBoundary searchIdInteractor) {
         this.searchIdInteractor = searchIdInteractor;
     }

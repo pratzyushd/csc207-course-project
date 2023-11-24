@@ -3,7 +3,7 @@ package use_case.search_by_id;
 import entity.Recipe;
 
 public class SearchIdOutputData {
-    private final String id;
+    private final int id;
     private final Recipe recipe;
 
     /**
@@ -11,12 +11,12 @@ public class SearchIdOutputData {
      * @param id the id associated with a certain recipe.
      * @param recipe recipe associated with the given id.
      */
-    public SearchIdOutputData(String id, Recipe recipe) {
+    public SearchIdOutputData(int id, Recipe recipe) {
         this.id = id;
         this.recipe = recipe;
     }
 
-    public String getId() { return id; }
+    public int getId() { return id; }
 
     public Recipe getRecipe() { return recipe; }
 }
