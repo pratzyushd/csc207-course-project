@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.display_recipes;
 
 import entity.User;
 import use_case.display_tagged_recipe.DisplayTaggedInputBoundary;
@@ -12,7 +12,7 @@ public class TaggedRecipesController {
     }
 
     public void execute(User user, String tag) {
-        DisplayTaggedInputData displayTaggedInputData = new DisplayTaggedInputData(user, tag);
+        DisplayTaggedInputData displayTaggedInputData = new DisplayTaggedInputData(user.getUsername(), tag);
         displayTaggedInteractor.execute(displayTaggedInputData);
     }
 
