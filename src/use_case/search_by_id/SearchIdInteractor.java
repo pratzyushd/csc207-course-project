@@ -23,15 +23,15 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
 
     @Override
     public void execute(SearchIdInputData searchIdInputData) {
-        System.out.println("executing");
         String id = searchIdInputData.getId();
         Recipe recipe = userDataAccessObject.searchRecipesById(id);
         SearchIdOutputData outputData = new SearchIdOutputData(id, recipe);
 
         if (recipe == null) {
             System.out.println("null recipe");
-            searchIdPresenter.prepareFailView(outputData);
+            searchIdPresenter.prepareFailView("No recipe with given ID could be found.");
         } else {
+            System.out.println("The interactor is preparing the success view");
             searchIdPresenter.prepareSuccessView(outputData);
         }
     }
