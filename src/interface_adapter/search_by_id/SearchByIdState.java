@@ -2,7 +2,7 @@ package interface_adapter.search_by_id;
 
 public class SearchByIdState {
     private String recipeId = "";
-    private String recipeIdError = null;
+    private String recipeIdError = "";
 
     public SearchByIdState(SearchByIdState copy) {
         recipeId = copy.recipeId;
@@ -24,7 +24,7 @@ public class SearchByIdState {
         this.recipeId = recipeId;
     }
 
-    public void getRecipeIdError(String repeatPasswordError) {
+    public void setRecipeIdError(String recipeIdError) {
         this.recipeIdError = recipeIdError;
     }
 }
