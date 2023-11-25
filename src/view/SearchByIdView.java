@@ -1,14 +1,17 @@
 package view;
 
 import interface_adapter.search_by_id.SearchByIdController;
+import interface_adapter.search_by_id.SearchByIdState;
 import interface_adapter.search_by_id.SearchByIdViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class SearchByIdView extends JPanel {
+public class SearchByIdView extends JPanel implements PropertyChangeListener {
     public final String viewName = "search recipe by id";
     private final SearchByIdController searchByIdController;
     private final SearchByIdViewModel searchByIdViewModel;
@@ -16,6 +19,7 @@ public class SearchByIdView extends JPanel {
     public SearchByIdView(SearchByIdController searchByIdController, SearchByIdViewModel searchByIdViewModel) {
         this.searchByIdController = searchByIdController;
         this.searchByIdViewModel = searchByIdViewModel;
+        searchByIdViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
 
@@ -37,6 +41,14 @@ public class SearchByIdView extends JPanel {
         add(searchButton);
 
         setPreferredSize(new Dimension(600, 200));
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        SearchByIdState state = (SearchByIdState) evt.getNewValue();
+        if (state.getRecipeIdError() != null) {
+            JOptionPane.showMessageDialog(this, state.getRecipeIdError());
+        }
     }
     // Add methods to update the view based on the ViewModel if needed here
 }
