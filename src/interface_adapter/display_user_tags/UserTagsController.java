@@ -18,11 +18,9 @@ public class UserTagsController {
 
     /**
      * Executes the display user tags use case.
-     *
      */
-    public Object[] execute() {
+    public void execute() {
         DisplayUserTagsInputData displayUserTagsInputData = new DisplayUserTagsInputData();
         displayUserTagsInteractor.execute(displayUserTagsInputData);
-        return new Object[]{};
     }
 }
