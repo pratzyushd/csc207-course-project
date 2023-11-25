@@ -1,21 +1,13 @@
 package use_case.favourite_recipe;
-import entity.Recipe;
-import entity.User;
 
 public class FavouriteRecipeInputData {
-    final private User user;
-    final private Recipe recipe;
+    final private int mealId;
 
-    public FavouriteRecipeInputData(User user, Recipe recipe) {
-        this.user = user;
-        this.recipe = recipe;
+    public FavouriteRecipeInputData(int mealId) {
+        this.mealId = mealId;
     }
 
-    Recipe getRecipe() {
-        return recipe;
-    }
-
-    User getUser() {
-        return user;
+    int getMealId() {
+        return mealId;
     }
 }
