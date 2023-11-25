@@ -19,7 +19,7 @@ public class TheMealDBTest {
 
     @Test
     public void testCreateWithInvalidId() {
-        String id = "64920";
+        int id = 64920;
         Recipe recipe;
         recipe = instance.searchRecipesById(id);
         /* We expect a null returned if the recipe ID is invalid (i.e. doesn't exist). */
@@ -28,7 +28,7 @@ public class TheMealDBTest {
 
     @Test
     public void testCreateWithValidId() {
-        String id = "52772";
+        int id = 52772;
         Recipe recipe;
         recipe = instance.searchRecipesById(id);
         /* NOTE: we aren't testing for the contents, because that depends on the API, and may change. */

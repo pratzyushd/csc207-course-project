@@ -13,8 +13,12 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private ViewManagerModel viewManagerModel;
     private SearchResultViewModel searchResultViewModel;
 
-    public SearchByIdPresenter(ViewManagerModel viewManagerModel, SearchByIdViewModel searchByIdViewModel,
-                               SearchResultViewModel searchResultViewModel) {
+    /**
+     * Creates an instance of the SearchByIdPresenter with its corresponding view manager model and view model.
+     * @param viewManagerModel The view manager model responsible for switching between views.
+     * @param searchByIdViewModel The view model that alerts the view when something has changed.
+     */
+    public SearchByIdPresenter(ViewManagerModel viewManagerModel, SearchByIdViewModel searchByIdViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.searchByIdViewModel = searchByIdViewModel;
         this.searchResultViewModel = searchResultViewModel;

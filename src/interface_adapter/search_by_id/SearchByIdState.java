@@ -4,6 +4,11 @@ public class SearchByIdState {
     private String recipeId = "";
     private String recipeIdError = "";
 
+    private String recipeIdError = null;
+    /**
+     * Creates an instance of the SearchByIdState with the same state as the provided copy.
+     * @param copy The SearchByIdState instance to copy.
+     */
     public SearchByIdState(SearchByIdState copy) {
         recipeId = copy.recipeId;
         recipeIdError = copy.recipeIdError;

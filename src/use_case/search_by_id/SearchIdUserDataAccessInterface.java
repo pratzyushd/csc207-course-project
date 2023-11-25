@@ -8,5 +8,5 @@ public interface SearchIdUserDataAccessInterface {
      * @param id the id that the user wants the recipe from.
      * @return a Recipe that belongs to the id.
      */
-    Recipe searchRecipesById(String id);
+    Recipe searchRecipesById(int id);
 }
