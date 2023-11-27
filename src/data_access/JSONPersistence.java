@@ -112,7 +112,7 @@ public class JSONPersistence implements Persistence {
      * @return User object with username, favourites, and tags fields all populated.
      */
     public User load() {
-        User user;
+        User user = null;
         String name;
         JSONArray favourites;
         JSONObject tagsMap;
@@ -125,7 +125,8 @@ public class JSONPersistence implements Persistence {
             favourites = obj.getJSONArray("favourites");
             tagsMap = obj.getJSONObject("tags");
         } catch (JSONException | IOException e) {
-            throw new RuntimeException(e);
+            setUser(null);
+            return null;
         }
         /* Construct the user object. */
         user = userFactory.create(name);
@@ -178,6 +179,9 @@ public class JSONPersistence implements Persistence {
     }
 
     public User getUser() {
+        if (this.currentUser == null) {
+            load();
+        }
         return this.currentUser;
     }
 
