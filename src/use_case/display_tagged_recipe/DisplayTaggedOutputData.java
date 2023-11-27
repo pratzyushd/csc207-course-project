@@ -1,17 +1,17 @@
 package use_case.display_tagged_recipe;
 
+import java.util.HashMap;
 import java.util.List;
-import entity.Recipe;
 
 public class DisplayTaggedOutputData {
 
-    private final List<Recipe> recipes;
+    private final List<HashMap> recipes;
 
     /**
      * Creates an output data object with the given recipes.
      * @param recipes the recipes to display.
      */
-    public DisplayTaggedOutputData(List<Recipe> recipes) { this.recipes = recipes; }
+    public DisplayTaggedOutputData(List<HashMap> recipes) { this.recipes = recipes; }
 
-    public List<Recipe> getRecipes() { return recipes; }
+    public List<HashMap> getRecipes() { return recipes; }
 }
