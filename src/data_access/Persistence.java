@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.User;
 import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
 import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
 import use_case.display_user_tags.DisplayUserTagsDataAccessInterface;
@@ -11,4 +12,15 @@ import use_case.display_user_tags.DisplayUserTagsDataAccessInterface;
  * all the required functionality for the various use cases.
  */
 public interface Persistence extends DisplayFavouriteUserDataAccessInterface, DisplayTaggedUserDataAccessInterface, DisplayUserTagsDataAccessInterface {
+    /**
+     * Getter for the User object stored in the Persistence class.
+     * @return the User object
+     */
+    public User getUser();
+
+    /**
+     * Setter method for the User object in the Persistence class.
+     * @param user the user to overwrite the current one with.
+     */
+    public void setUser(User user);
 }
