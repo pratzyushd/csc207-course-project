@@ -10,7 +10,7 @@ public interface SearchIdOutputBoundary {
 
     /**
      * Output the UI that shows that there doesn't exist any recipe from the specified id.
-     * @param searchIdOutputData error message telling user that there doesn't exist any recipe from the specified id.
+     * @param error error message telling user that there doesn't exist any recipe from the specified id.
      */
-    void prepareFailView(SearchIdOutputData searchIdOutputData);
+    void prepareFailView(String error);
 }
