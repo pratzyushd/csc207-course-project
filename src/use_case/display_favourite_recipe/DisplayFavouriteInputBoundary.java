@@ -3,7 +3,8 @@ package use_case.display_favourite_recipe;
 public interface DisplayFavouriteInputBoundary {
     /**
      * Executes the use case
-     * @param input the user whose favourite recipes we want to display.
+     * An empty DisplayFavouriteInputData object is passed as parameter to remain consistent with Clean Architecture and
+     * remain extensible in the future even though input data is not needed for this use case.
      */
     void execute(DisplayFavouriteInputData input);
 }

@@ -1,13 +1,10 @@
 package use_case.display_favourite_recipe;
 
 public class DisplayFavouriteInputData {
-
-    private final String username;
-
     /**
-     * Creates an input data object with the given user.
-     * @param username the user whose favourite recipes we want to display.
+     * No input data is needed for this use case.
      */
-    public DisplayFavouriteInputData(String username) { this.username = username; }
+    public DisplayFavouriteInputData() {
+    }
 
 }

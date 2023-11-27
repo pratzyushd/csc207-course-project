@@ -188,4 +188,15 @@ public class JSONPersistence implements Persistence {
     public void setUser(User user) {
         this.currentUser = user;
     }
+
+    @Override
+    public User getUser() {
+        return this.currentUser;
+    }
+
+    @Override
+    public List<String> getTags(User user) {
+        HashMap<String, ArrayList<Recipe>> taggedMap = this.currentUser.getTaggedRecipes();
+        return new ArrayList<>(taggedMap.keySet());
+    }
 }
