@@ -29,7 +29,7 @@ public class Main {
         CardLayout cardLayout = new CardLayout();
 
         // The various View objects. Only one view is visible at a time.
-        // 'views' serves as a container for various "views" (other JPanels)
+        // 'views' serves as a container for various "views" (other JPanels).
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
