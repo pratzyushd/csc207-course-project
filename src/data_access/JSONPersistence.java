@@ -141,7 +141,7 @@ public class JSONPersistence implements Persistence {
                 user.assignTag(recipe, key);
             }
         }
-        this.currentUser = user;
+        setUser(user);
         return user;
     }
 
@@ -175,5 +175,13 @@ public class JSONPersistence implements Persistence {
 
     private boolean usernameDoesNotMatch(String username) {
         return !Objects.equals(username, this.currentUser.getUsername());
+    }
+
+    public User getUser() {
+        return this.currentUser;
+    }
+
+    public void setUser(User user) {
+        this.currentUser = user;
     }
 }
