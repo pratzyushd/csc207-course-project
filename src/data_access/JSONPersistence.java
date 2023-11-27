@@ -112,7 +112,7 @@ public class JSONPersistence implements Persistence {
      * @return User object with username, favourites, and tags fields all populated.
      */
     public User load() {
-        User user = null;
+        User user;
         String name;
         JSONArray favourites;
         JSONObject tagsMap;
@@ -125,8 +125,8 @@ public class JSONPersistence implements Persistence {
             favourites = obj.getJSONArray("favourites");
             tagsMap = obj.getJSONObject("tags");
         } catch (JSONException | IOException e) {
-            setUser(null);
-            return null;
+            user = userFactory.create("");
+            return user;
         }
         /* Construct the user object. */
         user = userFactory.create(name);
@@ -156,16 +156,16 @@ public class JSONPersistence implements Persistence {
     }
 
     @Override
-    public List<Recipe> getFavouriteRecipes(String username) {
-        if (usernameDoesNotMatch(username)) {
+    public List<Recipe> getFavouriteRecipes(User user) {
+        if (usernameDoesNotMatch(user.getUsername())) {
             return new ArrayList<Recipe>();
         }
         return this.currentUser.getFavourites();
     }
 
     @Override
-    public List<Recipe> getTaggedRecipes(String username, String tag) {
-        if (usernameDoesNotMatch(username)) {
+    public List<Recipe> getTaggedRecipes(User user, String tag) {
+        if (usernameDoesNotMatch(user.getUsername())) {
             return new ArrayList<Recipe>();
         }
         if (!this.currentUser.getTaggedRecipes().containsKey(tag)) {
@@ -178,6 +178,7 @@ public class JSONPersistence implements Persistence {
         return !Objects.equals(username, this.currentUser.getUsername());
     }
 
+    @Override
     public User getUser() {
         if (this.currentUser == null) {
             load();
@@ -187,11 +188,6 @@ public class JSONPersistence implements Persistence {
 
     public void setUser(User user) {
         this.currentUser = user;
-    }
-
-    @Override
-    public User getUser() {
-        return this.currentUser;
     }
 
     @Override
