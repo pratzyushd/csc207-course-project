@@ -96,7 +96,6 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
         if (evt.getNewValue() instanceof SearchResultState) {
             SearchResultState state = (SearchResultState) evt.getNewValue();
             setFields(state);
@@ -117,5 +116,3 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
         recipeId = Integer.toString(state.getRecipeId());
     }
 }
-
-
