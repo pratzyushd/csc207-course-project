@@ -5,6 +5,7 @@ import entity.Recipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Implements the display user tagged recipes use case.
@@ -26,7 +27,7 @@ public class DisplayTaggedInteractor {
 
     public void execute(DisplayTaggedInputData input) {
         List<Recipe> recipes = dataAccess.getTaggedRecipes(dataAccess.getUser(), input.getTag());
-        List<HashMap> recipesAsMaps = convertFromRecipeListToHashMapList(recipes);
+        List<Map<String, String>> recipesAsMaps = convertFromRecipeListToHashMapList(recipes);
         DisplayTaggedOutputData dataOutput = new DisplayTaggedOutputData(recipesAsMaps);
 
         presenter.prepareSuccessView(dataOutput);
@@ -37,8 +38,8 @@ public class DisplayTaggedInteractor {
      * @param recipes the recipes to convert.
      * @return the given list of recipes as a list of hash maps.
      */
-    private List<HashMap> convertFromRecipeListToHashMapList(List<Recipe> recipes) {
-        List<HashMap> recipesAsMaps = new ArrayList<>(recipes.size());
+    private List<Map<String, String>> convertFromRecipeListToHashMapList(List<Recipe> recipes) {
+        List<Map<String, String>> recipesAsMaps = new ArrayList<>(recipes.size());
         for (Recipe recipe: recipes) {
             HashMap <String, String> recipeAsMap = new HashMap<>();
             recipeAsMap.put("id", String.valueOf(recipe.getMealId()));
