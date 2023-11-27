@@ -8,7 +8,6 @@ public class CommonRecipeFactory implements RecipeFactory {
      * @param instructions
      * @param areaOfOrigin
      */
-
     @Override
     public Recipe create(int mealId, String name, String category, String instructions, String areaOfOrigin) {
         return new CommonRecipe(mealId, name, category, instructions, areaOfOrigin);

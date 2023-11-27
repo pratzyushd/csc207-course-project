@@ -2,7 +2,8 @@ package interface_adapter.search_by_id;
 
 public class SearchByIdState {
     private String recipeId = "";
-    private String recipeIdError = null;
+    private String recipeIdError = "";
+
     /**
      * Creates an instance of the SearchByIdState with the same state as the provided copy.
      * @param copy The SearchByIdState instance to copy.
@@ -25,5 +26,9 @@ public class SearchByIdState {
 
     public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
+    }
+
+    public void setRecipeIdError(String recipeIdError) {
+        this.recipeIdError = recipeIdError;
     }
 }

@@ -7,9 +7,7 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-// TODO implement the propery change listener
-//public class ViewManager implements PropertyChangeListener {
-public class ViewManager {
+public class ViewManager implements PropertyChangeListener{
     private final CardLayout cardLayout;
     private final JPanel views;
     private ViewManagerModel viewManagerModel;
@@ -18,14 +16,14 @@ public class ViewManager {
         this.views = views;
         this.cardLayout = cardLayout;
         this.viewManagerModel = viewManagerModel;
-//        this.viewManagerModel.addPropertyChangeListener(this);
+        this.viewManagerModel.addPropertyChangeListener(this);
     }
 
-//    @Override
-//    public void propertyChange(PropertyChangeEvent evt) {
-//        if (evt.getPropertyName().equals("view")) {
-//            String viewModelName = (String) evt.getNewValue();
-//            cardLayout.show(views, viewModelName);
-//        }
-//    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("view")) {
+            String viewModelName = (String) evt.getNewValue();
+            cardLayout.show(views, viewModelName);
+        }
+    }
 }

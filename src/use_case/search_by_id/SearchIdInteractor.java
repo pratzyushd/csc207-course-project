@@ -30,8 +30,9 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
 
         if (recipe == null) {
             System.out.println("null recipe");
-            searchIdPresenter.prepareFailView(outputData);
+            searchIdPresenter.prepareFailView("No recipe with given ID could be found.");
         } else {
+            System.out.println("The interactor is preparing the success view");
             searchIdPresenter.prepareSuccessView(outputData);
         }
     }

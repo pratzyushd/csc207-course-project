@@ -2,6 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.SearchResultViewModel;
 import interface_adapter.search_by_id.SearchByIdPresenter;
 import interface_adapter.search_by_id.SearchByIdController;
 import interface_adapter.search_by_id.SearchByIdViewModel;
@@ -20,11 +21,11 @@ public class SearchByIdUseCaseFactory {
 
     public static SearchByIdView create(
             ViewManagerModel viewManagerModel, SearchByIdViewModel searchByIdViewModel,
-            SearchIdUserDataAccessInterface searchIdUserDataAccessObject) {
+            SearchResultViewModel searchResultViewModel, SearchIdUserDataAccessInterface searchIdUserDataAccessObject) {
 
         try {
             SearchByIdController searchByIdController = createSearchByIdUseCase(viewManagerModel, searchByIdViewModel,
-                    searchIdUserDataAccessObject);
+                    searchResultViewModel, searchIdUserDataAccessObject);
             return new SearchByIdView(searchByIdController, searchByIdViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -34,10 +35,10 @@ public class SearchByIdUseCaseFactory {
     }
 
     private static SearchByIdController createSearchByIdUseCase(ViewManagerModel viewManagerModel, SearchByIdViewModel
-            searchByIdViewModel, SearchIdUserDataAccessInterface searchIdUserDataAccessObject) throws IOException {
+            searchByIdViewModel, SearchResultViewModel searchResultViewModel, SearchIdUserDataAccessInterface searchIdUserDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        SearchIdOutputBoundary searchIdOutputBoundary = new SearchByIdPresenter(viewManagerModel, searchByIdViewModel);
+        SearchIdOutputBoundary searchIdOutputBoundary = new SearchByIdPresenter(viewManagerModel, searchByIdViewModel, searchResultViewModel);
 
         UserFactory userFactory = new CommonUserFactory();
 
