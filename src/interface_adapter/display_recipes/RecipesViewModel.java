@@ -1,10 +1,10 @@
 package interface_adapter.display_recipes;
 
-import entity.Recipe;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.HashMap;
 import java.util.List;
 
 public class RecipesViewModel extends ViewModel {
@@ -36,11 +36,10 @@ public class RecipesViewModel extends ViewModel {
     }
 
     /**
-     * Sets the list of recipes in the view model.
-     *
-     * @param recipes The list of recipes to be displayed.
+     * Sets the list of recipes in the view model given a list of recipes as a list of hashmaps.
+     * @param recipes the list of recipes to set.
      */
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<HashMap> recipes) {
         //TODO: implement set recipes method
 
     }
