@@ -1,6 +1,5 @@
 package use_case.favourite_recipe;
 
-import data_access.JSONPersistence;
 import data_access.Persistence;
 import entity.Recipe;
 import entity.User;
@@ -36,7 +35,7 @@ public class FavouriteRecipeInteractor implements FavouriteRecipeInputBoundary {
     @Override
     public void execute(FavouriteRecipeInputData favouriteRecipeInputData) {
         User user = jsonPersistence.getUser();
-        Recipe recipe = favouriteRecipeUserDataAccessObject.searchRecipesById(Integer.toString(favouriteRecipeInputData.getMealId()));
+        Recipe recipe = favouriteRecipeUserDataAccessObject.searchRecipesById(favouriteRecipeInputData.getMealId());
 
         ArrayList<Recipe> currentFavourites = user.getFavourites();
         if (currentFavourites.contains(recipe)) {
