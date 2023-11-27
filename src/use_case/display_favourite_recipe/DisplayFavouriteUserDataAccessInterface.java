@@ -1,8 +1,7 @@
 package use_case.display_favourite_recipe;
 
-import entity.Recipe;
 import entity.User;
-
+import entity.Recipe;
 import java.util.List;
 
 public interface DisplayFavouriteUserDataAccessInterface {
@@ -13,5 +12,7 @@ public interface DisplayFavouriteUserDataAccessInterface {
      * @return the favourite recipes of the given user.
      */
     List<Recipe> getFavouriteRecipes(User user);
+
+    User getUser();
 
 }

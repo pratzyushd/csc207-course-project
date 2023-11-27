@@ -1,7 +1,7 @@
 package view;
 
-import interface_adapter.SearchByIdController;
-import interface_adapter.SearchByIdViewModel;
+import interface_adapter.search_by_id.SearchByIdController;
+import interface_adapter.search_by_id.SearchByIdViewModel;
 
 import javax.swing.*;
 import java.awt.*;

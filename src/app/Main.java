@@ -2,7 +2,7 @@ package app;
 
 import data_access.TheMealDB;
 import entity.CommonRecipeFactory;
-import interface_adapter.SearchByIdViewModel;
+import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.search_by_id.SearchIdUserDataAccessInterface;
 import view.SearchByIdView;
