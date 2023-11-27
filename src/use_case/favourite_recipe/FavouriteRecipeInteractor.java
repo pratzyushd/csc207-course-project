@@ -3,6 +3,9 @@ package use_case.favourite_recipe;
 import data_access.JSONPersistence;
 import data_access.Persistence;
 import entity.Recipe;
+import entity.User;
+
+import java.util.ArrayList;
 
 /**
  * Implements the favourite recipe use case. Accesses the DAO to retrieve the User object
@@ -32,11 +35,15 @@ public class FavouriteRecipeInteractor implements FavouriteRecipeInputBoundary {
      */
     @Override
     public void execute(FavouriteRecipeInputData favouriteRecipeInputData) {
-        // TODO - fetch the User object from the DAO.
-        //  Modify it to add favourite recipe by fetching recipe by id.
-
-        // TODO - use DAO to modify the user's favourite recipes in JSON file
+        User user = jsonPersistence.getUser();
         Recipe recipe = favouriteRecipeUserDataAccessObject.searchRecipesById(Integer.toString(favouriteRecipeInputData.getMealId()));
-        favouriteRecipePresenter.prepareSuccessView(recipe.getName());
+
+        ArrayList<Recipe> currentFavourites = user.getFavourites();
+        if (currentFavourites.contains(recipe)) {
+            favouriteRecipePresenter.prepareFailView(recipe.getName());
+        } else {
+            user.addFavourite(recipe);
+            favouriteRecipePresenter.prepareSuccessView(recipe.getName());
+        }
     }
 }

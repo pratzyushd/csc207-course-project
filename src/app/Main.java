@@ -52,6 +52,7 @@ public class Main {
 
         CommonUserFactory userFactory = new CommonUserFactory();
         RecipeAPI recipeAPI = new TheMealDB(recipeFactory);
+        // TODO - provide jsonPersistence with a valid file path. Currently empty path.
         Persistence jsonPersistence = new JSONPersistence(userFactory, "", recipeAPI);
         SearchResultView searchResultView = SearchResultUseCaseFactory.create(viewManagerModel, favouriteRecipeViewModel,
                 searchResultViewModel, favouriteRecipeUserDataAccessInterface, jsonPersistence);
