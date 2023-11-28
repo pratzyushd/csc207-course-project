@@ -2,6 +2,10 @@ package use_case.search_by_name;
 
 import entity.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Implements the search by name use case. Accesses the DAO to retrieve the relevant recipes
  * and formats the output data.
@@ -25,7 +29,11 @@ public class SearchNameInteractor implements SearchNameInputBoundary {
     public void execute(SearchNameInputData searchNameInputData) {
         String name = searchNameInputData.getName();
         Recipe[] recipes = userDataAccessObject.searchRecipesByName(name);
-        SearchNameOutputData outputData = new SearchNameOutputData(name, recipes);
+        List<Map<String, String>> recipesAsMap = new ArrayList<>();
+        for (Recipe recipe: recipes) {
+            recipesAsMap.add(recipe.toMap());
+        }
+        SearchNameOutputData outputData = new SearchNameOutputData(name, recipesAsMap);
 
         if (recipes.length == 0) {
             searchNamePresenter.prepareFailView(outputData);
