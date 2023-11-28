@@ -5,10 +5,10 @@ import entity.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryDAOMock implements Persistence {
+public class InMemoryPersistenceMock implements Persistence {
     private User user;
 
-    public InMemoryDAOMock() {
+    public InMemoryPersistenceMock() {
         this.user = new CommonUserFactory().create("test");
         RecipeFactory recipeFactory = new CommonRecipeFactory();
         this.user.addFavourite(recipeFactory.create(12589, "", "", "", ""));

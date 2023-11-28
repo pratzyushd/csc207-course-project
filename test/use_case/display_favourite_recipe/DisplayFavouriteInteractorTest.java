@@ -1,6 +1,6 @@
 package use_case.display_favourite_recipe;
 
-import data_access.InMemoryDAOMock;
+import data_access.InMemoryPersistenceMock;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 public class DisplayFavouriteInteractorTest {
     @Test
     public void testUseCase() {
-        DisplayFavouriteUserDataAccessInterface mockDAO = new InMemoryDAOMock();
+        DisplayFavouriteUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
         DisplayFavouriteOutputBoundary presenter = new DisplayFavouriteOutputBoundary() {
             @Override
             public void prepareSuccessView(DisplayFavouriteOutputData outputData) {

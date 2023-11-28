@@ -1,6 +1,6 @@
 package use_case.display_tagged_recipe;
 
-import data_access.InMemoryDAOMock;
+import data_access.InMemoryPersistenceMock;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 public class DisplayTaggedInteractorTest {
     @Test
     public void testFirstTag() {
-        DisplayTaggedUserDataAccessInterface mockDAO = new InMemoryDAOMock();
+        DisplayTaggedUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
         DisplayTaggedOutputBoundary presenter = new DisplayTaggedOutputBoundary() {
             @Override
             public void prepareSuccessView(DisplayTaggedOutputData outputData) {
@@ -31,7 +31,7 @@ public class DisplayTaggedInteractorTest {
     }
     @Test
     public void testSecondTag() {
-        DisplayTaggedUserDataAccessInterface mockDAO = new InMemoryDAOMock();
+        DisplayTaggedUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
         DisplayTaggedOutputBoundary presenter = new DisplayTaggedOutputBoundary() {
             @Override
             public void prepareSuccessView(DisplayTaggedOutputData outputData) {

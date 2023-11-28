@@ -1,12 +1,9 @@
 package use_case.display_user_tags;
 
-import data_access.InMemoryDAOMock;
+import data_access.InMemoryPersistenceMock;
 import org.junit.Test;
-import use_case.display_user_tags.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class DisplayUserTagsInteractorTest {
     @Test
     public void testUseCase() {
-        DisplayUserTagsDataAccessInterface mockDAO = new InMemoryDAOMock();
+        DisplayUserTagsDataAccessInterface mockDAO = new InMemoryPersistenceMock();
         DisplayUserTagsOutputBoundary presenter = new DisplayUserTagsOutputBoundary() {
             @Override
             public void prepareSuccessView(DisplayUserTagsOutputData outputData) {
