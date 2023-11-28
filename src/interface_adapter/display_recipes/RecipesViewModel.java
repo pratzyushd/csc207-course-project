@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecipesViewModel extends ViewModel {
     private final boolean isFavourite;
@@ -39,7 +40,7 @@ public class RecipesViewModel extends ViewModel {
      * Sets the list of recipes in the view model given a list of recipes as a list of hashmaps.
      * @param recipes the list of recipes to set.
      */
-    public void setRecipes(List<HashMap> recipes) {
+    public void setRecipes(List<Map<String, String>> recipes) {
         //TODO: implement set recipes method
 
     }
