@@ -20,9 +20,20 @@ import view.SearchByIdView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory to create the components required for the SearchByCuisine use case, and all the
+ * required links between them.
+ */
 public class SearchByCuisineUseCaseFactory {
     private SearchByCuisineUseCaseFactory() {}
 
+    /**
+     * Create the final view for the Search By Cuisine use case.
+     * @param viewManagerModel The manager for the views, which is shared among all the views.
+     * @param searchByCuisineViewModel The specific view model for this use case.
+     * @param searchCuisineUserDataAccessObject The required DAO for this use case.
+     * @return a fully constructed view.
+     */
     public static SearchByCuisineView create(
             ViewManagerModel viewManagerModel, SearchByCuisineViewModel searchByCuisineViewModel,
             SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject) {
