@@ -1,9 +1,10 @@
 package interface_adapter.search_by_cuisine;
 
-import entity.Recipe;
 import interface_adapter.ViewManagerModel;
 import use_case.search_by_cuisine.SearchCuisineOutputBoundary;
 import use_case.search_by_cuisine.SearchCuisineOutputData;
+
+import java.util.Map;
 
 public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
     private final SearchByCuisineViewModel searchByCuisineViewModel;
@@ -16,9 +17,9 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
 
     @Override
     public void prepareSuccessView(SearchCuisineOutputData response) {
-        System.out.println(response.getRecipes().length);
-        for (Recipe recipe : response.getRecipes()) {
-            System.out.println(recipe.getName());
+        System.out.println(response.getRecipes().size());
+        for (Map<String, String> recipe : response.getRecipes()) {
+            System.out.println(recipe.get("name"));
         }
 //        // On success, switch to the results view.
 //        SearchByIdState searchByIdState = searchByIdViewModel.getState();
