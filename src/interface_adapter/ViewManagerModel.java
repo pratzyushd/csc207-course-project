@@ -3,6 +3,9 @@ package interface_adapter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Model that represents the currently active view.
+ */
 public class ViewManagerModel {
     private String activeViewName;
 

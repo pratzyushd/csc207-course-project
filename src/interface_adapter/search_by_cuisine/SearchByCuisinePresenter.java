@@ -14,6 +14,11 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
         this.searchByCuisineViewModel = searchByCuisineViewModel;
     }
 
+    /**
+     * Prepare the success view with the relevant information of the recipes found from the search.
+     * @param response contains the relevant cuisine and its associated recipes retrieved by the
+     * DAO that need to be displayed to the user.
+     */
     @Override
     public void prepareSuccessView(SearchCuisineOutputData response) {
         System.out.println(response.getRecipes().length);
@@ -30,6 +35,10 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
 //        viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Prepare the fail view with the relevant error message.
+     * @param error OutputData object containing the error.
+     */
     @Override
     public void prepareFailView(SearchCuisineOutputData error) {
 //        SignupState signupState = signupViewModel.getState();
