@@ -23,6 +23,10 @@ public class TheMealDB implements RecipeAPI {
     private static final String API_URL = "https://www.themealdb.com/api/json/v1/1/";
     private final RecipeFactory recipeFactory;
 
+    /**
+     * Create a new instance of this DAO.
+     * @param recipeFactory the factory that allows us to make new Recipe objects.
+     */
     public TheMealDB(RecipeFactory recipeFactory) {
         this.recipeFactory = recipeFactory;
     }
@@ -113,19 +117,38 @@ public class TheMealDB implements RecipeAPI {
         }
     }
 
+    /**
+     * Method that checks if a particular API response is valid. This is its own method
+     * in case we need to further expand our criteria of validity in the future.
+     * @param response the response object to check.
+     * @return boolean value: true if valid, false if invalid.
+     */
     private Boolean responseFromApiIsSuccessful(Response response) {
         if (response.body() == null) {
             return false;
         }
-        /* As per code review comment, we might later differentiate the types of errors that we
+        /* We might later differentiate the types of errors that we
          * could have, in which case we would change the below line. */
         return response.code() == 200;
     }
 
+    /**
+     * Method to check of there is actually data in the response we get from the API.
+     * If the API successfully responds, but doesn't have any data to give us based on
+     * the query, it returns a JSONObject with a "meals" key that maps to null.
+     * @param responseBody the response we get from the API.
+     * @return true if the API gave us data, false if it didn't.
+     */
     private Boolean dataIsInAPIResponse(JSONObject responseBody) {
         return !(responseBody.isNull("meals"));
     }
 
+    /**
+     * Method to construct a Recipe object from a JSONObject of the relevant
+     * information.
+     * @param meal the JSONObject of the particular recipe.
+     * @return the Recipe object that contains the corresponding information.
+     */
     private Recipe constructRecipeFromMealJSON(JSONObject meal) {
         return this.recipeFactory.create(
                 meal.getInt("idMeal"),
