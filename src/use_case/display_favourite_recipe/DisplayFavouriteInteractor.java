@@ -40,7 +40,12 @@ public class DisplayFavouriteInteractor implements DisplayFavouriteInputBoundary
     private List<Map<String,String>> convertFromRecipeListToHashMapList(List<Recipe> recipes) {
         List<Map<String,String>> recipesAsMaps = new ArrayList<>(recipes.size());
         for (Recipe recipe: recipes) {
-            Map<String, String> recipeAsMap = recipe.toMap();
+            HashMap <String, String> recipeAsMap = new HashMap<>();
+            recipeAsMap.put("id", String.valueOf(recipe.getMealId()));
+            recipeAsMap.put("name", recipe.getName());
+            recipeAsMap.put("category", recipe.getCategory());
+            recipeAsMap.put("areaOfOrigin", recipe.getAreaOfOrigin());
+            recipeAsMap.put("instructions", recipe.getInstructions());
             recipesAsMaps.add(recipeAsMap);
         }
         return recipesAsMaps;
