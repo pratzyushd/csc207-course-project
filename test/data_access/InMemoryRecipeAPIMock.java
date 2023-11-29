@@ -5,7 +5,7 @@ import entity.Recipe;
 import entity.RecipeFactory;
 
 public class InMemoryRecipeAPIMock implements RecipeAPI {
-    private Recipe[] recipes = new Recipe[3];
+    private final Recipe[] recipes = new Recipe[3];
 
     public InMemoryRecipeAPIMock() {
         RecipeFactory recipeFactory = new CommonRecipeFactory();
