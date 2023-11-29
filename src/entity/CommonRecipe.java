@@ -1,5 +1,8 @@
 package entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class CommonRecipe implements Recipe {
 
     private final int mealId;
@@ -46,5 +49,16 @@ class CommonRecipe implements Recipe {
     @Override
     public String getAreaOfOrigin() {
         return areaOfOrigin;
+    }
+
+    @Override
+    public Map<String, String> toMap() {
+        HashMap<String, String> recipeAsMap = new HashMap<>();
+        recipeAsMap.put("id", String.valueOf(this.getMealId()));
+        recipeAsMap.put("name", this.getName());
+        recipeAsMap.put("category", this.getCategory());
+        recipeAsMap.put("areaOfOrigin", this.getAreaOfOrigin());
+        recipeAsMap.put("instructions", this.getInstructions());
+        return recipeAsMap;
     }
 }

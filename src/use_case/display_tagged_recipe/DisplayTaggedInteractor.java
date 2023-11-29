@@ -42,12 +42,7 @@ public class DisplayTaggedInteractor implements DisplayTaggedInputBoundary {
     private List<Map<String, String>> convertFromRecipeListToHashMapList(List<Recipe> recipes) {
         List<Map<String, String>> recipesAsMaps = new ArrayList<>(recipes.size());
         for (Recipe recipe: recipes) {
-            HashMap <String, String> recipeAsMap = new HashMap<>();
-            recipeAsMap.put("id", String.valueOf(recipe.getMealId()));
-            recipeAsMap.put("name", recipe.getName());
-            recipeAsMap.put("category", recipe.getCategory());
-            recipeAsMap.put("areaOfOrigin", recipe.getAreaOfOrigin());
-            recipeAsMap.put("instructions", recipe.getInstructions());
+            Map<String, String> recipeAsMap = recipe.toMap();
             recipesAsMaps.add(recipeAsMap);
         }
         return recipesAsMaps;
