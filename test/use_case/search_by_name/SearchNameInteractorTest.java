@@ -55,6 +55,7 @@ public class SearchNameInteractorTest {
 
             @Override
             public void prepareFailView(SearchNameOutputData searchNameOutputData) {
+                assertEquals("name", searchNameOutputData.getName());
                 assertEquals(0, searchNameOutputData.getRecipes().length);
             }
         };
