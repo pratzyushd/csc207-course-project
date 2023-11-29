@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Implements the display user tagged recipes use case.
  */
-public class DisplayTaggedInteractor {
+public class DisplayTaggedInteractor implements DisplayTaggedInputBoundary {
 
     private final DisplayTaggedOutputBoundary presenter;
     private final DisplayTaggedUserDataAccessInterface dataAccess;
@@ -25,6 +25,7 @@ public class DisplayTaggedInteractor {
         this.dataAccess = dataAccess;
     }
 
+    @Override
     public void execute(DisplayTaggedInputData input) {
         List<Recipe> recipes = dataAccess.getTaggedRecipes(dataAccess.getUser(), input.getTag());
         List<Map<String, String>> recipesAsMaps = convertFromRecipeListToHashMapList(recipes);
