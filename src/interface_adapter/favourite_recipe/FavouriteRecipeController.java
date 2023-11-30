@@ -15,7 +15,6 @@ public class FavouriteRecipeController {
      */
     public void execute(int mealId) {
         FavouriteRecipeInputData favouriteRecipeInputData = new FavouriteRecipeInputData(mealId);
-
         favouriteRecipeInteractor.execute(favouriteRecipeInputData);
     }
 }
