@@ -2,7 +2,7 @@ package interface_adapter.search_by_name;
 
 public class SearchByNameState {
     private String recipeName = "";
-    private String recipeNameError = null;
+    private String recipeNameError = "";
 
     /**
      * Creates an instance of the SearchByNameState with the same state as the provided copy.
@@ -24,7 +24,7 @@ public class SearchByNameState {
         return recipeNameError;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setRecipeNameError(String recipeNameError) {
+        this.recipeNameError = recipeNameError;
     }
 }

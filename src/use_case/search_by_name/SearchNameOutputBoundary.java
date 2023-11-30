@@ -10,8 +10,8 @@ public interface SearchNameOutputBoundary {
 
     /**
      * Output the UI that shows that there doesn't exist any recipe from the specified name.
-     * @param searchNameOutputData error message telling user that there doesn't exist any recipe from the
+     * @param error error message telling user that there doesn't exist any recipe from the
      *                             specified name.
      */
-    void prepareFailView(SearchNameOutputData searchNameOutputData);
+    void prepareFailView(String error);
 }

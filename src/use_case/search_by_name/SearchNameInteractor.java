@@ -29,6 +29,7 @@ public class SearchNameInteractor implements SearchNameInputBoundary {
     public void execute(SearchNameInputData searchNameInputData) {
         String name = searchNameInputData.getName();
         Recipe[] recipes = userDataAccessObject.searchRecipesByName(name);
+        System.out.println(recipes.length);
         List<Map<String, String>> recipesAsMap = new ArrayList<>();
         for (Recipe recipe: recipes) {
             recipesAsMap.add(recipe.toMap());
@@ -36,7 +37,7 @@ public class SearchNameInteractor implements SearchNameInputBoundary {
         SearchNameOutputData outputData = new SearchNameOutputData(name, recipesAsMap);
 
         if (recipes.length == 0) {
-            searchNamePresenter.prepareFailView(outputData);
+            searchNamePresenter.prepareFailView("No results found for given search term " + "\"" + name + "\"");
         } else {
             searchNamePresenter.prepareSuccessView(outputData);
         }

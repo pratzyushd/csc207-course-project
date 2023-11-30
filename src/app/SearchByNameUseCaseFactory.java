@@ -2,6 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_name.SearchByNameController;
 import interface_adapter.search_by_name.SearchByNamePresenter;
@@ -26,16 +27,17 @@ public class SearchByNameUseCaseFactory {
      * Create the final view for the Search By Name use case.
      * @param viewManagerModel the view manger model that is shared by all views.
      * @param searchByNameViewModel The specific view model for this use case.
+     * @param searchResultViewModel the view model for the search result view
      * @param searchNameUserDataAccessObject The DAO that implements the required functionality for this use case
      * @return the fully constructed View.
      */
     public static SearchByNameView create(
             ViewManagerModel viewManagerModel, SearchByNameViewModel searchByNameViewModel,
-            SearchNameUserDataAccessInterface searchNameUserDataAccessObject) {
+            SearchResultViewModel searchResultViewModel, SearchNameUserDataAccessInterface searchNameUserDataAccessObject) {
 
         try {
             SearchByNameController searchByNameController = createSearchByNameUseCase(viewManagerModel, searchByNameViewModel,
-                    searchNameUserDataAccessObject);
+                    searchResultViewModel, searchNameUserDataAccessObject);
             return new SearchByNameView(searchByNameController, searchByNameViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -45,12 +47,11 @@ public class SearchByNameUseCaseFactory {
     }
 
     private static SearchByNameController createSearchByNameUseCase(ViewManagerModel viewManagerModel, SearchByNameViewModel
-            searchByNameViewModel, SearchNameUserDataAccessInterface searchNameUserDataAccessObject) throws IOException {
+            searchByNameViewModel, SearchResultViewModel searchResultViewModel, SearchNameUserDataAccessInterface searchNameUserDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        SearchNameOutputBoundary searchNameOutputBoundary = new SearchByNamePresenter(viewManagerModel, searchByNameViewModel);
-
-        UserFactory userFactory = new CommonUserFactory();
+        SearchNameOutputBoundary searchNameOutputBoundary = new SearchByNamePresenter(viewManagerModel, searchByNameViewModel,
+                searchResultViewModel);
 
         SearchNameInputBoundary searchNameInteractor = new SearchNameInteractor(
                 searchNameUserDataAccessObject, searchNameOutputBoundary);
