@@ -16,9 +16,9 @@ public class TagRecipePresenter implements TagRecipeOutputBoundary {
      */
     @Override
     public void prepareSuccessView(String recipeName, String tagName) {
-//        FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();
-//        favouriteRecipeState.setFavouriteRecipeMessage(recipeName + " has been added to your favourites!");
-//        favouriteRecipeViewModel.firePropertyChanged();
+        TagRecipeState tagRecipeState = tagRecipeViewModel.getState();
+        tagRecipeState.setTagRecipeMessage(recipeName + " has been added to your tag, " + tagName + ".");
+        tagRecipeViewModel.firePropertyChanged();
     }
 
     /**
@@ -27,8 +27,14 @@ public class TagRecipePresenter implements TagRecipeOutputBoundary {
      */
     @Override
     public void prepareFailView(String recipeName, String tagName) {
-//        FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();
-//        favouriteRecipeState.setFavouriteRecipeMessage(recipeName + " already exists in your favourites!");
-//        favouriteRecipeViewModel.firePropertyChanged();
+        TagRecipeState tagRecipeState = tagRecipeViewModel.getState();
+        if (tagName.isEmpty()) {
+            tagRecipeState.setTagRecipeMessage("Please provide a name for the tag you wish to add this recipe to.");
+        } else {
+            tagRecipeState.setTagRecipeMessage(recipeName + " already exists in " + tagName + ".");
+        }
+
+
+        tagRecipeViewModel.firePropertyChanged();
     }
 }
