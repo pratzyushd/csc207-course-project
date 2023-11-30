@@ -10,7 +10,7 @@ public interface SearchCuisineOutputBoundary {
 
     /**
      * Output the UI that shows that there doesn't exist any recipe from the specified cuisine.
-     * @param outputData error message telling user that there doesn't exist any recipe from the specified cuisine.
+     * @param error error message telling user that there doesn't exist any recipe from the specified cuisine.
      */
-    void prepareFailView(SearchCuisineOutputData outputData);
+    void prepareFailView(String error);
 }

@@ -37,7 +37,7 @@ public class SearchCuisineInteractor implements SearchCuisineInputBoundary {
         SearchCuisineOutputData outputData = new SearchCuisineOutputData(cuisine, recipeList);
 
         if (recipes.length == 0) {
-            searchCuisinePresenter.prepareFailView(outputData);
+            searchCuisinePresenter.prepareFailView("No results found for given cuisine " + "\"" + cuisine + "\"");
         } else {
             searchCuisinePresenter.prepareSuccessView(outputData);
         }

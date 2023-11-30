@@ -2,7 +2,7 @@ package interface_adapter.search_by_cuisine;
 
 public class SearchByCuisineState {
     private String recipeCuisine = "";
-    private String recipeCuisineError = null;
+    private String recipeCuisineError = "";
 
     public SearchByCuisineState(SearchByCuisineState copy) {
         recipeCuisine = copy.recipeCuisine;
@@ -22,6 +22,9 @@ public class SearchByCuisineState {
 
     public void setRecipeCuisine(String recipeCuisine) {
         this.recipeCuisine = recipeCuisine;
+    }
+    public void setRecipeCuisineError(String recipeCuisineError) {
+        this.recipeCuisineError = recipeCuisineError;
     }
 
 }
