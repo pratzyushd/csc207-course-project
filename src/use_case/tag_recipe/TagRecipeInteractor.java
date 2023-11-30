@@ -36,7 +36,7 @@ public class TagRecipeInteractor implements TagRecipeInputBoundary {
         String givenTagName = tagRecipeInputData.getTagName();
         HashMap<String, ArrayList<Recipe>> currentUserTags = user.getTaggedRecipes();
 
-        if (currentUserTags.get(givenTagName).contains(recipe)) {
+        if (currentUserTags.get(givenTagName).contains(recipe) || givenTagName.isEmpty()) {
             tagRecipePresenter.prepareFailView(recipe.getName(), givenTagName);
         } else {
             user.assignTag(recipe, tagRecipeInputData.getTagName());
