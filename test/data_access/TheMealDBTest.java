@@ -17,6 +17,9 @@ public class TheMealDBTest {
         this.instance = new TheMealDB(factory);
     }
 
+    /**
+     * Attempt a query with an invalid recipe ID for the API. This should return a null object.
+     */
     @Test
     public void testCreateWithInvalidId() {
         int id = 64920;
@@ -35,6 +38,10 @@ public class TheMealDBTest {
         assertNotNull(recipe);
     }
 
+    /**
+     * Test query with an invalid area parameter. We expect this to return nothing from the API,
+     * and so the class should return an empty array.
+     */
     @Test
     public void testCreateWithInvalidArea() {
         String area = "asdf";
@@ -51,12 +58,16 @@ public class TheMealDBTest {
         /* The array has elements */
         assertTrue(recipes.length != 0);
         /* There are no null objects in the array.
-        * NOTE: this should be fine, as long as we don't have some connection error / API error. */
+         * NOTE: this should be fine, as long as we don't have some connection error / API error. */
         for (Recipe r : recipes) {
             assertNotNull(r);
         }
     }
 
+    /**
+     * Test query with an invalid name. We expect this to return nothing from the API,
+     * and so the class should return an empty array.
+     */
     @Test
     public void testCreateWithInvalidName() {
         String name = "asdf";

@@ -22,6 +22,12 @@ public class JSONPersistence implements Persistence {
     private final RecipeAPI recipeDAO;
     private User currentUser;
 
+    /**
+     * Construct a new instance of the JSONPersistence DAO.
+     * @param userFactory a factory to make user's with. This is used to create the user when we load it.
+     * @param filePath the path to the file that the information is read from / written to.
+     * @param recipeDAO the DAO that allows access to the recipe information.
+     */
     public JSONPersistence(UserFactory userFactory, String filePath, RecipeAPI recipeDAO) {
         this.userFactory = userFactory;
         this.filePath = filePath;
@@ -146,6 +152,12 @@ public class JSONPersistence implements Persistence {
         return user;
     }
 
+    /**
+     * Helper method to generate an array of Recipes from a JSON array. Makes use
+     * of the functionality in the DAO of getting recieps from a list of IDs.
+     * @param array the JSONArray to convert.
+     * @return the converted array of Recipe objects.
+     */
     private Recipe[] generateRecipesFromJSONArray(JSONArray array) {
         String[] idList = new String[array.length()];
         for (int i = 0; i < array.length(); i++) {

@@ -18,7 +18,7 @@ public class DisplayTaggedInteractor implements DisplayTaggedInputBoundary {
     /**
      * Creates a new DisplayTaggedInteractor with the given presenter and data access.
      * @param presenter the presenter that will update the view with the relevant recipes.
-     * @param dataAccess the data access object that will retrieve the relevant recipes based on given user and tag.
+     * @param dataAccess the data access object that will retrieve the relevant recipes based on the given tag.
      */
     public DisplayTaggedInteractor(DisplayTaggedOutputBoundary presenter, DisplayTaggedUserDataAccessInterface dataAccess) {
         this.presenter = presenter;

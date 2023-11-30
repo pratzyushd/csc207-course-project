@@ -15,9 +15,20 @@ import view.SearchByNameView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory to create the components required for the Search By Name use case, and all the
+ * required links between them.
+ */
 public class SearchByNameUseCaseFactory {
     private SearchByNameUseCaseFactory() {}
 
+    /**
+     * Create the final view for the Search By Name use case.
+     * @param viewManagerModel the view manger model that is shared by all views.
+     * @param searchByNameViewModel The specific view model for this use case.
+     * @param searchNameUserDataAccessObject The DAO that implements the required functionality for this use case
+     * @return the fully constructed View.
+     */
     public static SearchByNameView create(
             ViewManagerModel viewManagerModel, SearchByNameViewModel searchByNameViewModel,
             SearchNameUserDataAccessInterface searchNameUserDataAccessObject) {

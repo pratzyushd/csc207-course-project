@@ -25,6 +25,10 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
         this.searchResultViewModel = searchResultViewModel;
     }
 
+    /**
+     * Prepare the success view given the relevant output data (which must contain the recipe).
+     * @param response the OutputData object that stores the relevant recipe that was fetched from the DAO.
+     */
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
         System.out.println(response.getRecipe().get("name"));
@@ -44,6 +48,10 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
         viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Prepare the fail view given the particular error message.
+     * @param error the error message generated.
+     */
     @Override
     public void prepareFailView(String error) {
         SearchByIdState searchByIdState = searchByIdViewModel.getState();
