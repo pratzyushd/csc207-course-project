@@ -7,6 +7,7 @@ import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
 import javax.naming.directory.SearchResult;
+import java.util.ArrayList;
 
 public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
@@ -31,17 +32,30 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
      */
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
-        System.out.println(response.getRecipe().get("name"));
+        ArrayList<String> recipeNames = new ArrayList<>();
+        recipeNames.add(response.getRecipe().get("name"));
+
+        ArrayList<String> recipeCategories = new ArrayList<>();
+        recipeCategories.add(response.getRecipe().get("category"));
+
+        ArrayList<String> recipeInstructions = new ArrayList<>();
+        recipeInstructions.add(response.getRecipe().get("instructions"));
+
+        ArrayList<String> recipeAreaOfOrigins = new ArrayList<>();
+        recipeAreaOfOrigins.add(response.getRecipe().get("areaOfOrigin"));
+
+        ArrayList<Integer> recipeIds = new ArrayList<>();
+        recipeIds.add(response.getId());
 
         SearchResultState searchResultState = searchResultViewModel.getState();
-        searchResultState.setRecipeName(response.getRecipe().get("name"));
-        searchResultState.setRecipeCategory(response.getRecipe().get("category"));
-        searchResultState.setRecipeInstructions(response.getRecipe().get("instructions"));
-        searchResultState.setRecipeAreaOfOrigin(response.getRecipe().get("areaOfOrigin"));
-        searchResultState.setRecipeId(Integer.parseInt(response.getRecipe().get("id")));
+        searchResultState.setRecipeNames(recipeNames);
+        searchResultState.setRecipeCategories(recipeCategories);
+        searchResultState.setRecipeInstructions(recipeInstructions);
+        searchResultState.setRecipeAreaOfOrigins(recipeAreaOfOrigins);
+        searchResultState.setRecipeIds(recipeIds);
+        searchResultState.setSearchTerm(String.valueOf(response.getId()));
 
         this.searchResultViewModel.setState(searchResultState);
-        System.out.println("\n" + searchResultViewModel.getState().getRecipeName());
         searchResultViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView(searchResultViewModel.getViewName());

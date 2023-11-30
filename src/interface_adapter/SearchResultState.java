@@ -1,61 +1,73 @@
 package interface_adapter;
 
+import java.util.ArrayList;
+
 public class SearchResultState {
-    private String recipeName = "";
-    private String recipeCategory = "";
-    private String recipeInstructions = "";
-    private String recipeAreaOfOrigin = "";
-    private int recipeId;
+    private ArrayList<String> recipeNames = new ArrayList<>();
+    private ArrayList<String> recipeCategories = new ArrayList<>();
+    private ArrayList<String> recipeInstructions = new ArrayList<>();
+    private ArrayList<String> recipeAreaOfOrigins = new ArrayList<>();
+    private ArrayList<Integer> recipeIds = new ArrayList<>();
+    private String searchTerm = "";
 
     public SearchResultState(SearchResultState copy) {
-        recipeName = copy.recipeName;
-        recipeCategory = copy.recipeCategory;
+        recipeNames = copy.recipeNames;
+        recipeCategories = copy.recipeCategories;
         recipeInstructions = copy.recipeInstructions;
-        recipeAreaOfOrigin = copy.recipeAreaOfOrigin;
-        recipeId = copy.recipeId;
+        recipeAreaOfOrigins = copy.recipeAreaOfOrigins;
+        recipeIds = copy.recipeIds;
+        searchTerm = copy.searchTerm;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
     public SearchResultState() {}
 
-    public String getRecipeName() {
-        return recipeName;
+    public ArrayList<String> getRecipeNames() {
+        return recipeNames;
     }
 
-    public void setRecipeName (String recipeName) {
-        this.recipeName = recipeName;
+    public ArrayList<String> getRecipeCategories() {
+        return recipeCategories;
     }
 
-    public String getRecipeCategory() {
-        return recipeCategory;
-    }
-
-    public void setRecipeCategory(String recipeCategory) {
-        this.recipeCategory = recipeCategory;
-    }
-
-    public String getRecipeInstructions() {
+    public ArrayList<String> getRecipeInstructions() {
         return recipeInstructions;
     }
 
-    public void setRecipeInstructions(String recipeInstructions) {
+    public ArrayList<String> getRecipeAreaOfOrigins() {
+        return recipeAreaOfOrigins;
+    }
+
+    public ArrayList<Integer> getRecipeIds() {
+        return recipeIds;
+    }
+
+    public String getSearchTerm() {
+        return searchTerm;
+    }
+
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+
+    public void setRecipeNames(ArrayList<String> recipeNames) {
+        this.recipeNames = recipeNames;
+    }
+
+    public void setRecipeCategories(ArrayList<String> recipeCategories) {
+        this.recipeCategories = recipeCategories;
+    }
+
+    public void setRecipeInstructions(ArrayList<String> recipeInstructions) {
         this.recipeInstructions = recipeInstructions;
     }
 
-    public String getRecipeAreaOfOrigin() {
-        return recipeAreaOfOrigin;
+    public void setRecipeAreaOfOrigins(ArrayList<String> recipeAreaOfOrigins) {
+        this.recipeAreaOfOrigins = recipeAreaOfOrigins;
     }
 
-    public void setRecipeAreaOfOrigin(String recipeAreaOfOrigin) {
-        this.recipeAreaOfOrigin = recipeAreaOfOrigin;
-    }
-
-    public int getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipeIds(ArrayList<Integer> recipeIds) {
+        this.recipeIds = recipeIds;
     }
 
 }
