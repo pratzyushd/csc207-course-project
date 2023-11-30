@@ -8,13 +8,17 @@ import entity.CommonRecipeFactory;
 import entity.CommonUserFactory;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
+import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
 import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.search_by_name.SearchByNameViewModel;
+import interface_adapter.tag_recipe.TagRecipeViewModel;
 import use_case.favourite_recipe.FavouriteRecipeUserDataAccessInterface;
+import use_case.search_by_cuisine.SearchCuisineUserDataAccessInterface;
 import use_case.search_by_id.SearchIdUserDataAccessInterface;
-import view.SearchByIdView;
-import view.SearchResultView;
-import view.ViewManager;
+import use_case.search_by_name.SearchNameUserDataAccessInterface;
+import use_case.tag_recipe.TagRecipeUserDataAccessInterface;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +27,31 @@ import java.awt.*;
  * The entry point of the application.
  */
 public class Main {
+    public static class MyCardLayout extends CardLayout {
+        @Override
+        public Dimension preferredLayoutSize(Container parent) {
+
+            Component current = findCurrentComponent(parent);
+            if (current != null) {
+                Insets insets = parent.getInsets();
+                Dimension pref = current.getPreferredSize();
+                pref.width += insets.left + insets.right;
+                pref.height += insets.top + insets.bottom;
+                return pref;
+            }
+            return super.preferredLayoutSize(parent);
+        }
+
+        public Component findCurrentComponent(Container parent) {
+            for (Component comp : parent.getComponents()) {
+                if (comp.isVisible()) {
+                    return comp;
+                }
+            }
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         JFrame application = new JFrame("MyRecipeMate");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -30,12 +59,13 @@ public class Main {
 
         // The various View objects. Only one view is visible at a time.
         // 'views' serves as a container for various "views" (other JPanels).
-        JPanel views = new JPanel(cardLayout);
+        MyCardLayout myCardLayout = new MyCardLayout();
+        JPanel views = new JPanel(myCardLayout);
         application.add(views);
 
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
+        new ViewManager(views, myCardLayout, viewManagerModel, application);
 
         // Create and add SearchById view
         SearchByIdViewModel searchByIdViewModel = new SearchByIdViewModel();
@@ -46,21 +76,42 @@ public class Main {
                 searchResultViewModel, searchIdUserDataAccessObject);
         views.add(searchByIdView, searchByIdView.viewName);
 
+        // Create and add SearchByCuisine view
+        SearchByCuisineViewModel searchByCuisineViewModel = new SearchByCuisineViewModel();
+        SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject = new TheMealDB(recipeFactory);
+        SearchByCuisineView searchByCuisineView = SearchByCuisineUseCaseFactory.create(viewManagerModel, searchByCuisineViewModel,
+                searchResultViewModel, searchCuisineUserDataAccessObject);
+        views.add(searchByCuisineView, searchByCuisineView.viewName);
+
+        // Create and add SearchByName view
+        SearchByNameViewModel searchByNameViewModel = new SearchByNameViewModel();
+        SearchNameUserDataAccessInterface searchNameUserDataAccessObject = new TheMealDB(recipeFactory);
+        SearchByNameView searchByNameView = SearchByNameUseCaseFactory.create(viewManagerModel, searchByNameViewModel,
+                searchResultViewModel, searchNameUserDataAccessObject);
+        views.add(searchByNameView, searchByNameView.viewName);
+
         // Create and add SearchResultView (for favouriting recipes and adding tags)
         FavouriteRecipeViewModel favouriteRecipeViewModel = new FavouriteRecipeViewModel();
+        TagRecipeViewModel tagRecipeViewModel = new TagRecipeViewModel();
+        // TODO, tag and favourite recipe user DA interfaces are the same thing, can we do type casting and use just 1?
         FavouriteRecipeUserDataAccessInterface favouriteRecipeUserDataAccessInterface = new TheMealDB(recipeFactory);
+        TagRecipeUserDataAccessInterface tagRecipeUserDataAccessInterface = new TheMealDB(recipeFactory);
 
         CommonUserFactory userFactory = new CommonUserFactory();
         RecipeAPI recipeAPI = new TheMealDB(recipeFactory);
         // TODO - provide jsonPersistence with a valid file path. Currently empty path.
         Persistence jsonPersistence = new JSONPersistence(userFactory, "", recipeAPI);
         SearchResultView searchResultView = SearchResultUseCaseFactory.create(viewManagerModel, favouriteRecipeViewModel,
-                searchResultViewModel, favouriteRecipeUserDataAccessInterface, jsonPersistence);
+                tagRecipeViewModel,
+                searchResultViewModel, favouriteRecipeUserDataAccessInterface, tagRecipeUserDataAccessInterface, jsonPersistence);
+//        JScrollPane scrollPane = new JScrollPane(searchResultView);
+//        scrollPane.setViewportView(searchResultView);
+//        views.add(scrollPane, searchResultView.viewName);
         views.add(searchResultView, searchResultView.viewName);
 
         // Set the active view to start with search by id
         // TODO - replace the initial active view with the create new user / load user from file screen.
-        viewManagerModel.setActiveView(searchByIdView.viewName);
+        viewManagerModel.setActiveView(searchByCuisineView.viewName);
         viewManagerModel.firePropertyChanged();
 
         // Pack the application and center the frame to the screen
