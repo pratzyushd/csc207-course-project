@@ -107,6 +107,7 @@ public class Main {
 //        JScrollPane scrollPane = new JScrollPane(searchResultView);
 //        scrollPane.setViewportView(searchResultView);
 //        views.add(scrollPane, searchResultView.viewName);
+        // TODO - we currently only support up to 15 results. Try implementing scrolling in search result view?
         views.add(searchResultView, searchResultView.viewName);
 
         // Set the active view to start with search by id
