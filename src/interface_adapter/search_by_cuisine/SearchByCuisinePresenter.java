@@ -29,11 +29,6 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
      */
     @Override
     public void prepareSuccessView(SearchCuisineOutputData response) {
-        System.out.println(response.getRecipes().size());
-        for (Map<String, String> recipe : response.getRecipes()) {
-            System.out.println(recipe.get("name"));
-        }
-
         List<Map<String, String>> recipeResults = response.getRecipes();
         ArrayList<String> recipeNames = new ArrayList<>();
         ArrayList<String> recipeCategories = new ArrayList<>();
