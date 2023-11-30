@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // The intiial view of the application tht allows user to load previous data or create a new user
-public class InitialView {
+public class InitialView extends JPanel implements PropertyChangeListener{
     public final String viewName = "initial view";
 
     public InitialView() {
@@ -17,7 +17,12 @@ public class InitialView {
         frame.setVisible(true);
     }
 
-    public class InitialPanel extends JPanel implements PropertyChangeListener {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+    }
+
+    public static class InitialPanel extends JPanel implements PropertyChangeListener {
         public InitialPanel() {
             setLayout(new FlowLayout());
 

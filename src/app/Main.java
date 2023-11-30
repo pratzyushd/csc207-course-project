@@ -16,6 +16,13 @@ import view.SearchByIdView;
 import view.SearchResultView;
 import view.ViewManager;
 
+import view.InitialView;
+import view.HomeView;
+import view.RecipesView;
+import interface_adapter.display_recipes.RecipesViewModel;
+import view.DisplayFavouriteView;
+import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -58,9 +65,24 @@ public class Main {
                 searchResultViewModel, favouriteRecipeUserDataAccessInterface, jsonPersistence);
         views.add(searchResultView, searchResultView.viewName);
 
+        // Create and add DisplayFavouriteView
+        RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(true);
+        DisplayFavouriteUserDataAccessInterface favouriteRecipeUserDataAccessInterface2 = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayFavouriteView displayFavouriteView = DisplayFavouriteUseCaseFactory.create(viewManagerModel, DisplayFavouriteViewModel,
+                favouriteRecipeUserDataAccessInterface2);
+        views.add(displayFavouriteView, displayFavouriteView.viewName);
+
+//        // Create and add InitialView
+//        InitialView initialView = new InitialView();
+//        views.add(initialView, initialView.viewName);
+
+        // Create and add HomeView
+        HomeView homeView = new HomeView(viewManagerModel);
+        views.add(homeView, homeView.viewName);
+
         // Set the active view to start with search by id
         // TODO - replace the initial active view with the create new user / load user from file screen.
-        viewManagerModel.setActiveView(searchByIdView.viewName);
+        viewManagerModel.setActiveView(homeView.viewName);
         viewManagerModel.firePropertyChanged();
 
         // Pack the application and center the frame to the screen

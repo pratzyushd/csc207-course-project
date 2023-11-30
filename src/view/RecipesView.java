@@ -3,9 +3,9 @@ package view;
 import interface_adapter.display_recipes.RecipesViewModel;
 import interface_adapter.display_recipes.TaggedRecipesController;
 import interface_adapter.display_recipes.FavouriteRecipesController;
-
 import interface_adapter.display_user_tags.UserTagsViewModel;
 import interface_adapter.display_user_tags.UserTagsController;
+import interface_adapter.ViewManagerModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -27,6 +27,8 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
 
     private final UserTagsViewModel userTagsViewModel;
 
+    private ViewManagerModel viewManagerModel;
+
 
     public RecipesView(TaggedRecipesController taggedRecipesController, FavouriteRecipesController favouriteRecipesController, UserTagsController userTagsController, RecipesViewModel recipesViewModel, UserTagsViewModel UserTagsViewModel) {
         this.taggedRecipesController = taggedRecipesController;
@@ -43,6 +45,7 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
 
         favouriteButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
+
                 displayFavouriteRecipes();
             }
         });
