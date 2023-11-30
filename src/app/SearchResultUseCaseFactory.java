@@ -11,6 +11,9 @@ import interface_adapter.search_by_id.SearchByIdPresenter;
 import interface_adapter.search_by_id.SearchByIdController;
 import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.tag_recipe.TagRecipeController;
+import interface_adapter.tag_recipe.TagRecipePresenter;
+import interface_adapter.tag_recipe.TagRecipeViewModel;
 import use_case.favourite_recipe.FavouriteRecipeInputBoundary;
 import use_case.favourite_recipe.FavouriteRecipeInteractor;
 import use_case.favourite_recipe.FavouriteRecipeOutputBoundary;
@@ -19,6 +22,10 @@ import use_case.search_by_id.SearchIdInputBoundary;
 import use_case.search_by_id.SearchIdInteractor;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdUserDataAccessInterface;
+import use_case.tag_recipe.TagRecipeInputBoundary;
+import use_case.tag_recipe.TagRecipeInteractor;
+import use_case.tag_recipe.TagRecipeOutputBoundary;
+import use_case.tag_recipe.TagRecipeUserDataAccessInterface;
 import view.SearchByIdView;
 import view.SearchResultView;
 
@@ -42,14 +49,16 @@ public class SearchResultUseCaseFactory {
      * @return the fully constructed View.
      */
     public static SearchResultView create(
-            ViewManagerModel viewManagerModel, FavouriteRecipeViewModel favouriteRecipeViewModel,
+            ViewManagerModel viewManagerModel, FavouriteRecipeViewModel favouriteRecipeViewModel, TagRecipeViewModel tagRecipeViewModel,
             SearchResultViewModel searchResultViewModel, FavouriteRecipeUserDataAccessInterface favouriteRecipeUserDataAccessInterface,
-            Persistence jsonPersistence) {
+            TagRecipeUserDataAccessInterface tagRecipeUserDataAccessInterface, Persistence jsonPersistence) {
 
         try {
             FavouriteRecipeController favouriteRecipeController = createFavouriteRecipeUseCase(favouriteRecipeViewModel,
                     favouriteRecipeUserDataAccessInterface, jsonPersistence);
-            return new SearchResultView(favouriteRecipeController, favouriteRecipeViewModel, searchResultViewModel);
+            TagRecipeController tagRecipeController = createTagRecipeUseCase(tagRecipeViewModel,
+                    tagRecipeUserDataAccessInterface, jsonPersistence);
+            return new SearchResultView(favouriteRecipeController, tagRecipeController, favouriteRecipeViewModel, tagRecipeViewModel, searchResultViewModel);
         } catch (IOException e) {
             // TODO - write a better message to display in the message dialog.
             JOptionPane.showMessageDialog(null, "Cannot favourite recipe.");
@@ -69,5 +78,18 @@ public class SearchResultUseCaseFactory {
                 favouriteRecipeUserDataAccessInterface, favouriteRecipePresenter, jsonPersistence);
 
         return new FavouriteRecipeController(favouriteRecipeInteractor);
+    }
+
+    private static TagRecipeController createTagRecipeUseCase (TagRecipeViewModel tagRecipeViewModel,
+                                                               TagRecipeUserDataAccessInterface tagRecipeUserDataAccessInterface,
+                                                               Persistence jsonPersistence) throws IOException {
+
+        // Notice how we pass this method's parameters to the Presenter.
+        TagRecipeOutputBoundary tagRecipePresenter = new TagRecipePresenter(tagRecipeViewModel);
+
+        TagRecipeInputBoundary tagRecipeInteractor = new TagRecipeInteractor(
+                tagRecipeUserDataAccessInterface, tagRecipePresenter, jsonPersistence);
+
+        return new TagRecipeController(tagRecipeInteractor);
     }
 }
