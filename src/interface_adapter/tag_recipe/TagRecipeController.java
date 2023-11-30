@@ -13,8 +13,8 @@ public class TagRecipeController {
      * call the tagRecipeInteractor's execute method to start the use case.
      * @param mealId The id of the recipe the user wants to find.
      */
-    public void execute(int mealId) {
-        TagRecipeInputData tagRecipeInputData = new TagRecipeInputData(mealId);
+    public void execute(int mealId, String tagName) {
+        TagRecipeInputData tagRecipeInputData = new TagRecipeInputData(mealId, tagName);
         tagRecipeInteractor.execute(tagRecipeInputData);
     }
 }
