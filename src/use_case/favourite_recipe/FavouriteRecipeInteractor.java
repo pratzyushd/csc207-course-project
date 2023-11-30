@@ -42,6 +42,7 @@ public class FavouriteRecipeInteractor implements FavouriteRecipeInputBoundary {
             favouriteRecipePresenter.prepareFailView(recipe.getName());
         } else {
             user.addFavourite(recipe);
+            jsonPersistence.setUser(user);
             favouriteRecipePresenter.prepareSuccessView(recipe.getName());
         }
     }

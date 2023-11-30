@@ -4,7 +4,7 @@ public interface SearchCuisineOutputBoundary {
     /**
      * Output the UI that shows the relevant recipes the user searched for if they existed.
      * @param outputData contains the relevant cuisine and its associated recipes retrieved by the
-     *                   DAO that need to be displayed to the user.
+     * DAO that need to be displayed to the user.
      */
     void prepareSuccessView(SearchCuisineOutputData outputData);
 

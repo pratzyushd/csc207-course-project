@@ -61,6 +61,11 @@ public class JSONPersistenceTest {
                 recipeDAO);
     }
 
+    /**
+     * Check that we can write an empty user correctly to the file.
+     * @throws IOException This exception only is thrown if there is some error
+     * in the test itself reading the file.
+     */
     @Test
     public void testEmptyUserOutput() throws IOException {
         instance.save(emptyUser);
@@ -73,6 +78,10 @@ public class JSONPersistenceTest {
         assertTrue(fileContents.contains("[]"));
     }
 
+    /**
+     * Test that we correctly write the mock information to the file.
+     * @throws IOException only thrown if the test has an error in reading the file.
+     */
     @Test
     public void testSingleUserOutput() throws IOException {
         instance.save(filledUser);
@@ -90,6 +99,10 @@ public class JSONPersistenceTest {
         assertTrue(fileContents.contains("52870"));
     }
 
+    /**
+     * Test our ability to parse the contents of the file and construct a User object from it.
+     * @throws IOException only thrown if the file reading fails.
+     */
     @Test
     public void testReadingContents() throws IOException {
         /* Write some testing data to the file */
@@ -108,6 +121,7 @@ public class JSONPersistenceTest {
                 "    ]}\n" +
                 "}");
         file.close();
+        /* What the actual values should be. */
         Set<Integer> actualFavouriteIds = Set.of(52802, 52872);
         Set<Integer> actualTaggedIds = Set.of(52855, 52870);
 
@@ -126,6 +140,7 @@ public class JSONPersistenceTest {
             taggedIds[i] = taggedRecipes.get(i).getMealId();
         }
 
+        /* Assert the correct recipes were stored in the user's favourites and tags. */
         assertEquals(favouriteIds.length, 2);
         assertTrue(actualFavouriteIds.containsAll(List.of(favouriteIds)));
         assertTrue(actualTaggedIds.containsAll(List.of(taggedIds)));

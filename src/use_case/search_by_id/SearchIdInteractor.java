@@ -24,16 +24,24 @@ public class SearchIdInteractor implements SearchIdInputBoundary {
     @Override
     public void execute(SearchIdInputData searchIdInputData) {
         System.out.println("executing");
+        /* Special case for ID of incorrect length.
+         * This also helps us avoid any Exceptions created by trying to use the Integer.parseInt method
+         * on a String that results in a value greater than 2^31, which is the max representable integer.
+         */
+        if (searchIdInputData.getId().length() != 5) {
+            System.out.println("Malformed ID");
+            searchIdPresenter.prepareFailView("ID is invalid.");
+        }
         int id = Integer.parseInt(searchIdInputData.getId());
         Recipe recipe = userDataAccessObject.searchRecipesById(id);
-        SearchIdOutputData outputData = new SearchIdOutputData(id, recipe);
-
+        /* Fail state */
         if (recipe == null) {
             System.out.println("null recipe");
             searchIdPresenter.prepareFailView("No recipe with given ID could be found.");
-        } else {
-            System.out.println("The interactor is preparing the success view");
-            searchIdPresenter.prepareSuccessView(outputData);
+        }
+        SearchIdOutputData outputData = new SearchIdOutputData(id, recipe.toMap());
+        System.out.println("The interactor is preparing the success view");
+        searchIdPresenter.prepareSuccessView(outputData);
         }
     }
 }

@@ -25,9 +25,22 @@ import view.SearchResultView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory to create the components required for the view to display the
+ * results from the search use cases, and all the required links between them.
+ */
 public class SearchResultUseCaseFactory {
     private SearchResultUseCaseFactory() {}
 
+    /**
+     * Create the required view for displaying search results.
+     * @param viewManagerModel the shared view manager model between all views.
+     * @param favouriteRecipeViewModel the view model that we switch ot if the user wants to favourite the recipe.
+     * @param searchResultViewModel the view model for displaying the results of a search
+     * @param favouriteRecipeUserDataAccessInterface the DAO that allows the user to favourite a recipe.
+     * @param jsonPersistence the DAO that implements the persistence, and that stores the user objects.
+     * @return the fully constructed View.
+     */
     public static SearchResultView create(
             ViewManagerModel viewManagerModel, FavouriteRecipeViewModel favouriteRecipeViewModel,
             SearchResultViewModel searchResultViewModel, FavouriteRecipeUserDataAccessInterface favouriteRecipeUserDataAccessInterface,
