@@ -4,6 +4,9 @@ import data_access.Persistence;
 import entity.Recipe;
 import entity.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class TagRecipeInteractor implements TagRecipeInputBoundary {
      final TagRecipeUserDataAccessInterface tagRecipeUserDataAccessObject;
      final Persistence jsonPersistence;
@@ -30,13 +33,14 @@ public class TagRecipeInteractor implements TagRecipeInputBoundary {
     public void execute(TagRecipeInputData tagRecipeInputData) {
         User user = jsonPersistence.getUser();
         Recipe recipe = tagRecipeUserDataAccessObject.searchRecipesById(tagRecipeInputData.getMealId());
+        String givenTagName = tagRecipeInputData.getTagName();
+        HashMap<String, ArrayList<Recipe>> currentUserTags = user.getTaggedRecipes();
 
-//        ArrayList<Recipe> currentFavourites = user.getFavourites();
-//        if (currentFavourites.contains(recipe)) {
-//            favouriteRecipePresenter.prepareFailView(recipe.getName());
-//        } else {
-//            user.addFavourite(recipe);
-//            favouriteRecipePresenter.prepareSuccessView(recipe.getName());
-//        }
+        if (currentUserTags.get(givenTagName).contains(recipe)) {
+            tagRecipePresenter.prepareFailView(recipe.getName(), givenTagName);
+        } else {
+            user.assignTag(recipe, tagRecipeInputData.getTagName());
+            tagRecipePresenter.prepareSuccessView(recipe.getName(), givenTagName);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class TagRecipePresenter implements TagRecipeOutputBoundary {
      * @param recipeName the name of the recipe that we successfully added to tags.
      */
     @Override
-    public void prepareSuccessView(String recipeName) {
+    public void prepareSuccessView(String recipeName, String tagName) {
 //        FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();
 //        favouriteRecipeState.setFavouriteRecipeMessage(recipeName + " has been added to your favourites!");
 //        favouriteRecipeViewModel.firePropertyChanged();
@@ -26,7 +26,7 @@ public class TagRecipePresenter implements TagRecipeOutputBoundary {
      * @param recipeName the name of the recipe that we failed to add to a tag.
      */
     @Override
-    public void prepareFailView(String recipeName) {
+    public void prepareFailView(String recipeName, String tagName) {
 //        FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();
 //        favouriteRecipeState.setFavouriteRecipeMessage(recipeName + " already exists in your favourites!");
 //        favouriteRecipeViewModel.firePropertyChanged();
