@@ -7,8 +7,6 @@ import java.beans.PropertyChangeSupport;
 
 public class SearchResultViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Recipe Search Result(s)";
-
     private SearchResultState state = new SearchResultState();
 
     public SearchResultViewModel() {
