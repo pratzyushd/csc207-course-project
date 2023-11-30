@@ -15,7 +15,6 @@ public class TagRecipeController {
      */
     public void execute(int mealId) {
         TagRecipeInputData tagRecipeInputData = new TagRecipeInputData(mealId);
-
         tagRecipeInteractor.execute(tagRecipeInputData);
     }
 }
