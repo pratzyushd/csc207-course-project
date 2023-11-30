@@ -29,7 +29,7 @@ public class TagRecipePresenter implements TagRecipeOutputBoundary {
     public void prepareFailView(String recipeName, String tagName) {
         TagRecipeState tagRecipeState = tagRecipeViewModel.getState();
         if (tagName.isEmpty()) {
-            tagRecipeState.setTagRecipeMessage("Please provide a name for the tag you wish to add this recipe to.");
+            tagRecipeState.setTagRecipeMessage("Please provide a name for the tag you wish to add " + recipeName + " to.");
         } else {
             tagRecipeState.setTagRecipeMessage(recipeName + " already exists in " + tagName + ".");
         }
