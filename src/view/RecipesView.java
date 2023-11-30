@@ -7,11 +7,15 @@ import interface_adapter.display_recipes.FavouriteRecipesController;
 import interface_adapter.display_user_tags.UserTagsViewModel;
 import interface_adapter.display_user_tags.UserTagsController;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 
-public class RecipesView extends JPanel{
+public class RecipesView extends JPanel implements PropertyChangeListener {
 
     public final String viewName = "user recipes";
 
@@ -37,14 +41,14 @@ public class RecipesView extends JPanel{
         JButton favouriteButton = new JButton("Favourite Recipes");
         JButton taggedButton = new JButton("Tagged Recipes");
 
-        favouriteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        favouriteButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 displayFavouriteRecipes();
             }
         });
 
-        taggedButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        taggedButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 displayUserTags();
             }
         });
@@ -67,5 +71,9 @@ public class RecipesView extends JPanel{
     public void displayTaggedRecipes(String tag) {
         //TODO: implement
         taggedRecipesController.execute(tag);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
     }
 }
