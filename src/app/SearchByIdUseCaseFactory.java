@@ -16,9 +16,21 @@ import view.SearchByIdView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory to create the components required for the Search By ID use case, and all the
+ * required links between them.
+ */
 public class SearchByIdUseCaseFactory {
     private SearchByIdUseCaseFactory() {}
 
+    /**
+     * Create the final view for the Search By ID use case.
+     * @param viewManagerModel the shared view manger between all the views.
+     * @param searchByIdViewModel The specific view model for this use case.
+     * @param searchResultViewModel The results view model, which is what we switch to after this use case is executed.
+     * @param searchIdUserDataAccessObject The DAO that implements the functionality for this use case.
+     * @return The fully constructed View.
+     */
     public static SearchByIdView create(
             ViewManagerModel viewManagerModel, SearchByIdViewModel searchByIdViewModel,
             SearchResultViewModel searchResultViewModel, SearchIdUserDataAccessInterface searchIdUserDataAccessObject) {

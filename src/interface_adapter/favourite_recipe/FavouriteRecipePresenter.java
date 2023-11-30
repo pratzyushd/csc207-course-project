@@ -9,6 +9,10 @@ public class FavouriteRecipePresenter implements FavouriteRecipeOutputBoundary {
         this.favouriteRecipeViewModel = favouriteRecipeViewModel;
     }
 
+    /**
+     * Prepares and updates the view model with the name of the recipe that we added to favourites.
+     * @param recipeName the name of the recipe that we successfully added to favourites.
+     */
     @Override
     public void prepareSuccessView(String recipeName) {
         FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();
@@ -16,6 +20,10 @@ public class FavouriteRecipePresenter implements FavouriteRecipeOutputBoundary {
         favouriteRecipeViewModel.firePropertyChanged();
     }
 
+    /**
+     * Prepares and updates the view model with the name of the recipe that we couldn't add to favourites.
+     * @param recipeName the name of the recipe that we failed to add to favourites.
+     */
     @Override
     public void prepareFailView(String recipeName) {
         FavouriteRecipeState favouriteRecipeState = favouriteRecipeViewModel.getState();

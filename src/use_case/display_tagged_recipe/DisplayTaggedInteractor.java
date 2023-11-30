@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Implements the display user tagged recipes use case.
  */
-public class DisplayTaggedInteractor {
+public class DisplayTaggedInteractor implements DisplayTaggedInputBoundary {
 
     private final DisplayTaggedOutputBoundary presenter;
     private final DisplayTaggedUserDataAccessInterface dataAccess;
@@ -18,13 +18,14 @@ public class DisplayTaggedInteractor {
     /**
      * Creates a new DisplayTaggedInteractor with the given presenter and data access.
      * @param presenter the presenter that will update the view with the relevant recipes.
-     * @param dataAccess the data access object that will retrieve the relevant recipes based on given user and tag.
+     * @param dataAccess the data access object that will retrieve the relevant recipes based on the given tag.
      */
     public DisplayTaggedInteractor(DisplayTaggedOutputBoundary presenter, DisplayTaggedUserDataAccessInterface dataAccess) {
         this.presenter = presenter;
         this.dataAccess = dataAccess;
     }
 
+    @Override
     public void execute(DisplayTaggedInputData input) {
         List<Recipe> recipes = dataAccess.getTaggedRecipes(dataAccess.getUser(), input.getTag());
         List<Map<String, String>> recipesAsMaps = convertFromRecipeListToHashMapList(recipes);
@@ -41,12 +42,7 @@ public class DisplayTaggedInteractor {
     private List<Map<String, String>> convertFromRecipeListToHashMapList(List<Recipe> recipes) {
         List<Map<String, String>> recipesAsMaps = new ArrayList<>(recipes.size());
         for (Recipe recipe: recipes) {
-            HashMap <String, String> recipeAsMap = new HashMap<>();
-            recipeAsMap.put("id", String.valueOf(recipe.getMealId()));
-            recipeAsMap.put("name", recipe.getName());
-            recipeAsMap.put("category", recipe.getCategory());
-            recipeAsMap.put("areaOfOrigin", recipe.getAreaOfOrigin());
-            recipeAsMap.put("instructions", recipe.getInstructions());
+            Map<String, String> recipeAsMap = recipe.toMap();
             recipesAsMaps.add(recipeAsMap);
         }
         return recipesAsMaps;

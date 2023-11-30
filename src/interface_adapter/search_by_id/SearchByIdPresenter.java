@@ -25,16 +25,20 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
         this.searchResultViewModel = searchResultViewModel;
     }
 
+    /**
+     * Prepare the success view given the relevant output data (which must contain the recipe).
+     * @param response the OutputData object that stores the relevant recipe that was fetched from the DAO.
+     */
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
-        System.out.println(response.getRecipe().getName());
+        System.out.println(response.getRecipe().get("name"));
 
         SearchResultState searchResultState = searchResultViewModel.getState();
-        searchResultState.setRecipeName(response.getRecipe().getName());
-        searchResultState.setRecipeCategory(response.getRecipe().getCategory());
-        searchResultState.setRecipeInstructions(response.getRecipe().getInstructions());
-        searchResultState.setRecipeAreaOfOrigin(response.getRecipe().getAreaOfOrigin());
-        searchResultState.setRecipeId(response.getRecipe().getMealId());
+        searchResultState.setRecipeName(response.getRecipe().get("name"));
+        searchResultState.setRecipeCategory(response.getRecipe().get("category"));
+        searchResultState.setRecipeInstructions(response.getRecipe().get("instructions"));
+        searchResultState.setRecipeAreaOfOrigin(response.getRecipe().get("areaOfOrigin"));
+        searchResultState.setRecipeId(Integer.parseInt(response.getRecipe().get("id")));
 
         this.searchResultViewModel.setState(searchResultState);
         System.out.println("\n" + searchResultViewModel.getState().getRecipeName());
@@ -44,6 +48,10 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
         viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Prepare the fail view given the particular error message.
+     * @param error the error message generated.
+     */
     @Override
     public void prepareFailView(String error) {
         SearchByIdState searchByIdState = searchByIdViewModel.getState();
