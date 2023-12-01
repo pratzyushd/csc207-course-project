@@ -4,7 +4,7 @@ import entity.User;
 
 import java.util.List;
 
-public interface DisplayUserTagsDataAccessInterface {
+public interface DisplayUserTagsUserDataAccessInterface {
 
     /**
      * Gets the tags of the given user.

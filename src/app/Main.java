@@ -16,6 +16,18 @@ import view.SearchByIdView;
 import view.SearchResultView;
 import view.ViewManager;
 
+import view.HomeView;
+import view.RecipesView;
+import view.DisplayTagsView;
+import interface_adapter.display_recipes.RecipesViewModel;
+import interface_adapter.display_user_tags.UserTagsViewModel;
+import view.DisplayFavouriteView;
+import view.DisplayTaggedView;
+import view.DisplayTagsView;
+import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
+import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
+import use_case.display_user_tags.DisplayUserTagsUserDataAccessInterface;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -58,9 +70,38 @@ public class Main {
                 searchResultViewModel, favouriteRecipeUserDataAccessInterface, jsonPersistence);
         views.add(searchResultView, searchResultView.viewName);
 
+        // Create and add DisplayFavouriteView
+        RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(true);
+        DisplayFavouriteUserDataAccessInterface favouriteRecipeUserDataAccessInterface2 = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayFavouriteView displayFavouriteView = DisplayFavouriteUseCaseFactory.create(viewManagerModel, DisplayFavouriteViewModel,
+                favouriteRecipeUserDataAccessInterface2);
+        views.add(displayFavouriteView, displayFavouriteView.viewName);
+
+        // Create and add DisplayTaggedView
+        RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(false);
+        DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
+                taggedRecipeUserDataAccessInterface);
+        views.add(displayTaggedView, displayTaggedView.viewName);
+
+        // Create and add DisplayTagsView
+        UserTagsViewModel userTagsViewModel = new UserTagsViewModel();
+        DisplayUserTagsUserDataAccessInterface userTagsUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayTagsView displayTagsView = DisplayUserTagsUseCaseFactory.create(viewManagerModel, userTagsViewModel,
+                userTagsUserDataAccessInterface);
+        views.add(displayTagsView, displayTagsView.viewName);
+
+        // Create and add RecipesView
+        RecipesView recipesView = new RecipesView(viewManagerModel);
+        views.add(recipesView, recipesView.viewName);
+
+        // Create and add HomeView
+        HomeView homeView = new HomeView(viewManagerModel);
+        views.add(homeView, homeView.viewName);
+
         // Set the active view to start with search by id
         // TODO - replace the initial active view with the create new user / load user from file screen.
-        viewManagerModel.setActiveView(searchByIdView.viewName);
+        viewManagerModel.setActiveView(homeView.viewName);
         viewManagerModel.firePropertyChanged();
 
         // Pack the application and center the frame to the screen
