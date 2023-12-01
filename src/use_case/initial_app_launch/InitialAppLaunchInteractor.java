@@ -44,7 +44,7 @@ public class InitialAppLaunchInteractor implements InitialAppLaunchInputBoundary
             // call dataaccess.setuser()
             // call dataaccess.save(<user you created>)
             CommonUserFactory commonUserFactory = new CommonUserFactory();
-            User user = commonUserFactory.create("");
+            User user = commonUserFactory.create(input.getUsername());
             dataAccess.setUser(user);
             dataAccess.save(user);
             presenter.prepareSuccessView();

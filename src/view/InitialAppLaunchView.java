@@ -26,6 +26,7 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
     private final InitialAppLaunchViewModel initialAppLaunchViewModel;
     private JButton loadExistingUserData;
     private JButton createNewUser;
+    private JLabel usernameLabel;
 
     public InitialAppLaunchView(InitialAppLaunchController initialAppLaunchController, InitialAppLaunchViewModel initialAppLaunchViewModel) {
         this.initialAppLaunchController = initialAppLaunchController;
@@ -37,6 +38,8 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
 
         loadExistingUserData = new JButton("Load Existing Data");
         createNewUser = new JButton("Create New User");
+        usernameLabel = new JLabel("Choose A Username: ");
+        JTextField usernameTextField = new JTextField(10);
 
         loadExistingUserData.addActionListener(new ActionListener() {
             @Override
@@ -46,7 +49,7 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
                 int returnValue = fileChooser.showOpenDialog(null);
                 File selectedFile = fileChooser.getSelectedFile();
                 String filePath = selectedFile.getAbsolutePath();
-                initialAppLaunchController.execute(load, filePath);
+                initialAppLaunchController.execute(load, filePath, "");
             }
         });
 
@@ -67,7 +70,10 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
 
                     // For your specific case, you can pass 'filePath' to your controller
                     Boolean load = false;
-                    initialAppLaunchController.execute(load, filePath);
+
+                    String username = usernameTextField.getText();
+
+                    initialAppLaunchController.execute(load, filePath, username);
                 } else {
                     // User canceled the file saving
                     System.out.println("File saving canceled");
@@ -79,6 +85,10 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
         add(loadExistingUserData);
         createNewUser.setBounds(180, 520, 450, 35);
         add(createNewUser);
+        usernameLabel.setBounds(190, 560, 450, 35);
+        add(usernameLabel);
+        usernameTextField.setBounds(330, 560, 300, 35);
+        add(usernameTextField);
     }
 
     @Override
