@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class JSONPersistence implements Persistence {
     private final UserFactory userFactory;
-    private final String filePath;
+    private String filePath;
     private final RecipeAPI recipeDAO;
     private User currentUser;
 
@@ -33,7 +33,6 @@ public class JSONPersistence implements Persistence {
         this.filePath = filePath;
         this.recipeDAO = recipeDAO;
     }
-
     /**
      * Make a JSONObject out of the tags for a given user.
      * @param user the User object which we make the JSONObject based on.
@@ -207,5 +206,9 @@ public class JSONPersistence implements Persistence {
     public List<String> getTags(User user) {
         HashMap<String, ArrayList<Recipe>> taggedMap = this.currentUser.getTaggedRecipes();
         return new ArrayList<>(taggedMap.keySet());
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }
