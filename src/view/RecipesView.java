@@ -17,6 +17,10 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "user recipes";
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Create a new view to see a given list of recipes.
+     * @param viewManagerModel handles switching views as required.
+     */
     public RecipesView(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
 

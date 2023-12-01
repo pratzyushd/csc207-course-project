@@ -21,6 +21,10 @@ public class HomeView extends JPanel implements PropertyChangeListener {
     public final String viewName = "home view";
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Create a new Home Page view.
+     * @param viewManagerModel representation of the information in this view.
+     */
     public HomeView(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
 

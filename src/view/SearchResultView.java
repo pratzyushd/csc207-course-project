@@ -39,6 +39,15 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
     private JButton viewInstructions;
     private JButton backToHomeButton;
 
+    /**
+     * View for showing search results from the various "search" use cases.
+     * @param favouriteRecipeController controller to allow a recipe to be added to favourites.
+     * @param tagRecipeController controller to allow a recipe to be assigned a tag.
+     * @param favouriteRecipeViewModel representation of the information for the "favouriting a recipe" view.
+     * @param tagRecipeViewModel representation of the information for the "tagging recipe" view.
+     * @param searchResultViewModel representation of the information for this view.
+     * @param viewManagerModel manager to switch from this view to another.
+     */
     public SearchResultView(FavouriteRecipeController favouriteRecipeController, TagRecipeController tagRecipeController,
                             FavouriteRecipeViewModel favouriteRecipeViewModel, TagRecipeViewModel tagRecipeViewModel,
                             SearchResultViewModel searchResultViewModel, ViewManagerModel viewManagerModel) {

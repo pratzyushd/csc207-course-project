@@ -13,6 +13,13 @@ public class ViewManager implements PropertyChangeListener{
     private final ViewManagerModel viewManagerModel;
     private final JFrame application;
 
+    /**
+     * Create a new view manager to handle switching between views.
+     * @param views the views for this application.
+     * @param cardLayout the Swing "cards" that represent the pages we can view.
+     * @param viewManagerModel representation of the information for the various views.
+     * @param application the application window.
+     */
     public ViewManager(JPanel views, CardLayout cardLayout, ViewManagerModel viewManagerModel, JFrame application) {
         this.views = views;
         this.cardLayout = cardLayout;

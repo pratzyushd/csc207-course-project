@@ -19,6 +19,11 @@ public class DisplayTaggedView extends JPanel implements PropertyChangeListener{
     private final TaggedRecipesController taggedRecipesController;
     private final RecipesViewModel recipesViewModel;
 
+    /**
+     * Create a new view to display tagged recipes.
+     * @param taggedRecipesController the controller for this view.
+     * @param recipesViewModel the model representation of this view.
+     */
     public DisplayTaggedView(TaggedRecipesController taggedRecipesController, RecipesViewModel recipesViewModel) {
         this.taggedRecipesController = taggedRecipesController;
         this.recipesViewModel = recipesViewModel;

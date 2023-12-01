@@ -18,6 +18,12 @@ public class SearchByNameView extends JPanel implements PropertyChangeListener {
     private final SearchByNameViewModel searchByNameViewModel;
     private final ViewManagerModel viewManagerModel;
 
+    /**
+     * View for the search by name use case.
+     * @param searchByNameController controller to execute this use case.
+     * @param searchByNameViewModel representation of the information required for this use case.
+     * @param viewManagerModel manager to handle switching to another view from this one.
+     */
     public SearchByNameView(SearchByNameController searchByNameController, SearchByNameViewModel searchByNameViewModel, ViewManagerModel viewManagerModel) {
         this.searchByNameController = searchByNameController;
         this.searchByNameViewModel = searchByNameViewModel;
