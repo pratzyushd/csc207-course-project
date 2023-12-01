@@ -2,6 +2,7 @@ package view;
 
 import interface_adapter.SearchResultState;
 import interface_adapter.SearchResultViewModel;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeController;
 import interface_adapter.favourite_recipe.FavouriteRecipeState;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
@@ -24,6 +25,7 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
     private final TagRecipeController tagRecipeController;
     private final TagRecipeViewModel tagRecipeViewModel;
     private final SearchResultViewModel searchResultViewModel;
+    private final ViewManagerModel viewManagerModel;
     private ArrayList<String> recipeNames = new ArrayList<>();
     private ArrayList<String> recipeCategories = new ArrayList<>();
     private ArrayList<String> recipeInstructions = new ArrayList<>();
@@ -39,7 +41,7 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
 
     public SearchResultView(FavouriteRecipeController favouriteRecipeController, TagRecipeController tagRecipeController,
                             FavouriteRecipeViewModel favouriteRecipeViewModel, TagRecipeViewModel tagRecipeViewModel,
-                            SearchResultViewModel searchResultViewModel) {
+                            SearchResultViewModel searchResultViewModel, ViewManagerModel viewManagerModel) {
         this.favouriteRecipeController = favouriteRecipeController;
         this.favouriteRecipeViewModel = favouriteRecipeViewModel;
         this.favouriteRecipeViewModel.addPropertyChangeListener(this);
@@ -48,6 +50,7 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
         this.tagRecipeController = tagRecipeController;
         this.tagRecipeViewModel = tagRecipeViewModel;
         this.tagRecipeViewModel.addPropertyChangeListener(this);
+        this.viewManagerModel = viewManagerModel;
 
         setPreferredSize(new Dimension(1200, 800));
         setLayout(null);
@@ -60,7 +63,7 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
             contentPanel.setLayout(null);
 
             final JTextField[] tagNameTextFields = new JTextField[recipeIds.size()];
-            for (int i = 0; i < recipeIds.size(); i++) {
+            for (int i = 0; i < Math.min(recipeIds.size(), 15); i++) {
                 final int currentRecipeId = recipeIds.get(i);
                 final String currentRecipeName = recipeNames.get(i);
                 final String currentRecipeCategory = recipeCategories.get(i);
@@ -104,6 +107,14 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
                         scrollPane.setPreferredSize(new Dimension(800, 500));  // Adjust size as needed
 
                         JOptionPane.showMessageDialog(SearchResultView.this, scrollPane, "Message", JOptionPane.PLAIN_MESSAGE);
+                    }
+                });
+
+                backToHomeButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewManagerModel.setActiveView("home view");
+                        viewManagerModel.firePropertyChanged();
                     }
                 });
 

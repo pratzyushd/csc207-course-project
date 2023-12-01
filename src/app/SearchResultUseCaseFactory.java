@@ -58,7 +58,7 @@ public class SearchResultUseCaseFactory {
                     favouriteRecipeUserDataAccessInterface, jsonPersistence);
             TagRecipeController tagRecipeController = createTagRecipeUseCase(tagRecipeViewModel,
                     tagRecipeUserDataAccessInterface, jsonPersistence);
-            return new SearchResultView(favouriteRecipeController, tagRecipeController, favouriteRecipeViewModel, tagRecipeViewModel, searchResultViewModel);
+            return new SearchResultView(favouriteRecipeController, tagRecipeController, favouriteRecipeViewModel, tagRecipeViewModel, searchResultViewModel, viewManagerModel);
         } catch (IOException e) {
             // TODO - write a better message to display in the message dialog.
             JOptionPane.showMessageDialog(null, "Cannot favourite recipe.");
