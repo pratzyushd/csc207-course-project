@@ -1,25 +1,24 @@
-package interface_adapter.search_by_name;
+package interface_adapter.tag_recipe;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class SearchByNameViewModel extends ViewModel {
-    private SearchByNameState state = new SearchByNameState();
+public class TagRecipeViewModel extends ViewModel {
+    private TagRecipeState state = new TagRecipeState();
 
-    public SearchByNameViewModel() {
-        super("search recipe by name view");
+    public TagRecipeViewModel() {
+        super("tag recipe view");
     }
 
-    public void setState(SearchByNameState state) {
+    public void setState(TagRecipeState state) {
         this.state = state;
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    // This is what the SearchByName Presenter will call to let the ViewModel know
-    // to alert the View
+    // This is what the presenter will call to let the ViewModel know to alert the View
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
@@ -28,7 +27,7 @@ public class SearchByNameViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public SearchByNameState getState() {
+    public TagRecipeState getState() {
         return state;
     }
 }

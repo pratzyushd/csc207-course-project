@@ -2,6 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.SearchResultViewModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineController;
 import interface_adapter.search_by_cuisine.SearchByCuisinePresenter;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
@@ -36,11 +37,12 @@ public class SearchByCuisineUseCaseFactory {
      */
     public static SearchByCuisineView create(
             ViewManagerModel viewManagerModel, SearchByCuisineViewModel searchByCuisineViewModel,
+            SearchResultViewModel searchResultViewModel,
             SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject) {
 
         try {
             SearchByCuisineController searchByCuisineController = createSearchByCuisineUseCase(viewManagerModel, searchByCuisineViewModel,
-                    searchCuisineUserDataAccessObject);
+                    searchResultViewModel, searchCuisineUserDataAccessObject);
             return new SearchByCuisineView(searchByCuisineController, searchByCuisineViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -50,10 +52,11 @@ public class SearchByCuisineUseCaseFactory {
     }
 
     private static SearchByCuisineController createSearchByCuisineUseCase(ViewManagerModel viewManagerModel, SearchByCuisineViewModel
-            searchByCuisineViewModel, SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject) throws IOException {
+            searchByCuisineViewModel, SearchResultViewModel searchResultViewModel, SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        SearchCuisineOutputBoundary searchCuisineOutputBoundary = new SearchByCuisinePresenter(viewManagerModel, searchByCuisineViewModel);
+        SearchCuisineOutputBoundary searchCuisineOutputBoundary = new SearchByCuisinePresenter(viewManagerModel, searchByCuisineViewModel,
+                searchResultViewModel);
 
         UserFactory userFactory = new CommonUserFactory();
 

@@ -1,18 +1,25 @@
 package interface_adapter.search_by_cuisine;
 
+import interface_adapter.SearchResultState;
+import interface_adapter.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.search_by_cuisine.SearchCuisineOutputBoundary;
 import use_case.search_by_cuisine.SearchCuisineOutputData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
     private final SearchByCuisineViewModel searchByCuisineViewModel;
     private ViewManagerModel viewManagerModel;
+    private SearchResultViewModel searchResultViewModel;
 
-    public SearchByCuisinePresenter(ViewManagerModel viewManagerModel, SearchByCuisineViewModel searchByCuisineViewModel) {
+    public SearchByCuisinePresenter(ViewManagerModel viewManagerModel, SearchByCuisineViewModel searchByCuisineViewModel,
+                                    SearchResultViewModel searchResultViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.searchByCuisineViewModel = searchByCuisineViewModel;
+        this.searchResultViewModel = searchResultViewModel;
     }
 
     /**
@@ -22,18 +29,33 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
      */
     @Override
     public void prepareSuccessView(SearchCuisineOutputData response) {
-        System.out.println(response.getRecipes().size());
-        for (Map<String, String> recipe : response.getRecipes()) {
-            System.out.println(recipe.get("name"));
+        List<Map<String, String>> recipeResults = response.getRecipes();
+        ArrayList<String> recipeNames = new ArrayList<>();
+        ArrayList<String> recipeCategories = new ArrayList<>();
+        ArrayList<String> recipeInstructions = new ArrayList<>();
+        ArrayList<String> recipeAreaOfOrigins = new ArrayList<>();
+        ArrayList<Integer> recipeIds = new ArrayList<>();
+        for (Map<String, String> recipe : recipeResults) {
+            recipeNames.add(recipe.get("name"));
+            recipeCategories.add(recipe.get("category"));
+            recipeInstructions.add(recipe.get("instructions"));
+            recipeAreaOfOrigins.add(recipe.get("areaOfOrigin"));
+            recipeIds.add(Integer.valueOf(recipe.get("id")));
         }
-//        // On success, switch to the results view.
-//        SearchByIdState searchByIdState = searchByIdViewModel.getState();
-//        searchByIdState.setUsername(response.getUsername());
-//        this.loginViewModel.setState(loginState);
-//        loginViewModel.firePropertyChanged();
-//
-//        viewManagerModel.setActiveView(loginViewModel.getViewName());
-//        viewManagerModel.firePropertyChanged();
+
+        SearchResultState searchResultState = searchResultViewModel.getState();
+        searchResultState.setSearchTerm(response.getCuisine());
+        searchResultState.setRecipeNames(recipeNames);
+        searchResultState.setRecipeCategories(recipeCategories);
+        searchResultState.setRecipeInstructions(recipeInstructions);
+        searchResultState.setRecipeAreaOfOrigins(recipeAreaOfOrigins);
+        searchResultState.setRecipeIds(recipeIds);
+
+        this.searchResultViewModel.setState(searchResultState);
+        searchResultViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(searchResultViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     /**
@@ -41,9 +63,9 @@ public class SearchByCuisinePresenter implements SearchCuisineOutputBoundary {
      * @param error OutputData object containing the error.
      */
     @Override
-    public void prepareFailView(SearchCuisineOutputData error) {
-//        SignupState signupState = signupViewModel.getState();
-//        signupState.setUsernameError(error);
-//        signupViewModel.firePropertyChanged();
+    public void prepareFailView(String error) {
+        SearchByCuisineState searchByCuisineState = searchByCuisineViewModel.getState();
+        searchByCuisineState.setRecipeCuisineError(error);
+        searchByCuisineViewModel.firePropertyChanged();
     }
 }

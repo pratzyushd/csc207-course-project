@@ -19,7 +19,7 @@ public class ViewManagerModel {
         this.activeViewName = activeView;
     }
 
-    // This is what the SearchByIdPresenter will call to let the ViewModel know
+    // This is what the presenters will call to let the ViewModel know
     // to alert the View
     public void firePropertyChanged() {
         support.firePropertyChange("view", null, this.activeViewName);

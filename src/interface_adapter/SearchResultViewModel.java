@@ -5,9 +5,7 @@ import interface_adapter.search_by_id.SearchByIdState;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class SearchResultViewModel extends ViewModel {
-
-    public final String TITLE_LABEL = "Recipe Search Result(s)";
+public class  SearchResultViewModel extends ViewModel {
 
     private SearchResultState state = new SearchResultState();
 

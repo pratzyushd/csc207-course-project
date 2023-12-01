@@ -1,14 +1,17 @@
 package view;
 
 import interface_adapter.search_by_cuisine.SearchByCuisineController;
+import interface_adapter.search_by_cuisine.SearchByCuisineState;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class SearchByCuisineView extends JPanel {
+public class SearchByCuisineView extends JPanel implements PropertyChangeListener {
     public final String viewName = "search recipes by cuisine";
     private final SearchByCuisineController searchByCuisineController;
     private final SearchByCuisineViewModel searchByCuisineViewModel;
@@ -16,10 +19,11 @@ public class SearchByCuisineView extends JPanel {
     public SearchByCuisineView(SearchByCuisineController searchByCuisineController, SearchByCuisineViewModel searchByCuisineViewModel) {
         this.searchByCuisineController = searchByCuisineController;
         this.searchByCuisineViewModel = searchByCuisineViewModel;
+        searchByCuisineViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
 
-        JLabel idLabel = new JLabel("Enter the recipe cuisine:");
+        JLabel idLabel = new JLabel("Enter the Cuisine to Search For:");
         JTextField idTextField = new JTextField(10);
         JButton searchButton = new JButton("Search");
 
@@ -35,8 +39,15 @@ public class SearchByCuisineView extends JPanel {
         add(idLabel);
         add(idTextField);
         add(searchButton);
-
         setPreferredSize(new Dimension(600, 200));
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        SearchByCuisineState state = (SearchByCuisineState) evt.getNewValue();
+        if (state.getRecipeCuisineError() != null) {
+            JOptionPane.showMessageDialog(this, state.getRecipeCuisineError());
+        }
     }
     // Add methods to update the view based on the ViewModel if needed here
 }
