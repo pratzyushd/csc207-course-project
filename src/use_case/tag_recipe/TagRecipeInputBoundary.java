@@ -1,5 +1,5 @@
 package use_case.tag_recipe;
 
 public interface TagRecipeInputBoundary {
-    void execute(TagRecipeInputData favouriteRecipeInputData);
+    public void execute(TagRecipeInputData favouriteRecipeInputData);
 }
