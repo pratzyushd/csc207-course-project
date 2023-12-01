@@ -1,7 +1,5 @@
 package use_case.search_by_id;
 
-import entity.Recipe;
-
 import java.util.Map;
 
 public class SearchIdOutputData {

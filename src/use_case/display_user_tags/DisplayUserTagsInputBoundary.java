@@ -1,7 +1,6 @@
 package use_case.display_user_tags;
 
 public interface DisplayUserTagsInputBoundary {
-
     /**
      * Executes the use case
      * An empty DisplayUserTagsInputData object is passed as parameter to remain consistent with Clean Architecture and

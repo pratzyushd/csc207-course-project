@@ -18,6 +18,12 @@ public class SearchByCuisineView extends JPanel implements PropertyChangeListene
     private final SearchByCuisineViewModel searchByCuisineViewModel;
     private final ViewManagerModel viewManagerModel;
 
+    /**
+     * View for the search by cuisine use case.
+     * @param searchByCuisineController the controller to start this ues case.
+     * @param searchByCuisineViewModel the representation of the information for this use case.
+     * @param viewManagerModel the manager for switching to another view from this one.
+     */
     public SearchByCuisineView(SearchByCuisineController searchByCuisineController, SearchByCuisineViewModel searchByCuisineViewModel, ViewManagerModel viewManagerModel) {
         this.searchByCuisineController = searchByCuisineController;
         this.searchByCuisineViewModel = searchByCuisineViewModel;

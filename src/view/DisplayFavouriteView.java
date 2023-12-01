@@ -18,6 +18,11 @@ public class DisplayFavouriteView extends JPanel implements PropertyChangeListen
     private final FavouriteRecipesController favouriteRecipesController;
     private final RecipesViewModel recipesViewModel;
 
+    /**
+     * Create a new view for displaying favourites, with the associated controller and view model.
+     * @param favouriteRecipesController the controller that we call with this view.
+     * @param recipesViewModel the representation this view is based on.
+     */
     public DisplayFavouriteView(FavouriteRecipesController favouriteRecipesController, RecipesViewModel recipesViewModel) {
         this.favouriteRecipesController = favouriteRecipesController;
         this.recipesViewModel = recipesViewModel;

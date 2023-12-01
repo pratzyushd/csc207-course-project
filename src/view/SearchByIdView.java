@@ -18,6 +18,12 @@ public class SearchByIdView extends JPanel implements PropertyChangeListener {
     private final SearchByIdViewModel searchByIdViewModel;
     private final ViewManagerModel viewManagerModel;
 
+    /**
+     * View for the search by ID use case.
+     * @param searchByIdController the controller for this use case.
+     * @param searchByIdViewModel representation of the information needed for this view.
+     * @param viewManagerModel manager to switch from this view to another.
+     */
     public SearchByIdView(SearchByIdController searchByIdController, SearchByIdViewModel searchByIdViewModel, ViewManagerModel viewManagerModel) {
         this.searchByIdController = searchByIdController;
         this.searchByIdViewModel = searchByIdViewModel;

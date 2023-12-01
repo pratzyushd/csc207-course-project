@@ -5,6 +5,11 @@ import use_case.search_by_cuisine.SearchCuisineInputData;
 
 public class SearchByCuisineController {
     final SearchCuisineInputBoundary searchCuisineInteractor;
+
+    /**
+     * Create a new controller for the given interactor.
+     * @param searchCuisineInteractor the interactor this controller is responsible for.
+     */
     public SearchByCuisineController(SearchCuisineInputBoundary searchCuisineInteractor) {
         this.searchCuisineInteractor = searchCuisineInteractor;
     }

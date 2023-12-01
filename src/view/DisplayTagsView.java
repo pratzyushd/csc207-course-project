@@ -19,6 +19,11 @@ public class DisplayTagsView extends JPanel implements PropertyChangeListener{
     private final UserTagsController userTagsController;
     private final UserTagsViewModel userTagsViewModel;
 
+    /**
+     * Create a new view to display the tags that a user has.
+     * @param userTagsController the controller for this use case.
+     * @param userTagsViewModel the view model that stores a representation of this view.
+     */
     public DisplayTagsView(UserTagsController userTagsController, UserTagsViewModel userTagsViewModel) {
         this.userTagsController = userTagsController;
         this.userTagsViewModel = userTagsViewModel;

@@ -10,6 +10,10 @@ public class SearchResultState {
     private ArrayList<Integer> recipeIds = new ArrayList<>();
     private String searchTerm = "";
 
+    /**
+     * Create a new instance based on the copy, overwriting our instance vars with the ones from the copy.
+     * @param copy the copy to base ourselves on.
+     */
     public SearchResultState(SearchResultState copy) {
         recipeNames = copy.recipeNames;
         recipeCategories = copy.recipeCategories;

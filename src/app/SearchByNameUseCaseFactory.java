@@ -1,7 +1,5 @@
 package app;
 
-import entity.CommonUserFactory;
-import entity.UserFactory;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_name.SearchByNameController;

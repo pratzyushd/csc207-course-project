@@ -10,7 +10,7 @@ public class FavouriteRecipeController {
     }
 
     /**
-     * call the favouriteRecipeInteractor's execute method to start the use case.
+     * Call the favouriteRecipeInteractor's execute method to start the use case.
      * @param mealId The id of the recipe the user wants to find.
      */
     public void execute(int mealId) {

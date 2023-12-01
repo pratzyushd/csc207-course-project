@@ -1,15 +1,10 @@
 package app;
 
 import data_access.Persistence;
-import entity.CommonUserFactory;
-import entity.UserFactory;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeController;
 import interface_adapter.favourite_recipe.FavouriteRecipePresenter;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
-import interface_adapter.search_by_id.SearchByIdPresenter;
-import interface_adapter.search_by_id.SearchByIdController;
-import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.tag_recipe.TagRecipeController;
 import interface_adapter.tag_recipe.TagRecipePresenter;
@@ -18,15 +13,10 @@ import use_case.favourite_recipe.FavouriteRecipeInputBoundary;
 import use_case.favourite_recipe.FavouriteRecipeInteractor;
 import use_case.favourite_recipe.FavouriteRecipeOutputBoundary;
 import use_case.favourite_recipe.FavouriteRecipeUserDataAccessInterface;
-import use_case.search_by_id.SearchIdInputBoundary;
-import use_case.search_by_id.SearchIdInteractor;
-import use_case.search_by_id.SearchIdOutputBoundary;
-import use_case.search_by_id.SearchIdUserDataAccessInterface;
 import use_case.tag_recipe.TagRecipeInputBoundary;
 import use_case.tag_recipe.TagRecipeInteractor;
 import use_case.tag_recipe.TagRecipeOutputBoundary;
 import use_case.tag_recipe.TagRecipeUserDataAccessInterface;
-import view.SearchByIdView;
 import view.SearchResultView;
 
 import javax.swing.*;

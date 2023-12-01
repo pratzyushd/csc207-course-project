@@ -6,8 +6,8 @@ import java.util.HashMap;
 class CommonUser implements User {
 
     private final String username;
-    private HashMap<String, ArrayList<Recipe>> taggedRecipes;
-    private ArrayList<Recipe> favourites;
+    private final HashMap<String, ArrayList<Recipe>> taggedRecipes;
+    private final ArrayList<Recipe> favourites;
 
     /**
      * Create a User with the given username and password given the username is available.
@@ -19,11 +19,6 @@ class CommonUser implements User {
         this.taggedRecipes = new HashMap<>();
     }
 
-    /**
-     * Assign the given recipe to the given tag. If tag does not already exist, create a new one.
-     * @param recipe the recipe to which the tag will be assigned.
-     * @param tag the tag to be given to the recipe.
-     */
     @Override
     public void assignTag(Recipe recipe, String tag) {
         if (taggedRecipes.containsKey(tag)) {

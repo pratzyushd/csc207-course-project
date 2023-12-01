@@ -1,7 +1,5 @@
 package use_case.tag_recipe;
 
-import entity.Recipe;
-
 public interface TagRecipeOutputBoundary {
     /**
      * Prepares the success view for the user, given the name of the recipe.
