@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class DisplayUserTagsInteractorTest {
     @Test
     public void testUseCase() {
-        DisplayUserTagsDataAccessInterface mockDAO = new InMemoryPersistenceMock();
+        DisplayUserTagsUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
         DisplayUserTagsOutputBoundary presenter = new DisplayUserTagsOutputBoundary() {
             @Override
             public void prepareSuccessView(DisplayUserTagsOutputData outputData) {

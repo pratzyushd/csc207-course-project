@@ -4,6 +4,9 @@ import data_access.InMemoryRecipeAPIMock;
 import entity.Recipe;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class SearchNameInteractorTest {
@@ -14,20 +17,20 @@ public class SearchNameInteractorTest {
         SearchNameOutputBoundary presenter = new SearchNameOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchNameOutputData searchNameOutputData) {
-                Recipe[] output = searchNameOutputData.getRecipes();
-                assertEquals(3, output.length);
+                List<Map<String, String>> output = searchNameOutputData.getRecipes();
+                assertEquals(3, output.size());
                 String[] recipeNames = new String[3];
-                int[] recipeIds = new int[3];
-                for (int i = 0; i < output.length; i++) {
-                    recipeNames[i] = output[i].getName();
-                    recipeIds[i] = output[i].getMealId();
+                String[] recipeIds = new String[3];
+                for (int i = 0; i < output.size(); i++) {
+                    recipeNames[i] = output.get(i).get("name");
+                    recipeIds[i] = output.get(i).get("id");
                 }
                 assertArrayEquals(new String[]{"recipe1", "recipe2", "recipe3"}, recipeNames);
-                assertArrayEquals(new int[]{32495, 18503, 68204}, recipeIds);
+                assertArrayEquals(new String[]{"32495", "18503", "68204"}, recipeIds);
             }
 
             @Override
-            public void prepareFailView(SearchNameOutputData searchNameOutputData) {
+            public void prepareFailView(String error) {
                 fail();
             }
         };
@@ -54,9 +57,8 @@ public class SearchNameInteractorTest {
             }
 
             @Override
-            public void prepareFailView(SearchNameOutputData searchNameOutputData) {
-                assertEquals("name", searchNameOutputData.getName());
-                assertEquals(0, searchNameOutputData.getRecipes().length);
+            public void prepareFailView(String error) {
+                assertTrue(error.contains("results"));
             }
         };
 

@@ -5,6 +5,9 @@ import data_access.InMemoryRecipeAPIMock;
 import entity.Recipe;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class SearchCuisineInteractorTest {
@@ -15,20 +18,20 @@ public class SearchCuisineInteractorTest {
         SearchCuisineOutputBoundary presenter = new SearchCuisineOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchCuisineOutputData outputData) {
-                Recipe[] output = outputData.getRecipes();
-                assertEquals(3, output.length);
+                List<Map<String, String>> output = outputData.getRecipes();
+                assertEquals(3, output.size());
                 String[] recipeNames = new String[3];
-                int[] recipeIds = new int[3];
-                for (int i = 0; i < output.length; i++) {
-                    recipeNames[i] = output[i].getName();
-                    recipeIds[i] = output[i].getMealId();
+                String[] recipeIds = new String[3];
+                for (int i = 0; i < output.size(); i++) {
+                    recipeNames[i] = output.get(i).get("name");
+                    recipeIds[i] = output.get(i).get("id");
                 }
                 assertArrayEquals(new String[]{"recipe1", "recipe2", "recipe3"}, recipeNames);
-                assertArrayEquals(new int[]{32495, 18503, 68204}, recipeIds);
+                assertArrayEquals(new String[]{"32495", "18503", "68204"}, recipeIds);
             }
 
             @Override
-            public void prepareFailView(SearchCuisineOutputData outputData) {
+            public void prepareFailView(String error) {
                 fail();
             }
         };
@@ -55,9 +58,8 @@ public class SearchCuisineInteractorTest {
             }
 
             @Override
-            public void prepareFailView(SearchCuisineOutputData outputData) {
-                Recipe[] output = outputData.getRecipes();
-                assertEquals(0, output.length);
+            public void prepareFailView(String error) {
+                assertTrue(error.contains("results"));
             }
         };
 
