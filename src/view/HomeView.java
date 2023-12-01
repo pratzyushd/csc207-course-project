@@ -9,6 +9,9 @@ import java.beans.PropertyChangeListener;
 
 import interface_adapter.ViewManagerModel;
 
+/**
+ * The home page view for the application.
+ */
 public class HomeView extends JPanel implements PropertyChangeListener {
 
     public final String viewName = "home view";

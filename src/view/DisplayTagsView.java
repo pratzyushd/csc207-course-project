@@ -10,6 +10,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The user tags view for the application.
+ */
 public class DisplayTagsView extends JPanel implements PropertyChangeListener{
 
     public final String viewName = "user tags";

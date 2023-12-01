@@ -10,6 +10,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The tagged recipes view for the application.
+ */
 public class DisplayTaggedView extends JPanel implements PropertyChangeListener{
 
     public final String viewName = "user tagged recipes";

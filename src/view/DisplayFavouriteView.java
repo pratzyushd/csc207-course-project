@@ -10,6 +10,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The favourite recipes view for the application.
+ */
 public class DisplayFavouriteView extends JPanel implements PropertyChangeListener{
     public final String viewName = "user favourite recipes";
     private final FavouriteRecipesController favouriteRecipesController;

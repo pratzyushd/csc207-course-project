@@ -8,10 +8,20 @@ import view.DisplayFavouriteView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * A factory class for creating the DisplayFavouriteUseCase.
+ */
 public class DisplayFavouriteUseCaseFactory {
 
     private DisplayFavouriteUseCaseFactory() {}
 
+    /**
+     * Create the final view for the Display Favourite use case.
+     * @param viewManagerModel the shared view manger between all the views.
+     * @param recipesViewModel The specific view model for this use case.
+     * @param favouriteRecipeUserDataAccessObject The DAO that implements the functionality for this use case.
+     * @return The fully constructed View.
+     */
     public static DisplayFavouriteView create(
             ViewManagerModel viewManagerModel, RecipesViewModel recipesViewModel,
             DisplayFavouriteUserDataAccessInterface favouriteRecipeUserDataAccessObject) {

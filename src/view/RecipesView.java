@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The view to select whether to view user's favourite recipes or tagged recipes.
+ */
 public class RecipesView extends JPanel implements PropertyChangeListener {
 
     public final String viewName = "user recipes";
@@ -41,7 +44,6 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
                 viewManagerModel.firePropertyChanged();
             }
         });
-
 
     }
     @Override

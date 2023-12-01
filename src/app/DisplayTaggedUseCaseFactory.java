@@ -8,10 +8,20 @@ import view.DisplayTaggedView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * A factory class for creating the DisplayTaggedUseCase.
+ */
 public class DisplayTaggedUseCaseFactory {
 
     private DisplayTaggedUseCaseFactory() {}
 
+    /**
+     * Create the final view for the Display Tagged use case.
+     * @param viewManagerModel the shared view manger between all the views.
+     * @param recipesViewModel The specific view model for this use case.
+     * @param taggedRecipeUserDataAccessObject The DAO that implements the functionality for this use case.
+     * @return The fully constructed View.
+     */
     public static DisplayTaggedView create(
             ViewManagerModel viewManagerModel, RecipesViewModel recipesViewModel,
             DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessObject) {
