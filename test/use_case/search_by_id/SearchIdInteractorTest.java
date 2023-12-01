@@ -4,6 +4,8 @@ import data_access.InMemoryRecipeAPIMock;
 import entity.Recipe;
 import org.junit.Test;
 
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class SearchIdInteractorTest {
@@ -14,8 +16,8 @@ public class SearchIdInteractorTest {
         SearchIdOutputBoundary presenter = new SearchIdOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchIdOutputData searchIdOutputData) {
-                Recipe output = searchIdOutputData.getRecipe();
-                assertEquals("recipe1", output.getName());
+                Map<String, String> output = searchIdOutputData.getRecipe();
+                assertEquals("recipe1", output.get("name"));
             }
 
             @Override
@@ -24,7 +26,7 @@ public class SearchIdInteractorTest {
             }
         };
 
-        SearchIdInputData input = new SearchIdInputData("0");
+        SearchIdInputData input = new SearchIdInputData("32495");
         SearchIdInputBoundary interactor = new SearchIdInteractor(mockAPI, presenter);
         interactor.execute(input);
     }
