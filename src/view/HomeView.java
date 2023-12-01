@@ -12,17 +12,18 @@ import interface_adapter.ViewManagerModel;
 public class HomeView extends JPanel implements PropertyChangeListener {
 
     public final String viewName = "home view";
-
     private ViewManagerModel viewManagerModel;
 
     public HomeView(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
 
         // Create buttons for different use cases
-        JButton button1 = new JButton("Search by ID");
-        JButton button2 = new JButton("Search by Cuisine");
-        JButton button3 = new JButton("Search by Name");
+        JButton IDButton = new JButton("Search by ID");
+        JButton CuisineButton = new JButton("Search by Cuisine");
+        JButton NameButton = new JButton("Search by Name");
+        JButton RecipeButton = new JButton("Display User Recipes Collection");
 
+        // will be removed in the future, just for testing purposes
         JButton button4 = new JButton("Display Favourite Recipes");
         JButton button5 = new JButton("Display Tagged Recipes");
 
@@ -30,14 +31,15 @@ public class HomeView extends JPanel implements PropertyChangeListener {
         setLayout(new GridLayout(3, 1));
 
         // Add buttons to the frame
-        add(button1);
-        add(button2);
-        add(button3);
+        add(IDButton);
+        add(CuisineButton);
+        add(NameButton);
+        add(RecipeButton);
         add(button4);
         add(button5);
 
         // Add action listeners to handle button clicks
-        button1.addActionListener(new ActionListener() {
+        IDButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Search by ID");
@@ -47,7 +49,7 @@ public class HomeView extends JPanel implements PropertyChangeListener {
             }
         });
 
-        button2.addActionListener(new ActionListener() {
+        CuisineButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Search by Cuisine");
@@ -57,7 +59,7 @@ public class HomeView extends JPanel implements PropertyChangeListener {
             }
         });
 
-        button3.addActionListener(new ActionListener() {
+        NameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Search by Name");
@@ -67,12 +69,22 @@ public class HomeView extends JPanel implements PropertyChangeListener {
             }
         });
 
+        RecipeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(HomeView.this, "Selected Display User Recipes Collection");
+                // change view to RecipesView
+                viewManagerModel.setActiveView("user recipes");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Display Favourite Recipes");
                 // change view to DisplayFavouriteRecipesView
-                viewManagerModel.setActiveView("display favourite recipes");
+                viewManagerModel.setActiveView("user favourite recipes");
                 viewManagerModel.firePropertyChanged();
             }
         });
@@ -82,7 +94,7 @@ public class HomeView extends JPanel implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Display Tagged Recipes");
                 // change view to DisplayTaggedRecipesView
-                viewManagerModel.setActiveView("display tagged recipes");
+                viewManagerModel.setActiveView("user tagged recipes");
                 viewManagerModel.firePropertyChanged();
             }
         });

@@ -1,15 +1,9 @@
 package view;
 
-import interface_adapter.display_recipes.RecipesViewModel;
-import interface_adapter.display_recipes.TaggedRecipesController;
-import interface_adapter.display_recipes.FavouriteRecipesController;
-import interface_adapter.display_user_tags.UserTagsViewModel;
-import interface_adapter.display_user_tags.UserTagsController;
 import interface_adapter.ViewManagerModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -18,24 +12,10 @@ import java.awt.*;
 public class RecipesView extends JPanel implements PropertyChangeListener {
 
     public final String viewName = "user recipes";
-
-    private final TaggedRecipesController taggedRecipesController;
-    private final FavouriteRecipesController favouriteRecipesController;
-
-    private final UserTagsController userTagsController;
-    private final RecipesViewModel recipesViewModel;
-
-    private final UserTagsViewModel userTagsViewModel;
-
     private ViewManagerModel viewManagerModel;
 
-
-    public RecipesView(TaggedRecipesController taggedRecipesController, FavouriteRecipesController favouriteRecipesController, UserTagsController userTagsController, RecipesViewModel recipesViewModel, UserTagsViewModel UserTagsViewModel) {
-        this.taggedRecipesController = taggedRecipesController;
-        this.favouriteRecipesController = favouriteRecipesController;
-        this.userTagsController = userTagsController;
-        this.recipesViewModel = recipesViewModel;
-        this.userTagsViewModel = UserTagsViewModel;
+    public RecipesView(ViewManagerModel viewManagerModel) {
+        this.viewManagerModel = viewManagerModel;
 
         setLayout(new FlowLayout());
 
@@ -43,39 +23,27 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
         JButton favouriteButton = new JButton("Favourite Recipes");
         JButton taggedButton = new JButton("Tagged Recipes");
 
+        add(optionLabel);
+        add(favouriteButton);
+        add(taggedButton);
+
         favouriteButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-
-                displayFavouriteRecipes();
+                viewManagerModel.setActiveView("user favourite recipes");
+                viewManagerModel.firePropertyChanged();
             }
         });
 
         taggedButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                displayUserTags();
+                // changes to display tags view instead of tagged recipes because user needs to select a tag first
+                viewManagerModel.setActiveView("User Tags");
+                viewManagerModel.firePropertyChanged();
             }
         });
 
 
     }
-
-    // Want to implement so that when taggedButton is clicked, it will first display all the tags that the user has,
-    // selecting a tag will then display all the recipes that are tagged with that tag
-    public void displayFavouriteRecipes() {
-        //TODO: implement
-        favouriteRecipesController.execute();
-    }
-
-    public void displayUserTags() {
-        //TODO: implement
-        userTagsController.execute();
-    }
-
-    public void displayTaggedRecipes(String tag) {
-        //TODO: implement
-        taggedRecipesController.execute(tag);
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
     }

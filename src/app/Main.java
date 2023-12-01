@@ -16,12 +16,17 @@ import view.SearchByIdView;
 import view.SearchResultView;
 import view.ViewManager;
 
-import view.InitialView;
 import view.HomeView;
 import view.RecipesView;
+import view.DisplayTagsView;
 import interface_adapter.display_recipes.RecipesViewModel;
+import interface_adapter.display_user_tags.UserTagsViewModel;
 import view.DisplayFavouriteView;
+import view.DisplayTaggedView;
+import view.DisplayTagsView;
 import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
+import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
+import use_case.display_user_tags.DisplayUserTagsUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,9 +77,23 @@ public class Main {
                 favouriteRecipeUserDataAccessInterface2);
         views.add(displayFavouriteView, displayFavouriteView.viewName);
 
-//        // Create and add InitialView
-//        InitialView initialView = new InitialView();
-//        views.add(initialView, initialView.viewName);
+        // Create and add DisplayTaggedView
+        RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(false);
+        DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
+                taggedRecipeUserDataAccessInterface);
+        views.add(displayTaggedView, displayTaggedView.viewName);
+
+        // Create and add DisplayTagsView
+        UserTagsViewModel userTagsViewModel = new UserTagsViewModel();
+        DisplayUserTagsUserDataAccessInterface userTagsUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
+        DisplayTagsView displayTagsView = DisplayUserTagsUseCaseFactory.create(viewManagerModel, userTagsViewModel,
+                userTagsUserDataAccessInterface);
+        views.add(displayTagsView, displayTagsView.viewName);
+
+        // Create and add RecipesView
+        RecipesView recipesView = new RecipesView(viewManagerModel);
+        views.add(recipesView, recipesView.viewName);
 
         // Create and add HomeView
         HomeView homeView = new HomeView(viewManagerModel);

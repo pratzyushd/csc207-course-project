@@ -12,7 +12,6 @@ import java.awt.*;
 
 public class DisplayFavouriteView extends JPanel implements PropertyChangeListener{
     public final String viewName = "user favourite recipes";
-
     private final FavouriteRecipesController favouriteRecipesController;
     private final RecipesViewModel recipesViewModel;
 

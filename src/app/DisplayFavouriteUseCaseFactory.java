@@ -30,7 +30,6 @@ public class DisplayFavouriteUseCaseFactory {
     private static FavouriteRecipesController createDisplayFavouriteUseCase(ViewManagerModel viewManagerModel, RecipesViewModel
             recipesViewModel, DisplayFavouriteUserDataAccessInterface favouriteRecipeUserDataAccessObject) throws IOException {
 
-        // Notice how we pass this method's parameters to the Presenter.
         DisplayFavouriteOutputBoundary displayFavouriteOutputBoundary = new FavouriteRecipesPresenter(recipesViewModel, viewManagerModel);
 
         DisplayFavouriteInputBoundary displayFavouriteInteractor = new DisplayFavouriteInteractor(
