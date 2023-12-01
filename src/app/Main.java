@@ -8,12 +8,18 @@ import entity.CommonRecipeFactory;
 import entity.CommonUserFactory;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
+import interface_adapter.initial_app_launch.InitialAppLaunchController;
+import interface_adapter.initial_app_launch.InitialAppLaunchPresenter;
+import interface_adapter.initial_app_launch.InitialAppLaunchViewModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
 import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_name.SearchByNameViewModel;
 import interface_adapter.tag_recipe.TagRecipeViewModel;
 import use_case.favourite_recipe.FavouriteRecipeUserDataAccessInterface;
+import use_case.initial_app_launch.InitialAppLaunchInteractor;
+import use_case.initial_app_launch.InitialAppLaunchOutputBoundary;
+import use_case.initial_app_launch.InitialAppLaunchUserDataAccessInterface;
 import use_case.search_by_cuisine.SearchCuisineUserDataAccessInterface;
 import use_case.search_by_id.SearchIdUserDataAccessInterface;
 import use_case.search_by_name.SearchNameUserDataAccessInterface;
@@ -79,68 +85,72 @@ public class Main {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, myCardLayout, viewManagerModel, application);
 
+        // Make instance of CommonRecipeFactory
+        CommonRecipeFactory recipeFactory = new CommonRecipeFactory();
+
+        // Make instance of CommonUserFactory
+        CommonUserFactory userFactory = new CommonUserFactory();
+
+        // Make instance of RecipeAPI
+        RecipeAPI recipeAPI = new TheMealDB(recipeFactory);
+
+        // Make instance of JSONPersistence, let variable have Persistence as type
+        Persistence persistence = new JSONPersistence(userFactory, "", recipeAPI);
+        // Make instance of TheMealDB with variable of RecipeAPI type
+        // ...
+
         // Create and add SearchById view
         SearchByIdViewModel searchByIdViewModel = new SearchByIdViewModel();
         SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
-        CommonRecipeFactory recipeFactory = new CommonRecipeFactory();
-        SearchIdUserDataAccessInterface searchIdUserDataAccessObject = new TheMealDB(recipeFactory);
         SearchByIdView searchByIdView = SearchByIdUseCaseFactory.create(viewManagerModel, searchByIdViewModel,
-                searchResultViewModel, searchIdUserDataAccessObject);
+                searchResultViewModel, recipeAPI);
         views.add(searchByIdView, searchByIdView.viewName);
 
         // Create and add SearchByCuisine view
         SearchByCuisineViewModel searchByCuisineViewModel = new SearchByCuisineViewModel();
-        SearchCuisineUserDataAccessInterface searchCuisineUserDataAccessObject = new TheMealDB(recipeFactory);
         SearchByCuisineView searchByCuisineView = SearchByCuisineUseCaseFactory.create(viewManagerModel, searchByCuisineViewModel,
-                searchResultViewModel, searchCuisineUserDataAccessObject);
+                searchResultViewModel, recipeAPI);
         views.add(searchByCuisineView, searchByCuisineView.viewName);
 
         // Create and add SearchByName view
         SearchByNameViewModel searchByNameViewModel = new SearchByNameViewModel();
-        SearchNameUserDataAccessInterface searchNameUserDataAccessObject = new TheMealDB(recipeFactory);
         SearchByNameView searchByNameView = SearchByNameUseCaseFactory.create(viewManagerModel, searchByNameViewModel,
-                searchResultViewModel, searchNameUserDataAccessObject);
+                searchResultViewModel, recipeAPI);
         views.add(searchByNameView, searchByNameView.viewName);
 
         // Create and add SearchResultView (for favouriting recipes and adding tags)
         FavouriteRecipeViewModel favouriteRecipeViewModel = new FavouriteRecipeViewModel();
         TagRecipeViewModel tagRecipeViewModel = new TagRecipeViewModel();
         // TODO, tag and favourite recipe user DA interfaces are the same thing, can we do type casting and use just 1?
-        FavouriteRecipeUserDataAccessInterface favouriteRecipeUserDataAccessInterface = new TheMealDB(recipeFactory);
-        TagRecipeUserDataAccessInterface tagRecipeUserDataAccessInterface = new TheMealDB(recipeFactory);
 
-        CommonUserFactory userFactory = new CommonUserFactory();
-        RecipeAPI recipeAPI = new TheMealDB(recipeFactory);
         // TODO - provide jsonPersistence with a valid file path. Currently empty path.
-        Persistence jsonPersistence = new JSONPersistence(userFactory, "", recipeAPI);
         SearchResultView searchResultView = SearchResultUseCaseFactory.create(viewManagerModel, favouriteRecipeViewModel,
-                tagRecipeViewModel, searchResultViewModel, favouriteRecipeUserDataAccessInterface,
-                tagRecipeUserDataAccessInterface, jsonPersistence);
+                tagRecipeViewModel, searchResultViewModel, recipeAPI,
+                recipeAPI, persistence);
 //        JScrollPane scrollPane = new JScrollPane(searchResultView);
 //        scrollPane.setViewportView(searchResultView);
 //        views.add(scrollPane, searchResultView.viewName);
         // TODO - we currently only support up to 15 results. Try implementing scrolling in search result view?
         views.add(searchResultView, searchResultView.viewName);
 
+
+
         // Create and add DisplayFavouriteView
         RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(true);
-        DisplayFavouriteUserDataAccessInterface favouriteRecipeUserDataAccessInterface2 = new JSONPersistence(userFactory, "", recipeAPI);
         DisplayFavouriteView displayFavouriteView = DisplayFavouriteUseCaseFactory.create(viewManagerModel, DisplayFavouriteViewModel,
-                favouriteRecipeUserDataAccessInterface2);
+                persistence);
         views.add(displayFavouriteView, displayFavouriteView.viewName);
 
         // Create and add DisplayTaggedView
         RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(false);
-        DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
         DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
-                taggedRecipeUserDataAccessInterface);
+                persistence);
         views.add(displayTaggedView, displayTaggedView.viewName);
 
         // Create and add DisplayTagsView
         UserTagsViewModel userTagsViewModel = new UserTagsViewModel();
-        DisplayUserTagsUserDataAccessInterface userTagsUserDataAccessInterface = new JSONPersistence(userFactory, "", recipeAPI);
         DisplayTagsView displayTagsView = DisplayUserTagsUseCaseFactory.create(viewManagerModel, userTagsViewModel,
-                userTagsUserDataAccessInterface);
+                persistence);
         views.add(displayTagsView, displayTagsView.viewName);
 
         // Create and add RecipesView
@@ -151,9 +161,17 @@ public class Main {
         HomeView homeView = new HomeView(viewManagerModel);
         views.add(homeView, homeView.viewName);
 
+        // Create and add InitialAppLaunchView
+        InitialAppLaunchViewModel initialAppLaunchViewModel = new InitialAppLaunchViewModel();
+        InitialAppLaunchOutputBoundary initialAppLaunchPresenter = new InitialAppLaunchPresenter(viewManagerModel, initialAppLaunchViewModel);
+        InitialAppLaunchInteractor initialAppLaunchInteractor = new InitialAppLaunchInteractor(persistence, initialAppLaunchPresenter);
+        InitialAppLaunchController initialAppLaunchController = new InitialAppLaunchController(initialAppLaunchInteractor);
+        InitialAppLaunchView initialAppLaunchView = new InitialAppLaunchView(initialAppLaunchController, initialAppLaunchViewModel);
+        views.add(initialAppLaunchView, initialAppLaunchView.viewName);
+
         // Set the active view to start with search by id
         // TODO - replace the initial active view with the create new user / load user from file screen.
-        viewManagerModel.setActiveView(homeView.viewName);
+        viewManagerModel.setActiveView(initialAppLaunchView.viewName);
         viewManagerModel.firePropertyChanged();
 
         // Pack the application and center the frame to the screen
