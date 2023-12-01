@@ -102,8 +102,8 @@ public class Main {
         // TODO - provide jsonPersistence with a valid file path. Currently empty path.
         Persistence jsonPersistence = new JSONPersistence(userFactory, "", recipeAPI);
         SearchResultView searchResultView = SearchResultUseCaseFactory.create(viewManagerModel, favouriteRecipeViewModel,
-                tagRecipeViewModel,
-                searchResultViewModel, favouriteRecipeUserDataAccessInterface, tagRecipeUserDataAccessInterface, jsonPersistence);
+                tagRecipeViewModel, searchResultViewModel, favouriteRecipeUserDataAccessInterface,
+                tagRecipeUserDataAccessInterface, jsonPersistence);
 //        JScrollPane scrollPane = new JScrollPane(searchResultView);
 //        scrollPane.setViewportView(searchResultView);
 //        views.add(scrollPane, searchResultView.viewName);
@@ -112,7 +112,7 @@ public class Main {
 
         // Set the active view to start with search by id
         // TODO - replace the initial active view with the create new user / load user from file screen.
-        viewManagerModel.setActiveView(searchByCuisineView.viewName);
+        viewManagerModel.setActiveView(searchByNameView.viewName);
         viewManagerModel.firePropertyChanged();
 
         // Pack the application and center the frame to the screen
