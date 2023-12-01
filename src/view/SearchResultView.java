@@ -152,8 +152,8 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof SearchResultState) {
             SearchResultState state = (SearchResultState) evt.getNewValue();
+            this.removeAll();
             setFields(state);
-
         } else if (evt.getNewValue() instanceof FavouriteRecipeState) {
             FavouriteRecipeState state = (FavouriteRecipeState) evt.getNewValue();
             JOptionPane.showMessageDialog(this, state.getFavouriteRecipeMessage());
