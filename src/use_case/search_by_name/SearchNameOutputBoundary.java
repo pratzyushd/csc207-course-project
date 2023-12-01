@@ -6,12 +6,12 @@ public interface SearchNameOutputBoundary {
      * @param searchNameOutputData contains the name and its associated recipes retrieved by the DAO and needed
      *                             to be displayed to the user.
      */
-    void prepareSuccessView(SearchNameOutputData searchNameOutputData);
+    public void prepareSuccessView(SearchNameOutputData searchNameOutputData);
 
     /**
      * Output the UI that shows that there doesn't exist any recipe from the specified name.
      * @param error error message telling user that there doesn't exist any recipe from the
      *                             specified name.
      */
-    void prepareFailView(String error);
+    public void prepareFailView(String error);
 }
