@@ -11,8 +11,8 @@ public class InitialAppLaunchController {
     }
 
 
-    public void execute(Boolean load, String filePath) {
-        InitialAppLaunchInputData initialAppLaunchInputData = new InitialAppLaunchInputData(load, filePath);
+    public void execute(Boolean load, String filePath, String username) {
+        InitialAppLaunchInputData initialAppLaunchInputData = new InitialAppLaunchInputData(load, filePath, username);
 
         initialAppLaunchInteractor.execute(initialAppLaunchInputData);
     }
