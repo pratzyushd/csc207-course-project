@@ -19,7 +19,7 @@ public class DisplayFavouriteInteractor implements DisplayFavouriteInputBoundary
      * @param dataAccess the data access object that retrieves the relevant recipes based on user.
      * @param presenter the presenter that will update the view with the relevant recipes.
      */
-    public DisplayFavouriteInteractor(DisplayFavouriteUserDataAccessInterface dataAccess, DisplayFavouriteOutputBoundary presenter, String username) {
+    public DisplayFavouriteInteractor(DisplayFavouriteUserDataAccessInterface dataAccess, DisplayFavouriteOutputBoundary presenter) {
         this.dataAccess = dataAccess;
         this.presenter = presenter;
     }

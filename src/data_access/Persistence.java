@@ -3,7 +3,7 @@ package data_access;
 import entity.User;
 import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
 import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
-import use_case.display_user_tags.DisplayUserTagsDataAccessInterface;
+import use_case.display_user_tags.DisplayUserTagsUserDataAccessInterface;
 
 /**
  * This interface functions as an aggregation of the interfaces defined by the
@@ -11,7 +11,7 @@ import use_case.display_user_tags.DisplayUserTagsDataAccessInterface;
  * implemented by a Persistence class, and as a result that class implements
  * all the required functionality for the various use cases.
  */
-public interface Persistence extends DisplayFavouriteUserDataAccessInterface, DisplayTaggedUserDataAccessInterface, DisplayUserTagsDataAccessInterface {
+public interface Persistence extends DisplayFavouriteUserDataAccessInterface, DisplayTaggedUserDataAccessInterface, DisplayUserTagsUserDataAccessInterface {
     /**
      * Getter for the User object stored in the Persistence class.
      * @return the User object
