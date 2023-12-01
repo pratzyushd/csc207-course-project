@@ -32,6 +32,10 @@ public class InMemoryPersistenceMock implements Persistence {
         return new ArrayList<>(user.getTaggedRecipes().keySet());
     }
 
+    /* NOTE: we are never actually using a file for the InMemory mocks, so we can leave this blank. */
+    @Override
+    public void setFilePath(String filePath) {}
+
     @Override
     public User getUser() {
         return this.user;
@@ -41,4 +45,14 @@ public class InMemoryPersistenceMock implements Persistence {
     public void setUser(User user) {
         this.user = user;
     }
+
+    /* NOTE: we are never actually using a file for the InMemory mocks, so we can leave this as is. */
+    @Override
+    public User load() {
+        return this.user;
+    }
+
+    /* NOTE: we are never actually using a file for the InMemory mocks, so we can leave this blank. */
+    @Override
+    public void save(User user) {}
 }
