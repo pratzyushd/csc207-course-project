@@ -8,6 +8,8 @@ import use_case.search_by_id.SearchIdOutputData;
 
 import javax.naming.directory.SearchResult;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
@@ -32,20 +34,11 @@ public class SearchByIdPresenter implements SearchIdOutputBoundary {
      */
     @Override
     public void prepareSuccessView(SearchIdOutputData response) {
-        ArrayList<String> recipeNames = new ArrayList<>();
-        recipeNames.add(response.getRecipe().get("name"));
-
-        ArrayList<String> recipeCategories = new ArrayList<>();
-        recipeCategories.add(response.getRecipe().get("category"));
-
-        ArrayList<String> recipeInstructions = new ArrayList<>();
-        recipeInstructions.add(response.getRecipe().get("instructions"));
-
-        ArrayList<String> recipeAreaOfOrigins = new ArrayList<>();
-        recipeAreaOfOrigins.add(response.getRecipe().get("areaOfOrigin"));
-
-        ArrayList<Integer> recipeIds = new ArrayList<>();
-        recipeIds.add(response.getId());
+        ArrayList<String> recipeNames = new ArrayList<>(Arrays.asList(response.getRecipe().get("name")));
+        ArrayList<String> recipeCategories = new ArrayList<>(Arrays.asList(response.getRecipe().get("category")));
+        ArrayList<String> recipeInstructions = new ArrayList<>(Arrays.asList(response.getRecipe().get("instructions")));
+        ArrayList<String> recipeAreaOfOrigins = new ArrayList<>(Arrays.asList(response.getRecipe().get("areaOfOrigin")));
+        ArrayList<Integer> recipeIds = new ArrayList<>(Arrays.asList(response.getId()));
 
         SearchResultState searchResultState = searchResultViewModel.getState();
         searchResultState.setRecipeNames(recipeNames);
