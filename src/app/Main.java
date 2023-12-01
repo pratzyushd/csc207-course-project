@@ -96,8 +96,6 @@ public class Main {
 
         // Make instance of JSONPersistence, let variable have Persistence as type
         Persistence persistence = new JSONPersistence(userFactory, "", recipeAPI);
-        // Make instance of TheMealDB with variable of RecipeAPI type
-        // ...
 
         // Create and add SearchById view
         SearchByIdViewModel searchByIdViewModel = new SearchByIdViewModel();
