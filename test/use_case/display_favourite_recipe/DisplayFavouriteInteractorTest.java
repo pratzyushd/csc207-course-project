@@ -25,7 +25,7 @@ public class DisplayFavouriteInteractorTest {
         };
 
         DisplayFavouriteInputData inputData = new DisplayFavouriteInputData();
-        DisplayFavouriteInputBoundary interactor = new DisplayFavouriteInteractor(mockDAO, presenter, "test");
+        DisplayFavouriteInputBoundary interactor = new DisplayFavouriteInteractor(mockDAO, presenter);
         interactor.execute(inputData);
     }
 }
