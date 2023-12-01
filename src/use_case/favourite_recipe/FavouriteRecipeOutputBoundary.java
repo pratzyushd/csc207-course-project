@@ -1,7 +1,5 @@
 package use_case.favourite_recipe;
 
-import entity.Recipe;
-
 public interface FavouriteRecipeOutputBoundary {
     /**
      * Prepares the success view for the user, given the name of the recipe.

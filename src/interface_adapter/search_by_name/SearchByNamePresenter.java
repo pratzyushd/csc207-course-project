@@ -1,11 +1,8 @@
 package interface_adapter.search_by_name;
 
-import entity.Recipe;
 import interface_adapter.SearchResultState;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.search_by_id.SearchByIdState;
-import use_case.search_by_id.SearchIdOutputData;
 import use_case.search_by_name.SearchNameOutputBoundary;
 import use_case.search_by_name.SearchNameOutputData;
 
@@ -15,8 +12,8 @@ import java.util.Map;
 
 public class SearchByNamePresenter implements SearchNameOutputBoundary {
     private final SearchByNameViewModel searchByNameViewModel;
-    private ViewManagerModel viewManagerModel;
-    private SearchResultViewModel searchResultViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final SearchResultViewModel searchResultViewModel;
 
     /**
      * Creates an instance of the SearchByNamePresenter with its corresponding view manager model and view model.

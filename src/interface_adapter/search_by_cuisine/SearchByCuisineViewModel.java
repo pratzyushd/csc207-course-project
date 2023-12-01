@@ -1,7 +1,6 @@
 package interface_adapter.search_by_cuisine;
 
 import interface_adapter.ViewModel;
-import interface_adapter.search_by_name.SearchByNameState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

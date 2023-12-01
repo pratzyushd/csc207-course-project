@@ -1,6 +1,5 @@
 package interface_adapter.tag_recipe;
 
-import interface_adapter.tag_recipe.TagRecipeState;
 import use_case.tag_recipe.TagRecipeOutputBoundary;
 
 public class TagRecipePresenter implements TagRecipeOutputBoundary {

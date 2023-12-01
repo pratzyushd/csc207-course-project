@@ -1,7 +1,6 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.search_by_id.SearchByIdState;
 import interface_adapter.search_by_name.SearchByNameController;
 import interface_adapter.search_by_name.SearchByNameState;
 import interface_adapter.search_by_name.SearchByNameViewModel;

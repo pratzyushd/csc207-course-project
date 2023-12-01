@@ -3,7 +3,6 @@ package interface_adapter.display_user_tags;
 import interface_adapter.ViewManagerModel;
 import use_case.display_user_tags.DisplayUserTagsOutputBoundary;
 import use_case.display_user_tags.DisplayUserTagsOutputData;
-import view.ViewManager;
 
 public class UserTagsPresenter implements DisplayUserTagsOutputBoundary {
 

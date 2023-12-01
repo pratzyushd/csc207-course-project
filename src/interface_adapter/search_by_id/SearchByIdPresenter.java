@@ -6,15 +6,13 @@ import interface_adapter.ViewManagerModel;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;
 
-import javax.naming.directory.SearchResult;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class SearchByIdPresenter implements SearchIdOutputBoundary {
     private final SearchByIdViewModel searchByIdViewModel;
-    private ViewManagerModel viewManagerModel;
-    private SearchResultViewModel searchResultViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final SearchResultViewModel searchResultViewModel;
 
     /**
      * Creates an instance of the SearchByIdPresenter with its corresponding view manager model and view model.
