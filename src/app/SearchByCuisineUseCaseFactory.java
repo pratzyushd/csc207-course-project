@@ -11,12 +11,7 @@ import use_case.search_by_cuisine.SearchCuisineInputBoundary;
 import use_case.search_by_cuisine.SearchCuisineInteractor;
 import use_case.search_by_cuisine.SearchCuisineOutputBoundary;
 import use_case.search_by_cuisine.SearchCuisineUserDataAccessInterface;
-import use_case.search_by_id.SearchIdInputBoundary;
-import use_case.search_by_id.SearchIdInteractor;
-import use_case.search_by_id.SearchIdOutputBoundary;
-import use_case.search_by_id.SearchIdUserDataAccessInterface;
 import view.SearchByCuisineView;
-import view.SearchByIdView;
 
 import javax.swing.*;
 import java.io.IOException;
