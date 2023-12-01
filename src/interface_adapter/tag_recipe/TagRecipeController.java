@@ -4,7 +4,7 @@ import use_case.tag_recipe.TagRecipeInputBoundary;
 import use_case.tag_recipe.TagRecipeInputData;
 
 public class TagRecipeController {
-    final TagRecipeInputBoundary tagRecipeInteractor;
+    private final TagRecipeInputBoundary tagRecipeInteractor;
     public TagRecipeController(TagRecipeInputBoundary tagRecipeInteractor) {
         this.tagRecipeInteractor = tagRecipeInteractor;
     }
