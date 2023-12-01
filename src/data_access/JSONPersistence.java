@@ -200,6 +200,7 @@ public class JSONPersistence implements Persistence {
 
     public void setUser(User user) {
         this.currentUser = user;
+        save(this.currentUser);
     }
 
     @Override
