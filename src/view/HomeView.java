@@ -26,10 +26,6 @@ public class HomeView extends JPanel implements PropertyChangeListener {
         JButton NameButton = new JButton("Search by Name");
         JButton RecipeButton = new JButton("Display User Recipes Collection");
 
-        // will be removed in the future, just for testing purposes
-        JButton button4 = new JButton("Display Favourite Recipes");
-        JButton button5 = new JButton("Display Tagged Recipes");
-
         // Set layout manager
         setLayout(new GridLayout(3, 1));
 
@@ -38,8 +34,6 @@ public class HomeView extends JPanel implements PropertyChangeListener {
         add(CuisineButton);
         add(NameButton);
         add(RecipeButton);
-        add(button4);
-        add(button5);
 
         // Add action listeners to handle button clicks
         IDButton.addActionListener(new ActionListener() {
@@ -78,26 +72,6 @@ public class HomeView extends JPanel implements PropertyChangeListener {
                 JOptionPane.showMessageDialog(HomeView.this, "Selected Display User Recipes Collection");
                 // change view to RecipesView
                 viewManagerModel.setActiveView("user recipes");
-                viewManagerModel.firePropertyChanged();
-            }
-        });
-
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(HomeView.this, "Selected Display Favourite Recipes");
-                // change view to DisplayFavouriteRecipesView
-                viewManagerModel.setActiveView("user favourite recipes");
-                viewManagerModel.firePropertyChanged();
-            }
-        });
-
-        button5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(HomeView.this, "Selected Display Tagged Recipes");
-                // change view to DisplayTaggedRecipesView
-                viewManagerModel.setActiveView("user tagged recipes");
                 viewManagerModel.firePropertyChanged();
             }
         });
