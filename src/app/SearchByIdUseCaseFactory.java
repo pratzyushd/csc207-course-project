@@ -38,7 +38,7 @@ public class SearchByIdUseCaseFactory {
         try {
             SearchByIdController searchByIdController = createSearchByIdUseCase(viewManagerModel, searchByIdViewModel,
                     searchResultViewModel, searchIdUserDataAccessObject);
-            return new SearchByIdView(searchByIdController, searchByIdViewModel);
+            return new SearchByIdView(searchByIdController, searchByIdViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

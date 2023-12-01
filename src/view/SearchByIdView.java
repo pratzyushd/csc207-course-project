@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_id.SearchByIdController;
 import interface_adapter.search_by_id.SearchByIdState;
 import interface_adapter.search_by_id.SearchByIdViewModel;
@@ -15,10 +16,12 @@ public class SearchByIdView extends JPanel implements PropertyChangeListener {
     public final String viewName = "search recipe by id";
     private final SearchByIdController searchByIdController;
     private final SearchByIdViewModel searchByIdViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public SearchByIdView(SearchByIdController searchByIdController, SearchByIdViewModel searchByIdViewModel) {
+    public SearchByIdView(SearchByIdController searchByIdController, SearchByIdViewModel searchByIdViewModel, ViewManagerModel viewManagerModel) {
         this.searchByIdController = searchByIdController;
         this.searchByIdViewModel = searchByIdViewModel;
+        this.viewManagerModel = viewManagerModel;
         searchByIdViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
@@ -26,6 +29,7 @@ public class SearchByIdView extends JPanel implements PropertyChangeListener {
         JLabel idLabel = new JLabel("Enter the recipe ID:");
         JTextField idTextField = new JTextField(10);
         JButton searchButton = new JButton("Search");
+        JButton backToHomeButton = new JButton("Back to Home");
 
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -36,9 +40,18 @@ public class SearchByIdView extends JPanel implements PropertyChangeListener {
             }
         });
 
+        backToHomeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("home view");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
         add(idLabel);
         add(idTextField);
         add(searchButton);
+        add(backToHomeButton);
 
         setPreferredSize(new Dimension(600, 200));
     }

@@ -43,7 +43,7 @@ public class SearchByCuisineUseCaseFactory {
         try {
             SearchByCuisineController searchByCuisineController = createSearchByCuisineUseCase(viewManagerModel, searchByCuisineViewModel,
                     searchResultViewModel, searchCuisineUserDataAccessObject);
-            return new SearchByCuisineView(searchByCuisineController, searchByCuisineViewModel);
+            return new SearchByCuisineView(searchByCuisineController, searchByCuisineViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

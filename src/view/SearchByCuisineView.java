@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineController;
 import interface_adapter.search_by_cuisine.SearchByCuisineState;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
@@ -15,10 +16,12 @@ public class SearchByCuisineView extends JPanel implements PropertyChangeListene
     public final String viewName = "search recipes by cuisine";
     private final SearchByCuisineController searchByCuisineController;
     private final SearchByCuisineViewModel searchByCuisineViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public SearchByCuisineView(SearchByCuisineController searchByCuisineController, SearchByCuisineViewModel searchByCuisineViewModel) {
+    public SearchByCuisineView(SearchByCuisineController searchByCuisineController, SearchByCuisineViewModel searchByCuisineViewModel, ViewManagerModel viewManagerModel) {
         this.searchByCuisineController = searchByCuisineController;
         this.searchByCuisineViewModel = searchByCuisineViewModel;
+        this.viewManagerModel = viewManagerModel;
         searchByCuisineViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
@@ -26,6 +29,7 @@ public class SearchByCuisineView extends JPanel implements PropertyChangeListene
         JLabel idLabel = new JLabel("Enter the Cuisine to Search For:");
         JTextField idTextField = new JTextField(10);
         JButton searchButton = new JButton("Search");
+        JButton backToHomeButton = new JButton("Back to Home");
 
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -36,9 +40,18 @@ public class SearchByCuisineView extends JPanel implements PropertyChangeListene
             }
         });
 
+        backToHomeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("home view");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
         add(idLabel);
         add(idTextField);
         add(searchButton);
+        add(backToHomeButton);
         setPreferredSize(new Dimension(600, 200));
     }
 

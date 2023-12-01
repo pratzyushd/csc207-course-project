@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_id.SearchByIdState;
 import interface_adapter.search_by_name.SearchByNameController;
 import interface_adapter.search_by_name.SearchByNameState;
@@ -16,10 +17,12 @@ public class SearchByNameView extends JPanel implements PropertyChangeListener {
     public final String viewName = "search recipes by name";
     private final SearchByNameController searchByNameController;
     private final SearchByNameViewModel searchByNameViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public SearchByNameView(SearchByNameController searchByNameController, SearchByNameViewModel searchByNameViewModel) {
+    public SearchByNameView(SearchByNameController searchByNameController, SearchByNameViewModel searchByNameViewModel, ViewManagerModel viewManagerModel) {
         this.searchByNameController = searchByNameController;
         this.searchByNameViewModel = searchByNameViewModel;
+        this.viewManagerModel = viewManagerModel;
         searchByNameViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
@@ -27,6 +30,7 @@ public class SearchByNameView extends JPanel implements PropertyChangeListener {
         JLabel idLabel = new JLabel("Enter the recipe Name:");
         JTextField idTextField = new JTextField(10);
         JButton searchButton = new JButton("Search");
+        JButton backToHomeButton = new JButton("Back to Home");
 
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -37,9 +41,18 @@ public class SearchByNameView extends JPanel implements PropertyChangeListener {
             }
         });
 
+        backToHomeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("home view");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
         add(idLabel);
         add(idTextField);
         add(searchButton);
+        add(backToHomeButton);
 
         setPreferredSize(new Dimension(600, 200));
     }
