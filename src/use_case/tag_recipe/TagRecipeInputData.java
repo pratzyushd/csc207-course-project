@@ -9,11 +9,11 @@ public class TagRecipeInputData {
         this.tagName = tagName;
     }
 
-    int getMealId() {
+    public int getMealId() {
         return mealId;
     }
 
-    String getTagName() {
+    public String getTagName() {
         return tagName;
     }
 }
