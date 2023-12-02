@@ -44,7 +44,7 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
         taggedButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 // changes to display tags view instead of tagged recipes because user needs to select a tag first
-                viewManagerModel.setActiveView("User Tags");
+                viewManagerModel.setActiveView("user tags");
                 viewManagerModel.firePropertyChanged();
             }
         });

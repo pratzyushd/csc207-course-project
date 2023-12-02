@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * The user tags view for the application.
@@ -32,15 +33,15 @@ public class DisplayTagsView extends JPanel implements PropertyChangeListener{
 
         setLayout(new FlowLayout());
 
-        JList<String> tagsList = new JList<String>();
+        JList<String> tagsList = new JList<>();
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 userTagsController.execute();
                 tagsList.setListData(userTagsViewModel.getTags());
-                System.out.println("working");
-
             }
         });
+
+        add(tagsList);
 
         setPreferredSize(new Dimension(600, 200));
     }

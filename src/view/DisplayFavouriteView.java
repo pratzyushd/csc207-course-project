@@ -31,12 +31,12 @@ public class DisplayFavouriteView extends JPanel implements PropertyChangeListen
 
         setLayout(new FlowLayout());
 
-        JList favouritesList = new JList();
+        JList<String> favouritesList = new JList<>();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 favouriteRecipesController.execute();
-                favouritesList.setListData(recipesViewModel.getRecipes().toArray());
+                favouritesList.setListData((String[]) recipesViewModel.getRecipes().toArray());
             }
         });
 
