@@ -2,6 +2,7 @@ package view;
 
 import interface_adapter.display_recipes.RecipesViewModel;
 import interface_adapter.display_recipes.FavouriteRecipesController;
+import interface_adapter.ViewManagerModel;
 
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -20,23 +21,27 @@ public class DisplayFavouriteView extends JPanel implements PropertyChangeListen
     private final FavouriteRecipesController favouriteRecipesController;
     private final RecipesViewModel recipesViewModel;
 
+    private ViewManagerModel viewManagerModel;
+
     /**
      * Create a new view for displaying favourites, with the associated controller and view model.
      * @param favouriteRecipesController the controller that we call with this view.
      * @param recipesViewModel the representation this view is based on.
      */
-    public DisplayFavouriteView(FavouriteRecipesController favouriteRecipesController, RecipesViewModel recipesViewModel) {
+    public DisplayFavouriteView(FavouriteRecipesController favouriteRecipesController, RecipesViewModel recipesViewModel, ViewManagerModel viewManagerModel) {
         this.favouriteRecipesController = favouriteRecipesController;
         this.recipesViewModel = recipesViewModel;
+        this.viewManagerModel = viewManagerModel;
 
         setLayout(new FlowLayout());
 
         JList<String> favouritesList = new JList<>();
+        JButton backToOptionsButton = new JButton("Back to Options");
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 favouriteRecipesController.execute();
-                favouritesList.setListData((String[]) recipesViewModel.getRecipes().toArray());
+                favouritesList.setListData(recipesViewModel.getRecipes().toArray(new String[0]));
             }
         });
 
@@ -54,7 +59,15 @@ public class DisplayFavouriteView extends JPanel implements PropertyChangeListen
             }
         });
 
+        backToOptionsButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                viewManagerModel.setActiveView("user recipes");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
         add(favouritesList);
+        add(backToOptionsButton);
 
         setPreferredSize(new Dimension(600, 200));
     }

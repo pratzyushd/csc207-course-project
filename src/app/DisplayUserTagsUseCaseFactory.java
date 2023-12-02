@@ -29,7 +29,7 @@ public class DisplayUserTagsUseCaseFactory {
         try {
             UserTagsController userTagsController = createDisplayUserTagsUseCase(viewManagerModel, userTagsViewModel,
                     userTagsUserDataAccessObject);
-            return new DisplayTagsView(userTagsController, userTagsViewModel);
+            return new DisplayTagsView(userTagsController, userTagsViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
