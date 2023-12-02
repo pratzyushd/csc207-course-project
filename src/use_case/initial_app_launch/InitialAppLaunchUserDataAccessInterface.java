@@ -22,7 +22,15 @@ public interface InitialAppLaunchUserDataAccessInterface {
      */
     public void setUser(User user);
 
+    /**
+     * Load a user from the file path in the DAO.
+     * @return the user object for the file at the file path.
+     */
     public User load();
 
+    /**
+     * Save the given user to the file path in the DAO.
+     * @param user the user to save.
+     */
     public void save(User user);
 }

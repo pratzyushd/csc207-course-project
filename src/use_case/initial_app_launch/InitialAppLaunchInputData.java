@@ -4,12 +4,13 @@ public class InitialAppLaunchInputData {
     private final Boolean load;
     private final String filePath;
     private final String username;
-//todo change javadoc
+
     /**
-     * Creates an input data object with the given cuisine name.
-     * @param load area the recipe is originated from.
-     * @param filePath the.
-     * @param username the.
+     * Create an input data object with the given information.
+     * @param load whether the user opted to load a file or not.
+     * @param filePath the path to the file that they want to use (save to, and optionally load from depending on
+     *                 the "load" parameter.
+     * @param username the username the user chose.
      */
     public InitialAppLaunchInputData(Boolean load, String filePath, String username) {
 

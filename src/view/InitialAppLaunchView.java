@@ -1,12 +1,6 @@
 package view;
 
-import interface_adapter.SearchResultState;
-import interface_adapter.SearchResultViewModel;
-import interface_adapter.favourite_recipe.FavouriteRecipeController;
-import interface_adapter.favourite_recipe.FavouriteRecipeState;
-import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
 import interface_adapter.initial_app_launch.InitialAppLaunchController;
-import interface_adapter.initial_app_launch.InitialAppLaunchPresenter;
 import interface_adapter.initial_app_launch.InitialAppLaunchViewModel;
 
 import javax.imageio.ImageIO;
@@ -28,6 +22,11 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
     private JButton createNewUser;
     private JLabel usernameLabel;
 
+    /**
+     * Create a new view for the initial app launch.
+     * @param initialAppLaunchController the controller that executes the actions for the front page.
+     * @param initialAppLaunchViewModel representation of the information required for the view.
+     */
     public InitialAppLaunchView(InitialAppLaunchController initialAppLaunchController, InitialAppLaunchViewModel initialAppLaunchViewModel) {
         this.initialAppLaunchController = initialAppLaunchController;
         this.initialAppLaunchViewModel = initialAppLaunchViewModel;
