@@ -4,6 +4,7 @@ import interface_adapter.display_recipes.*;
 import interface_adapter.ViewManagerModel;
 import use_case.display_tagged_recipe.*;
 import view.DisplayTaggedView;
+import interface_adapter.display_user_tags.UserTagsViewModel;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -24,12 +25,12 @@ public class DisplayTaggedUseCaseFactory {
      */
     public static DisplayTaggedView create(
             ViewManagerModel viewManagerModel, RecipesViewModel recipesViewModel,
-            DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessObject) {
+            DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessObject, UserTagsViewModel userTagsViewModel) {
 
         try {
             TaggedRecipesController taggedRecipesController = createDisplayTaggedUseCase(viewManagerModel, recipesViewModel,
-                    taggedRecipeUserDataAccessObject);
-            return new DisplayTaggedView(taggedRecipesController, recipesViewModel);
+                    taggedRecipeUserDataAccessObject, userTagsViewModel);
+            return new DisplayTaggedView(taggedRecipesController, recipesViewModel, userTagsViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
@@ -38,7 +39,7 @@ public class DisplayTaggedUseCaseFactory {
     }
 
     private static TaggedRecipesController createDisplayTaggedUseCase(ViewManagerModel viewManagerModel, RecipesViewModel
-            recipesViewModel, DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessObject) throws IOException {
+            recipesViewModel, DisplayTaggedUserDataAccessInterface taggedRecipeUserDataAccessObject, UserTagsViewModel userTagsViewModel ) throws IOException {
 
         DisplayTaggedOutputBoundary displayTaggedOutputBoundary = new TaggedRecipesPresenter(recipesViewModel, viewManagerModel);
 

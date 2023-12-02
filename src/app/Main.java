@@ -33,6 +33,7 @@ import interface_adapter.display_recipes.RecipesViewModel;
 import interface_adapter.display_user_tags.UserTagsViewModel;
 import view.DisplayFavouriteView;
 import view.DisplayTaggedView;
+import view.DisplayRecipeView;
 import view.DisplayTagsView;
 import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
 import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
@@ -134,16 +135,10 @@ public class Main {
 
 
         // Create and add DisplayFavouriteView
-        RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(true);
+        RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(0);
         DisplayFavouriteView displayFavouriteView = DisplayFavouriteUseCaseFactory.create(viewManagerModel, DisplayFavouriteViewModel,
                 persistence);
         views.add(displayFavouriteView, displayFavouriteView.viewName);
-
-        // Create and add DisplayTaggedView
-        RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(false);
-        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
-                persistence);
-        views.add(displayTaggedView, displayTaggedView.viewName);
 
         // Create and add DisplayTagsView
         UserTagsViewModel userTagsViewModel = new UserTagsViewModel();
@@ -151,9 +146,19 @@ public class Main {
                 persistence);
         views.add(displayTagsView, displayTagsView.viewName);
 
+        // Create and add DisplayTaggedView
+        RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(1);
+        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
+                persistence, userTagsViewModel);
+        views.add(displayTaggedView, displayTaggedView.viewName);
+
         // Create and add RecipesView
         RecipesView recipesView = new RecipesView(viewManagerModel);
         views.add(recipesView, recipesView.viewName);
+
+        // Create and add DisplayRecipeView
+        RecipesView displayRecipeView = new RecipesView(viewManagerModel);
+        views.add(displayRecipeView, displayRecipeView.viewName);
 
         // Create and add HomeView
         HomeView homeView = new HomeView(viewManagerModel);

@@ -29,5 +29,6 @@ public class FavouriteRecipesPresenter implements DisplayFavouriteOutputBoundary
         public void prepareSuccessView(DisplayFavouriteOutputData outputData) {
                 favouriteRecipesViewModel.setRecipes(outputData.getRecipes());
                 viewManagerModel.setActiveView(favouriteRecipesViewModel.getViewName());
+                viewManagerModel.firePropertyChanged();
         }
 }
