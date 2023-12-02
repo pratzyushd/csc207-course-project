@@ -35,9 +35,14 @@ public class FavouriteRecipeInteractor implements FavouriteRecipeInputBoundary {
     @Override
     public void execute(FavouriteRecipeInputData favouriteRecipeInputData) {
         User user = jsonPersistence.getUser();
+        System.out.println(user.getFavourites().size());
         Recipe recipe = favouriteRecipeUserDataAccessObject.searchRecipesById(favouriteRecipeInputData.getMealId());
 
         ArrayList<Recipe> currentFavourites = user.getFavourites();
+        for (Recipe recipe1 : currentFavourites) {
+            System.out.println(recipe1.getName());
+        }
+
         if (currentFavourites.contains(recipe)) {
             favouriteRecipePresenter.prepareFailView(recipe.getName());
         } else {
