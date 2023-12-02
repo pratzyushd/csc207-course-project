@@ -14,11 +14,14 @@ public class InitialAppLaunchViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    /* NOTE: we don't actually use this method, but it is a required part of the ViewModel parent class. */
     @Override
-    public void firePropertyChanged() {
-        // todo we don't use this but it is part of the view model abstract class
-    }
+    public void firePropertyChanged() {}
 
+    /**
+     * Add an observer to this ViewModel.
+     * @param listener the observer to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }

@@ -6,8 +6,13 @@ import use_case.initial_app_launch.InitialAppLaunchOutputBoundary;
 // public class InitialAppLaunchPresenter implements LoginOutputBoundary {
 public class InitialAppLaunchPresenter implements InitialAppLaunchOutputBoundary {
     private final InitialAppLaunchViewModel initialAppLaunchViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
+    /**
+     * Create a new Presenter for the initial app launch view.
+     * @param viewManagerModel manager to facilitate switching to another use case from this one.
+     * @param initialAppLaunchViewModel the representation of the information in the view.
+     */
     public InitialAppLaunchPresenter(ViewManagerModel viewManagerModel,
                           InitialAppLaunchViewModel initialAppLaunchViewModel) {
         this.viewManagerModel = viewManagerModel;
@@ -22,6 +27,5 @@ public class InitialAppLaunchPresenter implements InitialAppLaunchOutputBoundary
     }
 
     @Override
-    public void prepareFailView() {
-    }
+    public void prepareFailView() {}
 }
