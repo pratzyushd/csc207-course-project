@@ -34,19 +34,9 @@ public class TagRecipeInteractor implements TagRecipeInputBoundary {
         User user = jsonPersistence.getUser();
         Recipe recipe = tagRecipeUserDataAccessObject.searchRecipesById(tagRecipeInputData.getMealId());
         String givenTagName = tagRecipeInputData.getTagName();
-        /* Make a list of the recipes associated with the tag from the user. */
-        ArrayList<Recipe> tagAddedTo = user.getTaggedRecipes().get(givenTagName);
-        ArrayList<Integer> recipeIdsWithTag;
-        if (tagAddedTo != null) {
-            recipeIdsWithTag = new ArrayList<>(tagAddedTo.size());
-            for (Recipe item : tagAddedTo) {
-                recipeIdsWithTag.add(item.getMealId());
-            }
-        } else {
-            recipeIdsWithTag = new ArrayList<>(0);
-        }
-        /* If we already have the recipe based on the tag, or the tag is empty */
-        if (recipeIdsWithTag.contains(tagRecipeInputData.getMealId()) || givenTagName.isEmpty()) {
+        HashMap<String, ArrayList<Recipe>> currentUserTags = user.getTaggedRecipes();
+
+        if (givenTagName.isEmpty() || (currentUserTags.containsKey(givenTagName) && currentUserTags.get(givenTagName).contains(recipe))) {
             tagRecipePresenter.prepareFailView(recipe.getName(), givenTagName);
         } else {
             user.assignTag(recipe, tagRecipeInputData.getTagName());
