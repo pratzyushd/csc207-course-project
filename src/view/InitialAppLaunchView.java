@@ -35,7 +35,7 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
         setLayout(null);
         setPreferredSize(new Dimension(1400, 800));
 
-        loadExistingUserData = new JButton("Load Existing Data");
+        loadExistingUserData = new JButton("Load Existing User Data");
         createNewUser = new JButton("Create New User");
         usernameLabel = new JLabel("Choose A Username: ");
         JTextField usernameTextField = new JTextField(10);
@@ -80,13 +80,13 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
             }
         });
 
-        loadExistingUserData.setBounds(180, 470, 450, 35);
+        loadExistingUserData.setBounds(180, 560, 450, 35);
         add(loadExistingUserData);
         createNewUser.setBounds(180, 520, 450, 35);
         add(createNewUser);
-        usernameLabel.setBounds(190, 560, 450, 35);
+        usernameLabel.setBounds(190, 470, 450, 35);
         add(usernameLabel);
-        usernameTextField.setBounds(330, 560, 300, 35);
+        usernameTextField.setBounds(330, 470, 300, 35);
         add(usernameTextField);
     }
 
