@@ -27,6 +27,8 @@ public class UserTagsPresenter implements DisplayUserTagsOutputBoundary {
      */
     @Override
     public void prepareSuccessView(DisplayUserTagsOutputData outputData) {
-
+        userTagsViewModel.setTags(outputData.getUserTags());
+        viewManagerModel.setActiveView(userTagsViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

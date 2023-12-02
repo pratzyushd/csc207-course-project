@@ -28,6 +28,8 @@ public class TaggedRecipesPresenter implements DisplayTaggedOutputBoundary {
          */
         public void prepareSuccessView(DisplayTaggedOutputData outputData) {
                 taggedRecipesViewModel.setRecipes(outputData.getRecipes());
+
                 viewManagerModel.setActiveView(taggedRecipesViewModel.getViewName());
+                viewManagerModel.firePropertyChanged();
         }
 }

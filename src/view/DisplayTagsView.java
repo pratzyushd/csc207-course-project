@@ -3,6 +3,8 @@ package view;
 import interface_adapter.display_user_tags.UserTagsViewModel;
 import interface_adapter.display_user_tags.UserTagsController;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.MouseAdapter;
@@ -30,22 +32,19 @@ public class DisplayTagsView extends JPanel implements PropertyChangeListener{
 
         setLayout(new FlowLayout());
 
-        JButton tagsButton = new JButton("User Tags");
+        JList<String> tagsList = new JList<String>();
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                userTagsController.execute();
+                tagsList.setListData(userTagsViewModel.getTags());
+                System.out.println("working");
 
-        tagsButton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                displayUserTags();
             }
         });
-
-        add(tagsButton);
 
         setPreferredSize(new Dimension(600, 200));
     }
 
-    public void displayUserTags() {
-        userTagsController.execute();
-    }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
