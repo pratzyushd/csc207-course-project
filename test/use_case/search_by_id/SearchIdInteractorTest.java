@@ -16,8 +16,9 @@ public class SearchIdInteractorTest {
         SearchIdOutputBoundary presenter = new SearchIdOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchIdOutputData searchIdOutputData) {
+                assertEquals(32495, searchIdOutputData.getId());
                 Map<String, String> output = searchIdOutputData.getRecipe();
-                assertEquals("recipe1", output.get("name"));
+                assertEquals("testrecipe", output.get("name"));
             }
 
             @Override
