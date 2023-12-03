@@ -17,6 +17,7 @@ public class SearchNameInteractorTest {
         SearchNameOutputBoundary presenter = new SearchNameOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchNameOutputData searchNameOutputData) {
+                assertEquals("name", searchNameOutputData.getName());
                 List<Map<String, String>> output = searchNameOutputData.getRecipes();
                 assertEquals(3, output.size());
                 String[] recipeNames = new String[3];

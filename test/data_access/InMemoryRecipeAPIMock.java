@@ -20,7 +20,7 @@ public class InMemoryRecipeAPIMock implements RecipeAPI {
 
     @Override
     public Recipe searchRecipesById(int id) {
-        return this.recipes[0];
+        return new CommonRecipeFactory().create(id, "testrecipe", "", "", "");
     }
 
     @Override
