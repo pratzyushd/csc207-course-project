@@ -8,22 +8,12 @@ import entity.CommonRecipeFactory;
 import entity.CommonUserFactory;
 import interface_adapter.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
-import interface_adapter.initial_app_launch.InitialAppLaunchController;
-import interface_adapter.initial_app_launch.InitialAppLaunchPresenter;
 import interface_adapter.initial_app_launch.InitialAppLaunchViewModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;
 import interface_adapter.search_by_id.SearchByIdViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_name.SearchByNameViewModel;
 import interface_adapter.tag_recipe.TagRecipeViewModel;
-import use_case.favourite_recipe.FavouriteRecipeUserDataAccessInterface;
-import use_case.initial_app_launch.InitialAppLaunchInteractor;
-import use_case.initial_app_launch.InitialAppLaunchOutputBoundary;
-import use_case.initial_app_launch.InitialAppLaunchUserDataAccessInterface;
-import use_case.search_by_cuisine.SearchCuisineUserDataAccessInterface;
-import use_case.search_by_id.SearchIdUserDataAccessInterface;
-import use_case.search_by_name.SearchNameUserDataAccessInterface;
-import use_case.tag_recipe.TagRecipeUserDataAccessInterface;
 import view.*;
 
 import view.HomeView;
@@ -33,11 +23,6 @@ import interface_adapter.display_recipes.RecipesViewModel;
 import interface_adapter.display_user_tags.UserTagsViewModel;
 import view.DisplayFavouriteView;
 import view.DisplayTaggedView;
-import view.DisplayRecipeView;
-import view.DisplayTagsView;
-import use_case.display_favourite_recipe.DisplayFavouriteUserDataAccessInterface;
-import use_case.display_tagged_recipe.DisplayTaggedUserDataAccessInterface;
-import use_case.display_user_tags.DisplayUserTagsUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -147,8 +132,8 @@ public class Main {
         views.add(displayTagsView, displayTagsView.viewName);
 
         // Create and add DisplayTaggedView
-        RecipesViewModel DisplayTaggedViewModel = new RecipesViewModel(1);
-        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, DisplayTaggedViewModel,
+        RecipesViewModel displayTaggedViewModel = new RecipesViewModel(1);
+        DisplayTaggedView displayTaggedView = DisplayTaggedUseCaseFactory.create(viewManagerModel, displayTaggedViewModel,
                 persistence, userTagsViewModel);
         views.add(displayTaggedView, displayTaggedView.viewName);
 
@@ -166,10 +151,8 @@ public class Main {
 
         // Create and add InitialAppLaunchView
         InitialAppLaunchViewModel initialAppLaunchViewModel = new InitialAppLaunchViewModel();
-        InitialAppLaunchOutputBoundary initialAppLaunchPresenter = new InitialAppLaunchPresenter(viewManagerModel, initialAppLaunchViewModel);
-        InitialAppLaunchInteractor initialAppLaunchInteractor = new InitialAppLaunchInteractor(persistence, initialAppLaunchPresenter);
-        InitialAppLaunchController initialAppLaunchController = new InitialAppLaunchController(initialAppLaunchInteractor);
-        InitialAppLaunchView initialAppLaunchView = new InitialAppLaunchView(initialAppLaunchController, initialAppLaunchViewModel);
+        InitialAppLaunchView initialAppLaunchView = InitialAppLaunchUseCaseFactory.create(viewManagerModel,
+                initialAppLaunchViewModel, persistence);
         views.add(initialAppLaunchView, initialAppLaunchView.viewName);
 
         // Set the active view to start with search by id
