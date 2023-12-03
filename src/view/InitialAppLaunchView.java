@@ -47,6 +47,9 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
                 JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
                 int returnValue = fileChooser.showOpenDialog(null);
                 File selectedFile = fileChooser.getSelectedFile();
+                if (selectedFile == null) {
+                    return;
+                }
                 String filePath = selectedFile.getAbsolutePath();
                 initialAppLaunchController.execute(load, filePath, "");
             }
@@ -60,6 +63,9 @@ public class InitialAppLaunchView extends JPanel implements PropertyChangeListen
 
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
+                    if (selectedFile == null) {
+                        return;
+                    }
                     String filePath = selectedFile.getAbsolutePath();
 
                     // Now 'filePath' contains the selected file's path as a String
