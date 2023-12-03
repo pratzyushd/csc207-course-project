@@ -59,7 +59,6 @@ public class Main {
     public static void main(String[] args) {
         JFrame application = new JFrame("MyRecipeMate");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        CardLayout cardLayout = new CardLayout();
 
         // The various View objects. Only one view is visible at a time.
         // 'views' serves as a container for various "views" (other JPanels).
@@ -105,19 +104,11 @@ public class Main {
         // Create and add SearchResultView (for favouriting recipes and adding tags)
         FavouriteRecipeViewModel favouriteRecipeViewModel = new FavouriteRecipeViewModel();
         TagRecipeViewModel tagRecipeViewModel = new TagRecipeViewModel();
-        // TODO, tag and favourite recipe user DA interfaces are the same thing, can we do type casting and use just 1?
 
-        // TODO - provide jsonPersistence with a valid file path. Currently empty path.
         SearchResultView searchResultView = SearchResultUseCaseFactory.create(viewManagerModel, favouriteRecipeViewModel,
                 tagRecipeViewModel, searchResultViewModel, recipeAPI,
                 recipeAPI, persistence);
-//        JScrollPane scrollPane = new JScrollPane(searchResultView);
-//        scrollPane.setViewportView(searchResultView);
-//        views.add(scrollPane, searchResultView.viewName);
-        // TODO - we currently only support up to 15 results. Try implementing scrolling in search result view?
         views.add(searchResultView, searchResultView.viewName);
-
-
 
         // Create and add DisplayFavouriteView
         RecipesViewModel DisplayFavouriteViewModel = new RecipesViewModel(0);
@@ -156,7 +147,6 @@ public class Main {
         views.add(initialAppLaunchView, initialAppLaunchView.viewName);
 
         // Set the active view to start with search by id
-        // TODO - replace the initial active view with the create new user / load user from file screen.
         viewManagerModel.setActiveView(initialAppLaunchView.viewName);
         viewManagerModel.firePropertyChanged();
 
