@@ -70,6 +70,8 @@ public class DisplayFavouriteView extends JPanel implements PropertyChangeListen
         add(backToOptionsButton);
 
         setPreferredSize(new Dimension(600, 200));
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
     }
 
     public void openRecipeView() {

@@ -59,6 +59,8 @@ public class SearchByCuisineView extends JPanel implements PropertyChangeListene
         add(searchButton);
         add(backToHomeButton);
         setPreferredSize(new Dimension(600, 200));
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
     }
 
     @Override

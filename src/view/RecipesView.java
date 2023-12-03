@@ -25,6 +25,10 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
         this.viewManagerModel = viewManagerModel;
 
         setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(600, 200));
+
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
 
         JLabel optionLabel = new JLabel("Select an option: ");
         JButton favouriteButton = new JButton("Favourite Recipes");

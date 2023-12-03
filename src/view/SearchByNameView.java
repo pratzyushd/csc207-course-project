@@ -31,6 +31,8 @@ public class SearchByNameView extends JPanel implements PropertyChangeListener {
         searchByNameViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
 
         JLabel idLabel = new JLabel("Enter the recipe Name:");
         JTextField idTextField = new JTextField(10);
