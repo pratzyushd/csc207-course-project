@@ -1,7 +1,7 @@
 package interface_adapter.search_by_id;
 
-import interface_adapter.SearchResultState;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultState;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.search_by_id.SearchIdOutputBoundary;
 import use_case.search_by_id.SearchIdOutputData;

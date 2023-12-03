@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.search_result;
 
 import java.util.ArrayList;
 

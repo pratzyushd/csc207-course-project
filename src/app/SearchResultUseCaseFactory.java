@@ -1,7 +1,7 @@
 package app;
 
 import data_access.Persistence;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeController;
 import interface_adapter.favourite_recipe.FavouriteRecipePresenter;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;

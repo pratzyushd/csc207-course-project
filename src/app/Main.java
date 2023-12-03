@@ -6,7 +6,7 @@ import data_access.RecipeAPI;
 import data_access.TheMealDB;
 import entity.CommonRecipeFactory;
 import entity.CommonUserFactory;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeViewModel;
 import interface_adapter.initial_app_launch.InitialAppLaunchViewModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;

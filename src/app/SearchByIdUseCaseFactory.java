@@ -2,7 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.search_by_id.SearchByIdPresenter;
 import interface_adapter.search_by_id.SearchByIdController;
 import interface_adapter.search_by_id.SearchByIdViewModel;

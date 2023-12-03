@@ -1,6 +1,6 @@
 package app;
 
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.search_by_name.SearchByNameController;
 import interface_adapter.search_by_name.SearchByNamePresenter;

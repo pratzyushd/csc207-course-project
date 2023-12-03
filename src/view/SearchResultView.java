@@ -1,7 +1,7 @@
 package view;
 
-import interface_adapter.SearchResultState;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultState;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.favourite_recipe.FavouriteRecipeController;
 import interface_adapter.favourite_recipe.FavouriteRecipeState;
@@ -66,7 +66,7 @@ public class SearchResultView extends JPanel implements PropertyChangeListener {
     }
     public void updateUI() {
         if (recipeIds == null) {
-            ; // If there are no results to show, do not populate the JPanel with anything.
+            // If there are no results to show, do not populate the JPanel with anything.
         } else {
             JPanel contentPanel = new JPanel();
             contentPanel.setLayout(null);
