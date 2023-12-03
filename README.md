@@ -1,4 +1,4 @@
-# CSC207 Group Project
+# MyRecipeMate
 
 ## Members
 - Pratyush Dwivedi
@@ -7,25 +7,27 @@
 - Kevin Hu
 
 ## Problem Domain
-- As university students, our busy lives often prevent us from eating nutritous meals. It takes time, effort, and thought to account for the variety of nutrients and vitamins students need as young adults.
-- Our application seeks to tackle this issue by providing a platform for users to seek out new recipes, save their favourites, and view nutritional information as well.
-- Users will also be able to seamlessly track their nutrition intake.  
+- As university students, our busy lives often prevent us from eating
+nutritious meals. It takes time, effort, and thought to account for the variety
+of nutrients and vitamins students need as young adults.
+- Our application seeks to tackle this issue by providing a platform for users
+to seek out new recipes, save their favourites, and add tags / categorise their
+recipes
 
 ## Application Description
 
-- Accounts for each user
-    - Store favourite recipes
-- Allow searching of recipes
-    - Provide recipe, and nutritional information of item
+- Allows searching of recipes by various methods, including:
+    - By name
+    - By 5-digit ID
+    - By cuisine
+- Allows recipes to be "favourited"
+- Allows recipes to be associated with a certain tag / tags
 
 ## API We Can Use
 
-- For recipes, make use of TheMealDB API [link](https://themealdb.com/api.php)
-- For nutritional information, can make use of [this nutrition API](https://api-ninjas.com/api/nutrition)
+- For recipes, we make use of [TheMealDB API](https://themealdb.com/api.php)
 
 ![Sample usage of TheMealDB API](./docs/Sample_API_Usage.png)
-
-![Sample usage of Nutrition API](./docs/Sample_API_Usage_2.png)
 
 ## Example Output From Java
 
