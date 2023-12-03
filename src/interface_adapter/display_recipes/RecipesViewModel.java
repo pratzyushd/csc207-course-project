@@ -12,6 +12,7 @@ public class RecipesViewModel extends ViewModel {
     private List<Map<String, String>> recipesStored;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private Map<String, String> selectedRecipe;
+    private String selectedTag;
 
     /**
      * Constructs a new RecipesViewModel with the specified isFavourite status.
@@ -58,13 +59,6 @@ public class RecipesViewModel extends ViewModel {
             recipeNames.add(recipe.get("name"));
         }
         return recipeNames;
-    }
-    public void setTags(List<String> tags){
-        support.firePropertyChange("tags", null, tags);
-    }
-
-    public void getTag() {
-        support.firePropertyChange("tag", null, null);
     }
 
     public void setSelectedRecipeName(String name) {

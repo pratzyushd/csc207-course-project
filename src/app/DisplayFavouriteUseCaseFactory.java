@@ -29,7 +29,7 @@ public class DisplayFavouriteUseCaseFactory {
         try {
             FavouriteRecipesController favouriteRecipesController = createDisplayFavouriteUseCase(viewManagerModel, recipesViewModel,
                     favouriteRecipeUserDataAccessObject);
-            return new DisplayFavouriteView(favouriteRecipesController, recipesViewModel);
+            return new DisplayFavouriteView(favouriteRecipesController, recipesViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

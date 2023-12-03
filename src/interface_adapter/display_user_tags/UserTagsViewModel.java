@@ -9,6 +9,7 @@ import java.util.List;
 public class UserTagsViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private List<String> tags;
+    private String selectedTag;
 
     /**
      * Constructs a new UserTagsViewModel.
@@ -35,4 +36,16 @@ public class UserTagsViewModel extends ViewModel {
         support.firePropertyChange("tags", null, null);
         return tags.toArray(new String[0]);
     }
+
+
+    public void setSelectedTag(String tag){
+        this.selectedTag = tag;
+        support.firePropertyChange("tag", null, tag);
+    }
+
+    public String getTag() {
+        support.firePropertyChange("tag", null, null);
+        return selectedTag;
+    }
+
 }

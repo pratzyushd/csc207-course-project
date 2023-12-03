@@ -29,10 +29,12 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
         JLabel optionLabel = new JLabel("Select an option: ");
         JButton favouriteButton = new JButton("Favourite Recipes");
         JButton taggedButton = new JButton("Tagged Recipes");
+        JButton backToHomeButton = new JButton("Back to Home");
 
         add(optionLabel);
         add(favouriteButton);
         add(taggedButton);
+        add(backToHomeButton);
 
         favouriteButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -45,6 +47,13 @@ public class RecipesView extends JPanel implements PropertyChangeListener {
             public void mouseClicked(MouseEvent evt) {
                 // changes to display tags view instead of tagged recipes because user needs to select a tag first
                 viewManagerModel.setActiveView("user tags");
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+
+        backToHomeButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                viewManagerModel.setActiveView("home view");
                 viewManagerModel.firePropertyChanged();
             }
         });

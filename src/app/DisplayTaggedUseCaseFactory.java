@@ -30,7 +30,7 @@ public class DisplayTaggedUseCaseFactory {
         try {
             TaggedRecipesController taggedRecipesController = createDisplayTaggedUseCase(viewManagerModel, recipesViewModel,
                     taggedRecipeUserDataAccessObject, userTagsViewModel);
-            return new DisplayTaggedView(taggedRecipesController, recipesViewModel, userTagsViewModel);
+            return new DisplayTaggedView(taggedRecipesController, recipesViewModel, userTagsViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
