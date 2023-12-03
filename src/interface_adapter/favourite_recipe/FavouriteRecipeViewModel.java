@@ -23,6 +23,10 @@ public class FavouriteRecipeViewModel extends ViewModel {
         support.firePropertyChange("state", null, this.state);
     }
 
+    /**
+     * Add an observer to this ViewModel.
+     * @param listener the observer to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }

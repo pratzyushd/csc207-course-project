@@ -2,7 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
-import interface_adapter.SearchResultViewModel;
+import interface_adapter.search_result.SearchResultViewModel;
 import interface_adapter.search_by_cuisine.SearchByCuisineController;
 import interface_adapter.search_by_cuisine.SearchByCuisinePresenter;
 import interface_adapter.search_by_cuisine.SearchByCuisineViewModel;

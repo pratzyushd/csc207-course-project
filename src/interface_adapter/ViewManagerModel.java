@@ -25,6 +25,10 @@ public class ViewManagerModel {
         support.firePropertyChange("view", null, this.activeViewName);
     }
 
+    /**
+     * Add an observer to this ViewModel.
+     * @param listener the observer to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
