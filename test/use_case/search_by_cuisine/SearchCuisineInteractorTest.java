@@ -18,6 +18,7 @@ public class SearchCuisineInteractorTest {
         SearchCuisineOutputBoundary presenter = new SearchCuisineOutputBoundary() {
             @Override
             public void prepareSuccessView(SearchCuisineOutputData outputData) {
+                assertEquals("cuisine", outputData.getCuisine());
                 List<Map<String, String>> output = outputData.getRecipes();
                 assertEquals(3, output.size());
                 String[] recipeNames = new String[3];
