@@ -31,6 +31,8 @@ public class SearchByIdView extends JPanel implements PropertyChangeListener {
         searchByIdViewModel.addPropertyChangeListener(this);
 
         setLayout(new FlowLayout());
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
 
         JLabel idLabel = new JLabel("Enter the recipe ID:");
         JTextField idTextField = new JTextField(10);

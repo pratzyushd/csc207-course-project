@@ -37,6 +37,8 @@ public class DisplayTagsView extends JPanel implements PropertyChangeListener{
         this.viewManagerModel = viewManagerModel;
 
         setLayout(new FlowLayout());
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
 
         JList<String> tagsList = new JList<>();
         JButton backToOptionsButton = new JButton("Back to Options");

@@ -49,6 +49,8 @@ public class DisplayRecipeView extends JPanel implements PropertyChangeListener 
         add(recipeInstructions);
 
         setPreferredSize(new Dimension(800, 600));
+        Color bgColour = new Color(200,210,223);
+        setBackground(bgColour);
 
     }
 
