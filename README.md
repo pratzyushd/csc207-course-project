@@ -22,6 +22,7 @@ recipes
     - By cuisine
 - Allows recipes to be "favourited"
 - Allows recipes to be associated with a certain tag / tags
+- Allows the user to save and load their information (e.g. favourited recipes, tagged recipes and associated tags, etc)
 
 ## API We Can Use
 
