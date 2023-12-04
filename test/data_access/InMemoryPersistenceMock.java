@@ -11,10 +11,10 @@ public class InMemoryPersistenceMock implements Persistence {
     public InMemoryPersistenceMock() {
         this.user = new CommonUserFactory().create("test");
         RecipeFactory recipeFactory = new CommonRecipeFactory();
-        this.user.addFavourite(recipeFactory.create(12589, "", "", "", ""));
-        this.user.addFavourite(recipeFactory.create(57392, "", "", "", ""));
-        this.user.assignTag(recipeFactory.create(57201, "", "", "", ""), "tag1");
-        this.user.assignTag(recipeFactory.create(94782, "", "", "", ""), "tag1");
+        this.user.addFavourite(recipeFactory.create(12589, "burger", "", "", ""));
+        this.user.addFavourite(recipeFactory.create(57392, "pizza", "", "", ""));
+        this.user.assignTag(recipeFactory.create(57201, "vegan burger", "", "", ""), "tag1");
+        this.user.assignTag(recipeFactory.create(94782, "vegan pizza", "", "", ""), "tag1");
         this.user.assignTag(recipeFactory.create(12694, "", "", "", ""), "tag2");
     }
     @Override
