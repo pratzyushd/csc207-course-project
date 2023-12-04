@@ -52,15 +52,13 @@ public class DisplayTagsView extends JPanel implements PropertyChangeListener{
 
         tagsList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int index = tagsList.locationToIndex(e.getPoint());
-                    if (index >= 0) {
-                        Object o = tagsList.getModel().getElementAt(index);
-                        System.out.println("Selected: " + o.toString());
-                        userTagsViewModel.setSelectedTag(o.toString());
-                        viewManagerModel.setActiveView("user tagged recipes");
-                        viewManagerModel.firePropertyChanged();
-                    }
+                int index = tagsList.locationToIndex(e.getPoint());
+                if (index >= 0) {
+                    Object o = tagsList.getModel().getElementAt(index);
+                    System.out.println("Selected: " + o.toString());
+                    userTagsViewModel.setSelectedTag(o.toString());
+                    viewManagerModel.setActiveView("user tagged recipes");
+                    viewManagerModel.firePropertyChanged();
                 }
             }
         });
