@@ -2,9 +2,10 @@ package view;
 
 import entity.Recipe;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.display_user_tags.UserTagsViewModel;
 import interface_adapter.display_recipes.RecipesViewModel;
-import interface_adapter.display_recipes.FavouriteRecipesController;
-import use_case.display_favourite_recipe.*;
+import interface_adapter.display_recipes.TaggedRecipesController;
+import use_case.display_tagged_recipe.*;
 
 import data_access.InMemoryPersistenceMock;
 
@@ -17,47 +18,48 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class DisplayFavouriteViewTest {
+public class DisplayTaggedViewTest {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
-    private final RecipesViewModel recipesViewModel = new RecipesViewModel(0);
-    private final DisplayFavouriteUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
-    private final DisplayFavouriteInputData inputData = new DisplayFavouriteInputData();
+    private final RecipesViewModel recipesViewModel = new RecipesViewModel(1);
 
+    private final UserTagsViewModel userTagsViewModel = new UserTagsViewModel();
+    private final DisplayTaggedUserDataAccessInterface mockDAO = new InMemoryPersistenceMock();
+    private final DisplayTaggedInputData inputData = new DisplayTaggedInputData("tag1");
 
     @Test
-    public void testDisplayFavouriteView() {
+    public void testDisplayTaggedView() {
 
         // create presenter
-        DisplayFavouriteOutputBoundary presenter = outputData -> {
+        DisplayTaggedOutputBoundary presenter = outputData -> {
             List<Map<String, String>> output = outputData.getRecipes();
             assertEquals(2, output.size());
             Map<String, String> recipe1 = output.get(0);
             Map<String, String> recipe2 = output.get(1);
-            assertTrue(Objects.equals(recipe1.get("id"), "12589") || Objects.equals(recipe2.get("id"), "12589"));
-            assertTrue(Objects.equals(recipe1.get("id"), "57392") || Objects.equals(recipe2.get("id"), "57392"));
+            assertTrue(Objects.equals(recipe1.get("id"), "57201") || Objects.equals(recipe2.get("id"), "57201"));
+            assertTrue(Objects.equals(recipe1.get("id"), "94782") || Objects.equals(recipe2.get("id"), "94782"));
         };
 
         // create interactor
-        DisplayFavouriteInputBoundary interactor = new DisplayFavouriteInteractor(mockDAO, presenter);
+        DisplayTaggedInputBoundary interactor = new DisplayTaggedInteractor(presenter, mockDAO);
 
         // create controller
-        FavouriteRecipesController controller = new FavouriteRecipesController(interactor);
+        TaggedRecipesController controller = new TaggedRecipesController(interactor);
 
-        // create a new DisplayFavouriteView object
-        DisplayFavouriteView displayFavouriteView = new DisplayFavouriteView(controller, recipesViewModel, viewManagerModel);
+        // create a new DisplayTaggedView object
+        DisplayTaggedView displayTaggedView = new DisplayTaggedView(controller, recipesViewModel, userTagsViewModel, viewManagerModel);
 
         // create a new JFrame object
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(displayFavouriteView);
+        frame.setContentPane(displayTaggedView);
         frame.pack();
         frame.setVisible(true);
 
         // execute controller
-        controller.execute();
+        controller.execute("tag1");
 
         // set recipes
-        List<Recipe> recipes = mockDAO.getFavouriteRecipes(mockDAO.getUser());
+        List<Recipe> recipes = mockDAO.getTaggedRecipes(mockDAO.getUser(), "tag1");
         List<Map<String,String>> recipesAsMaps = convertFromRecipeListToHashMapList(recipes);
         recipesViewModel.setRecipes(recipesAsMaps);
 
@@ -67,21 +69,21 @@ public class DisplayFavouriteViewTest {
         System.out.println(recipeList);
 
         // update recipeList
-        JList<String> favouritesList = (JList<String>) displayFavouriteView.getComponent(0);
-        favouritesList.setListData(recipeList.toArray(new String[0]));
+        JList<String> taggedList = (JList<String>) displayTaggedView.getComponent(0);
+        taggedList.setListData(recipeList.toArray(new String[0]));
 
-        // test favouritesList values
-        assertEquals(2, favouritesList.getModel().getSize());
-        assertEquals("burger", favouritesList.getModel().getElementAt(0));
-        assertEquals("pizza", favouritesList.getModel().getElementAt(1));
+        // test taggedList values
+        assertEquals(2, taggedList.getModel().getSize());
+        assertEquals("vegan burger", taggedList.getModel().getElementAt(0));
+        assertEquals("vegan pizza", taggedList.getModel().getElementAt(1));
 
         // test clicking on a recipe
-        favouritesList.setSelectedIndex(0);
-        favouritesList.dispatchEvent(new MouseEvent(favouritesList, MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, 2, false));
-        assertEquals("burger", recipesViewModel.getRecipeName());
+        taggedList.setSelectedIndex(0);
+        taggedList.dispatchEvent(new MouseEvent(taggedList, MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, 2, false));
+        assertEquals("vegan burger", recipesViewModel.getRecipeName());
 
         // test backToOptionsButton
-        JButton backToOptionsButton = (JButton) displayFavouriteView.getComponent(1);
+        JButton backToOptionsButton = (JButton) displayTaggedView.getComponent(1);
         assertEquals("Back to Options", backToOptionsButton.getText());
         backToOptionsButton.dispatchEvent(new MouseEvent(backToOptionsButton, MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, 1, false));
         assertEquals("user recipes", viewManagerModel.getActiveView());
@@ -96,7 +98,3 @@ public class DisplayFavouriteViewTest {
         return recipesAsMaps;
     }
 }
-
-
-
-
